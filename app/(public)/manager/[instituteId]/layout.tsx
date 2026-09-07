@@ -2,7 +2,7 @@ import { PremiumLock } from "@/components/manager/PremiumLock";
 import { ManagerSidebarWrapper } from "@/components/manager/ManagerSidebarWrapper";
 import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/prisma";
-import { ArrowLeft, BarChart2, BarChart3, CreditCard, LayoutDashboardIcon, MessageSquare, User, UserRound, Users, PackageOpen, MessageCircle, FileText, Zap, Building2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, BarChart2, BarChart3, CreditCard, LayoutDashboardIcon, MessageSquare, User, UserRound, Users, PackageOpen, MessageCircle, FileText, Zap, Building2, Sparkles } from "lucide-react";
 import { Metadata } from "next";
 import { headers } from "next/headers";
 import Link from "next/link";
@@ -166,15 +166,44 @@ export default async function ManagerDashBoardLayout({
                         <h2 className="font-extrabold text-2xl text-stone-900 leading-tight tracking-tight">
                             {institute.name}
                         </h2>
-                        <div className="mt-3 flex flex-col gap-1.5 items-start">
-                            <span className="inline-flex items-center text-[10px] uppercase tracking-wider font-bold bg-[#ebdbb7]/20 text-stone-700 px-3 py-1 rounded-full border border-[#ebdbb7]/40">
-                                {plan} PLAN
-                            </span>
-                            {plan !== "BASIC" && institute.planExpiresAt && (
-                                <span className="text-[11px] text-slate-500 font-medium tracking-wide">
-                                    Expires {new Date(institute.planExpiresAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        <div className="mt-3 flex flex-col gap-2.5 items-start w-full">
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <span className="inline-flex items-center text-[10px] uppercase tracking-wider font-bold bg-amber-500/15 text-amber-900 px-3 py-1 rounded-full border border-amber-500/30 shadow-xs">
+                                    {plan} PLAN
                                 </span>
-                            )}
+                                {plan !== "BASIC" && institute.planExpiresAt && (
+                                    <span className="text-[11px] text-slate-500 font-medium tracking-wide">
+                                        Expires {new Date(institute.planExpiresAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                                    </span>
+                                )}
+                            </div>
+
+                            {/* Prominent Subscription Card right below the Plan badge */}
+                            <Link
+                                href={`/manager/${instituteId}/subscription`}
+                                className="w-full group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500 via-amber-600 to-orange-500 p-[1px] shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.02]"
+                            >
+                                <div className="relative rounded-2xl bg-gradient-to-br from-amber-500 via-amber-600 to-orange-500 p-3 text-white">
+                                    <div className="flex items-center justify-between gap-2">
+                                        <div className="flex items-center gap-2.5">
+                                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
+                                                <CreditCard className="h-4 w-4 text-white" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] font-bold uppercase tracking-wider text-amber-100">
+                                                    Subscription
+                                                </p>
+                                                <p className="text-xs font-black text-white flex items-center gap-1">
+                                                    Upgrade / Subscribe <Sparkles className="w-3 h-3 text-amber-200 fill-amber-200 inline" />
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="h-6 w-6 rounded-full bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition-colors">
+                                            <ArrowRight className="w-3.5 h-3.5 text-white transition-transform group-hover:translate-x-0.5" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
                         </div>
                     </div>
 
@@ -189,6 +218,13 @@ export default async function ManagerDashBoardLayout({
                             href={`/manager/${instituteId}/profile`}
                             icon={<Building2 />}
                             label="Institute Profile"
+                        />
+                        <ManagerSidebarLink
+                            href={`/manager/${instituteId}/subscription`}
+                            icon={<CreditCard />}
+                            label="Subscription"
+                            badge="Plans"
+                            className="bg-amber-500/10 text-amber-900 font-bold border border-amber-500/30 hover:bg-amber-500/20"
                         />
                         <ManagerSidebarLink
                             href={`/manager/${instituteId}/team`}
@@ -242,13 +278,6 @@ export default async function ManagerDashBoardLayout({
                             icon={<Zap />}
                             label="Integrations"
                             locked={plan === "BASIC" || plan === "VERIFIED"}
-                        />
-
-                        <ManagerSidebarLink
-                            href={`/manager/${instituteId}/subscription`}
-                            icon={<CreditCard />}
-                            label="Subscription"
-                            className="mt-6 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-800 hover:from-amber-100 hover:to-orange-100 border border-amber-200/50 shadow-sm"
                         />
                     </nav>
                 </ManagerSidebarWrapper>

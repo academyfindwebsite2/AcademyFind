@@ -62,7 +62,7 @@ export default async function InstituteDashboardOverview({
                     </p>
                 </div>
 
-                <div className="shrink-0 relative z-10 flex flex-col items-end gap-1">
+                <div className="shrink-0 relative z-10 flex flex-col items-start md:items-end gap-2">
                     <Badge className="bg-amber-400 hover:bg-amber-500 text-stone-900 font-bold px-4 py-1.5 rounded-xl uppercase tracking-wider text-xs">
                         {plan} PLAN
                     </Badge>
@@ -71,6 +71,15 @@ export default async function InstituteDashboardOverview({
                             Expires {new Date(institute.planExpiresAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                         </span>
                     )}
+                    <Link href={`/manager/${instituteId}/subscription`} className="mt-0.5">
+                        <Button
+                            size="sm"
+                            className="bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-stone-950 font-black shadow-lg shadow-amber-500/25 rounded-xl text-xs h-8 px-3.5 flex items-center gap-1.5 transition-all hover:scale-[1.03]"
+                        >
+                            <Sparkles className="w-3.5 h-3.5 fill-stone-950 text-stone-950" />
+                            Subscribe / Upgrade Plan
+                        </Button>
+                    </Link>
                 </div>
             </div>
 

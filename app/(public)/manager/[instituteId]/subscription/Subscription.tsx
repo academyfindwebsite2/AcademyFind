@@ -93,10 +93,10 @@ export default function SubscriptionClient({ currentPlan, currentBillingCycle, i
                 <h2 className="text-3xl font-extrabold text-stone-900 flex items-center justify-center gap-2 mb-2">
                     <CreditCard className="w-7 h-7 text-amber-500" /> Subscription Plans
                 </h2>
-                
+
                 {/* 🚀 PROMO BANNER */}
                 <div className="mb-4 mt-2 inline-block bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-amber-800 px-6 py-2.5 rounded-full text-sm font-bold shadow-sm max-w-full">
-                    🎉 <span className="text-amber-900">Early Bird Offer:</span> Special pricing valid only till <span className="bg-amber-200/50 px-2 py-0.5 rounded-md whitespace-nowrap mx-1">31st July</span>!
+                    🎉 <span className="text-amber-900">Early Bird Offer:</span> Special pricing valid only till <span className="bg-amber-200/50 px-2 py-0.5 rounded-md whitespace-nowrap mx-1">30th September</span>!
                 </div>
 
                 <p className="text-sm text-stone-500 mt-2">

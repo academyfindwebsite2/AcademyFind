@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { Bell, Check, CheckCheck, X } from "lucide-react";
+import { formatNotificationTime } from "@/lib/utils";
 
 interface Notification {
   id: string;
@@ -180,8 +181,10 @@ export function NotificationBell() {
                           {n.body}
                         </p>
                       )}
-                      <p className="mt-1 text-[10px] text-slate-400">
-                        {timeAgo(n.createdAt)}
+                      <p className="mt-1 text-[10px] text-slate-400 flex items-center gap-1">
+                        <span>{timeAgo(n.createdAt)}</span>
+                        <span>•</span>
+                        <span>{formatNotificationTime(n.createdAt)}</span>
                       </p>
                     </div>
                     {!n.isRead && (
@@ -240,8 +243,8 @@ export function NotificationBell() {
 
 function timeAgo(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();
+  if (diff < 60000) return "Just now";
   const mins = Math.floor(diff / 60000);
-  if (mins < 1) return "Just now";
   if (mins < 60) return `${mins}m ago`;
   const hrs = Math.floor(mins / 60);
   if (hrs < 24) return `${hrs}h ago`;

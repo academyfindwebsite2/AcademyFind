@@ -7,6 +7,7 @@ import MarkAsReadButton from "@/components/admin/AdminMarkasRead";
 import { auth } from "@/lib/auth/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { formatNotificationTime, formatNotificationRelativeTime } from "@/lib/utils";
 
 export const dynamic = "force-dynamic"; // Hamesha fresh data layega
 
@@ -98,11 +99,11 @@ export default async function AdminNotificationsPage() {
                                     <p className="text-slate-600 mt-1 text-sm leading-relaxed">
                                         {notification.message}
                                     </p>
-                                    <p className="text-slate-400 text-xs mt-2 flex items-center gap-1 font-medium">
-                                        <Clock className="w-3.5 h-3.5" />
-                                        {new Date(notification.createdAt).toLocaleString("en-IN", {
-                                            dateStyle: "medium", timeStyle: "short"
-                                        })}
+                                    <p className="text-slate-400 text-xs mt-2 flex items-center gap-1.5 font-medium">
+                                        <Clock className="w-3.5 h-3.5 shrink-0" />
+                                        <span>{formatNotificationRelativeTime(notification.createdAt)}</span>
+                                        <span>•</span>
+                                        <span>{formatNotificationTime(notification.createdAt)}</span>
                                     </p>
                                 </div>
                             </div>

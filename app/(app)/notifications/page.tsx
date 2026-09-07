@@ -5,6 +5,7 @@ import { Bell } from "lucide-react";
 import { markAllRead, markRead } from "./actions";
 import { InviteActions } from "./components/InviteActions";
 import Link from "next/link"; // Imported to handle actionUrl routing
+import { formatNotificationTime, formatNotificationRelativeTime } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Notifications | AcademyFind",
@@ -186,14 +187,10 @@ export default async function NotificationsPage() {
                   );
                 })()}
 
-                <p className="mt-2 text-xs text-slate-400">
-                  {new Date(n.createdAt).toLocaleDateString("en-IN", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                    hour: "numeric",
-                    minute: "2-digit",
-                  })}
+                <p className="mt-2 text-xs text-slate-400 flex items-center gap-1.5 font-medium">
+                  <span>{formatNotificationRelativeTime(n.createdAt)}</span>
+                  <span>•</span>
+                  <span>{formatNotificationTime(n.createdAt)}</span>
                 </p>
               </div>
 

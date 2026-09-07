@@ -91,3 +91,43 @@ export function formatWhatsAppNumber(phone: string | null | undefined): string {
   }
   return cleaned;
 }
+
+export function formatNotificationTime(dateInput: string | Date | null | undefined): string {
+  if (!dateInput) return "";
+  const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+  if (isNaN(date.getTime())) return "";
+
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(date);
+}
+
+export function formatNotificationRelativeTime(dateInput: string | Date | null | undefined): string {
+  if (!dateInput) return "";
+  const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+  if (isNaN(date.getTime())) return "";
+
+  const diffMs = Date.now() - date.getTime();
+  if (diffMs < 60_000) return "Just now";
+
+  const mins = Math.floor(diffMs / 60_000);
+  if (mins < 60) return `${mins}m ago`;
+
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days}d ago`;
+
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    day: "numeric",
+    month: "short",
+  }).format(date);
+}
