@@ -18,20 +18,26 @@ export async function GET(
       return NextResponse.json({ success: false, error: 'batchId required' }, { status: 400 });
     }
 
-    const batch = await prisma.instituteBatch.findUnique({
+    const batch = await prisma.instituteBatch.findFirst({
       where: { id: batchId, instituteId },
       include: {
         studentMembers: {
           include: {
             studentRecord: {
-              include: { studentProfile: { include: { user: true } } },
+              include: {
+                studentProfile: { include: { user: true } },
+                membership: { include: { user: true } },
+              },
             },
           },
         },
         teacherMembers: {
           include: {
             teacherRecord: {
-              include: { teacherProfile: { include: { user: true } } },
+              include: {
+                teacherProfile: { include: { user: true } },
+                membership: { include: { user: true } },
+              },
             },
           },
         },
@@ -45,12 +51,18 @@ export async function GET(
     // Get active students and teachers from the institute to invite
     const [activeStudents, activeTeachers] = await Promise.all([
       prisma.studentInstituteRecord.findMany({
-        where: { instituteId, isVerified: true, membership: { status: "ACTIVE" } },
-        include: { studentProfile: { include: { user: true } } },
+        where: { instituteId, membership: { status: "ACTIVE" } },
+        include: {
+          studentProfile: { include: { user: true } },
+          membership: { include: { user: true } },
+        },
       }),
       prisma.teacherInstituteRecord.findMany({
-        where: { instituteId, isVerified: true, membership: { status: "ACTIVE" } },
-        include: { teacherProfile: { include: { user: true } } },
+        where: { instituteId, membership: { status: "ACTIVE" } },
+        include: {
+          teacherProfile: { include: { user: true } },
+          membership: { include: { user: true } },
+        },
       }),
     ]);
 
@@ -91,7 +103,7 @@ export async function POST(
       return NextResponse.json({ success: false, error: 'batchId, type (STUDENT|TEACHER), and recordId are required' }, { status: 400 });
     }
 
-    const batch = await prisma.instituteBatch.findUnique({ where: { id: batchId, instituteId } });
+    const batch = await prisma.instituteBatch.findFirst({ where: { id: batchId, instituteId } });
     if (!batch) {
       return NextResponse.json({ success: false, error: 'Batch not found' }, { status: 404 });
     }
