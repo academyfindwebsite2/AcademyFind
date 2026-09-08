@@ -43,17 +43,28 @@ export async function GET(req: Request) {
             return NextResponse.json({ users });
         }
 
-        // Add member / invite status if instituteId is provided
-        const enrichedUsers = await Promise.all(users.map(async (u: any) => {
-            const membership = await prisma.instituteMembership.findFirst({
-                where: { userId: u.id, instituteId }
-            });
+        // Add member / invite status via a SINGLE batch query (no N+1 sequential DB roundtrips)
+        const userIds = users.map((u: any) => u.id);
+        const memberships = userIds.length > 0
+            ? await prisma.instituteMembership.findMany({
+                where: {
+                    instituteId,
+                    userId: { in: userIds }
+                },
+                select: { userId: true, status: true }
+            })
+            : [];
+
+        const membershipMap = new Map(memberships.map((m: any) => [m.userId, m.status]));
+
+        const enrichedUsers = users.map((u: any) => {
+            const status = membershipMap.get(u.id);
             return {
                 ...u,
-                isMember: membership?.status === "ACTIVE",
-                isInvited: membership?.status === "PENDING"
+                isMember: status === "ACTIVE",
+                isInvited: status === "PENDING"
             };
-        }));
+        });
 
         return NextResponse.json({ users: enrichedUsers });
     } catch (error) {
