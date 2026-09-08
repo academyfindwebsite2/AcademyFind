@@ -21,6 +21,8 @@ export async function GET(request: NextRequest) {
     const institute = await prisma.institute.findUnique({
       where: { id: instituteId },
       select: {
+        id: true,
+        name: true,
         subscriptionPlan: true,
         viewCount: true,
         _count: {
@@ -33,9 +35,25 @@ export async function GET(request: NextRequest) {
       }
     });
 
-    const isLocked = institute?.subscriptionPlan === 'BASIC' || institute?.subscriptionPlan === 'VERIFIED';
+    if (!institute) return NextResponse.json({ success: false, error: 'Institute not found' }, { status: 404 });
+
+    const isLocked = institute.subscriptionPlan === 'BASIC' || institute.subscriptionPlan === 'VERIFIED';
     if (isLocked) {
-      return NextResponse.json({ success: true, data: { isLocked: true } });
+      return NextResponse.json({
+        success: true,
+        data: {
+          isLocked: true,
+          plan: institute.subscriptionPlan,
+          instituteName: institute.name,
+          stats: {
+            totalViews: institute.viewCount || 0,
+            shortlists: institute._count.shortlistedBy || 0,
+            enquiries: institute._count.enquiries || 0,
+            reviews: institute._count.reviews || 0
+          },
+          dailyViews: []
+        }
+      });
     }
 
     const rawDailyViews = await prisma.instituteDailyView.findMany({
@@ -52,15 +70,24 @@ export async function GET(request: NextRequest) {
     }));
 
     const stats = {
-      totalViews: institute?.viewCount || 0,
-      shortlists: institute?._count.shortlistedBy || 0,
-      enquiries: institute?._count.enquiries || 0,
-      reviews: institute?._count.reviews || 0
+      totalViews: institute.viewCount || 0,
+      shortlists: institute._count.shortlistedBy || 0,
+      enquiries: institute._count.enquiries || 0,
+      reviews: institute._count.reviews || 0
     };
 
-    return NextResponse.json({ success: true, data: { isLocked: false, stats, dailyViews } });
+    return NextResponse.json({
+      success: true,
+      data: {
+        isLocked: false,
+        plan: institute.subscriptionPlan,
+        instituteName: institute.name,
+        stats,
+        dailyViews
+      }
+    });
   } catch (error: any) {
-    console.error("Manager Metrics API Error:", error);
+    console.error('Manager Metrics API Error:', error);
     return NextResponse.json({ success: false, error: 'Internal Server Error' }, { status: 500 });
   }
 }

@@ -33,7 +33,6 @@ export async function addTeamMember(instituteId: string, email: string) {
         // 👇 STEP 4: YAHAN MAGIC HOGA (Transaction)
         // Hum dono database updates ek sath karenge
         await prisma.$transaction([
-            // Pehla kaam: InstituteManager table me entry banana
             prisma.instituteManager.create({
                 data: {
                     instituteId: instituteId,
@@ -43,12 +42,37 @@ export async function addTeamMember(instituteId: string, email: string) {
             prisma.user.update({
                 where: { id: userToAdd.id },
                 data: { role: "INSTITUTE_MANAGER" } 
+            }),
+            prisma.instituteMembership.upsert({
+                where: { userId_instituteId_role: { userId: userToAdd.id, instituteId, role: 'MANAGER' } },
+                create: {
+                    userId: userToAdd.id,
+                    instituteId,
+                    role: 'MANAGER',
+                    status: 'ACTIVE',
+                    joinedAt: new Date(),
+                    isActive: true
+                },
+                update: {
+                    role: 'MANAGER',
+                    status: 'ACTIVE',
+                    isActive: true
+                }
+            }),
+            prisma.userNotification.create({
+                data: {
+                    userId: userToAdd.id,
+                    entityId: instituteId,
+                    type: "SYSTEM",
+                    title: "Added as Team Member",
+                    body: `You have been added as a co-manager to ${institute.name}.`,
+                    isRead: false
+                }
             })
-
-            
         ]);
 
         // UI ko refresh karne ke liye
+        revalidatePath(`/manager/${instituteId}/team`); 
         revalidatePath(`/institute/${instituteId}/team`); 
         return { success: true };
 

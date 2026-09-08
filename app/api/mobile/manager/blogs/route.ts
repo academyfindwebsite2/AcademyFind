@@ -20,17 +20,27 @@ export async function GET(request: NextRequest) {
 
     const institute = await prisma.institute.findUnique({
       where: { id: instituteId },
-      select: { subscriptionPlan: true }
+      select: { id: true, name: true, subscriptionPlan: true }
     });
+    if (!institute) return NextResponse.json({ success: false, error: 'Institute not found' }, { status: 404 });
 
-    const isPremium = institute?.subscriptionPlan === 'PREMIUM' || institute?.subscriptionPlan === 'ULTRA';
-    if (!isPremium) {
-      return NextResponse.json({ success: true, data: { isLocked: true } });
+    const isPremiumOrUltra = institute.subscriptionPlan === 'PREMIUM' || institute.subscriptionPlan === 'ULTRA';
+    if (!isPremiumOrUltra) {
+      return NextResponse.json({
+        success: true,
+        data: {
+          isLocked: true,
+          plan: institute.subscriptionPlan,
+          instituteName: institute.name,
+          blogs: [],
+          stats: { total: 0, published: 0, pending: 0, rejected: 0, totalViews: 0 },
+        }
+      });
     }
 
     const blogs = await prisma.blogPost.findMany({
       where: { relatedInstituteId: instituteId },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: 'desc' },
       select: {
         id: true,
         title: true,
@@ -40,12 +50,35 @@ export async function GET(request: NextRequest) {
         coverImage: true,
         rejectionReason: true,
         viewCount: true,
+        excerpt: true,
+        contentHtml: true,
+        contentMarkdown: true,
       },
     });
 
-    return NextResponse.json({ success: true, data: { isLocked: false, blogs } });
+    const publishedCount = blogs.filter(b => b.status === 'PUBLISHED').length;
+    const pendingCount = blogs.filter(b => b.status === 'PENDING_REVIEW').length;
+    const rejectedCount = blogs.filter(b => b.status === 'REJECTED').length;
+    const totalViews = blogs.reduce((acc, b) => acc + (b.viewCount || 0), 0);
+
+    return NextResponse.json({
+      success: true,
+      data: {
+        isLocked: false,
+        plan: institute.subscriptionPlan,
+        instituteName: institute.name,
+        stats: {
+          total: blogs.length,
+          published: publishedCount,
+          pending: pendingCount,
+          rejected: rejectedCount,
+          totalViews,
+        },
+        blogs,
+      }
+    });
   } catch (error: any) {
-    console.error("Manager Blogs API Error:", error);
+    console.error('Manager Blogs API Error:', error);
     return NextResponse.json({ success: false, error: 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -58,7 +91,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { instituteId, title, content, coverImage, excerpt } = body;
 
-    if (!instituteId || !title || !content) {
+    if (!instituteId || !title?.trim() || !content?.trim()) {
       return NextResponse.json({ success: false, error: 'Institute ID, Title, and Content are required' }, { status: 400 });
     }
 
@@ -67,6 +100,14 @@ export async function POST(request: NextRequest) {
     });
     if (!isManager && session.user.role !== 'ADMIN') {
       return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
+    }
+
+    const institute = await prisma.institute.findUnique({
+      where: { id: instituteId },
+      select: { subscriptionPlan: true }
+    });
+    if (institute?.subscriptionPlan !== 'PREMIUM' && institute?.subscriptionPlan !== 'ULTRA') {
+      return NextResponse.json({ success: false, error: 'Article publishing requires Premium or Ultra subscription' }, { status: 403 });
     }
 
     // Auto find or create BlogAuthorProfile for the user
@@ -117,7 +158,53 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, data: blog });
   } catch (error: any) {
-    console.error("Manager Blogs POST Error:", error);
+    console.error('Manager Blogs POST Error:', error);
+    return NextResponse.json({ success: false, error: error.message || 'Internal Server Error' }, { status: 500 });
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const session = await getSession();
+    if (!session?.user) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+
+    const body = await request.json();
+    const { blogId, title, content, coverImage, excerpt } = body;
+
+    if (!blogId || !title?.trim()) {
+      return NextResponse.json({ success: false, error: 'Blog ID and Title are required' }, { status: 400 });
+    }
+
+    const existingBlog = await prisma.blogPost.findUnique({
+      where: { id: blogId },
+      select: { id: true, relatedInstituteId: true }
+    });
+    if (!existingBlog) {
+      return NextResponse.json({ success: false, error: 'Blog not found' }, { status: 404 });
+    }
+
+    if (existingBlog.relatedInstituteId) {
+      const isManager = await prisma.instituteManager.findFirst({
+        where: { userId: session.user.id, instituteId: existingBlog.relatedInstituteId }
+      });
+      if (!isManager && session.user.role !== 'ADMIN') {
+        return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
+      }
+    }
+
+    const updatedBlog = await prisma.blogPost.update({
+      where: { id: blogId },
+      data: {
+        title: title.trim(),
+        excerpt: excerpt?.trim() || undefined,
+        ...(content ? { contentHtml: content.trim(), contentMarkdown: content.trim() } : {}),
+        coverImage: coverImage !== undefined ? (coverImage.trim() || null) : undefined,
+      }
+    });
+
+    return NextResponse.json({ success: true, data: updatedBlog });
+  } catch (error: any) {
+    console.error('Manager Blogs PUT Error:', error);
     return NextResponse.json({ success: false, error: error.message || 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -128,17 +215,34 @@ export async function DELETE(request: NextRequest) {
     if (!session?.user) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
 
     const { searchParams } = new URL(request.url);
-    const blogId = searchParams.get('id');
+    const blogId = searchParams.get('id') || searchParams.get('blogId');
 
     if (!blogId) {
       return NextResponse.json({ success: false, error: 'Blog ID is required' }, { status: 400 });
+    }
+
+    const blog = await prisma.blogPost.findUnique({
+      where: { id: blogId },
+      select: { id: true, relatedInstituteId: true }
+    });
+    if (!blog) {
+      return NextResponse.json({ success: false, error: 'Blog not found' }, { status: 404 });
+    }
+
+    if (blog.relatedInstituteId) {
+      const isManager = await prisma.instituteManager.findFirst({
+        where: { userId: session.user.id, instituteId: blog.relatedInstituteId }
+      });
+      if (!isManager && session.user.role !== 'ADMIN') {
+        return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
+      }
     }
 
     await prisma.blogPost.delete({ where: { id: blogId } });
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error("Manager Blogs DELETE Error:", error);
+    console.error('Manager Blogs DELETE Error:', error);
     return NextResponse.json({ success: false, error: error.message || 'Internal Server Error' }, { status: 500 });
   }
 }

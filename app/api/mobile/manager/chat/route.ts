@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getSession } from '@/lib/auth/getSession';
+import { ensureInstituteChannels } from '@/lib/chat/ensureInstituteChannels';
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,26 +21,57 @@ export async function GET(request: NextRequest) {
 
     const institute = await prisma.institute.findUnique({
       where: { id: instituteId },
-      select: { subscriptionPlan: true }
+      select: { id: true, name: true, subscriptionPlan: true }
     });
+    if (!institute) return NextResponse.json({ success: false, error: 'Institute not found' }, { status: 404 });
 
-    const isLocked = institute?.subscriptionPlan === 'BASIC' || institute?.subscriptionPlan === 'VERIFIED';
+    const isLocked = institute.subscriptionPlan === 'BASIC' || institute.subscriptionPlan === 'VERIFIED';
     if (isLocked) {
-      return NextResponse.json({ success: true, data: { isLocked: true } });
+      return NextResponse.json({
+        success: true,
+        data: {
+          isLocked: true,
+          plan: institute.subscriptionPlan,
+          channels: [],
+          reports: []
+        }
+      });
     }
+
+    // Ensure default system channels exist (parity with web layout)
+    await ensureInstituteChannels(instituteId);
+
+    // Calculate dynamic member counts for display (parity with web chat page)
+    const [activeStudents, activeTeachers, managers] = await Promise.all([
+      prisma.studentInstituteRecord.count({
+        where: { instituteId, isVerified: true, membership: { status: "ACTIVE" } },
+      }),
+      prisma.teacherInstituteRecord.count({
+        where: { instituteId, isVerified: true, membership: { status: "ACTIVE" } },
+      }),
+      prisma.instituteManager.count({
+        where: { instituteId },
+      }),
+    ]);
 
     const [channels, reports] = await Promise.all([
       prisma.conversation.findMany({
         where: { instituteId, type: "INSTITUTE" },
-        orderBy: { channelType: "asc" },
+        orderBy: [{ channelType: "asc" }, { createdAt: "asc" }],
         select: {
           id: true,
           title: true,
           channelType: true,
           isReadOnly: true,
           memberCount: true,
+          createdAt: true,
           lastMessage: {
-            select: { content: true, sender: { select: { name: true } } },
+            select: {
+              id: true,
+              content: true,
+              createdAt: true,
+              sender: { select: { name: true, username: true } },
+            },
           },
         },
       }),
@@ -49,7 +81,7 @@ export async function GET(request: NextRequest) {
           status: "PENDING",
         },
         orderBy: { createdAt: "desc" },
-        take: 20,
+        take: 30,
         select: {
           id: true,
           reason: true,
@@ -59,16 +91,48 @@ export async function GET(request: NextRequest) {
             select: {
               id: true,
               content: true,
+              createdAt: true,
               sender: { select: { name: true, username: true } },
-              conversation: { select: { title: true, channelType: true } },
+              conversation: { select: { id: true, title: true, channelType: true } },
             },
           },
           reporter: { select: { name: true, username: true } },
         },
-      })
+      }),
     ]);
 
-    return NextResponse.json({ success: true, data: { isLocked: false, channels, reports } });
+    // Format member counts according to channel scope
+    const totalCommunityMembers = activeStudents + activeTeachers + managers;
+    const formattedChannels = channels.map((ch) => {
+      let count = ch.memberCount;
+      if (["GENERAL", "ANNOUNCEMENTS", "QNA", "STUDENTS"].includes(ch.channelType || "")) {
+        count = totalCommunityMembers;
+      } else if (ch.channelType === "TEACHERS") {
+        count = activeTeachers + managers;
+      } else if (ch.channelType === "STAFF") {
+        count = managers;
+      }
+      return {
+        ...ch,
+        memberCount: Math.max(count || 0, 1),
+      };
+    });
+
+    return NextResponse.json({
+      success: true,
+      data: {
+        isLocked: false,
+        plan: institute.subscriptionPlan,
+        stats: {
+          totalChannels: channels.length,
+          customChannels: channels.filter(c => c.channelType === 'CUSTOM').length,
+          totalMembers: totalCommunityMembers,
+          pendingReports: reports.length,
+        },
+        channels: formattedChannels,
+        reports,
+      }
+    });
   } catch (error: any) {
     console.error("Manager Chat API Error:", error);
     return NextResponse.json({ success: false, error: 'Internal Server Error' }, { status: 500 });
@@ -81,9 +145,9 @@ export async function POST(request: NextRequest) {
     if (!session?.user) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
 
     const body = await request.json();
-    const { instituteId, title, channelType, isReadOnly } = body;
+    const { instituteId, title, isReadOnly } = body;
 
-    if (!instituteId || !title) {
+    if (!instituteId || !title?.trim()) {
       return NextResponse.json({ success: false, error: 'Institute ID and Channel Title are required' }, { status: 400 });
     }
 
@@ -94,25 +158,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
     }
 
-    // Safely validate channelType against ChannelType enum
-    const validTypes = ['GENERAL', 'STUDENTS', 'TEACHERS', 'ANNOUNCEMENTS', 'BATCH', 'STAFF', 'CUSTOM'];
-    let targetType: any = (channelType && validTypes.includes(channelType)) ? channelType : 'CUSTOM';
-
-    // If targetType is not CUSTOM, check if it already exists to prevent @@unique([instituteId, channelType]) violation
-    if (targetType !== 'CUSTOM') {
-      const existing = await prisma.conversation.findFirst({
-        where: { instituteId, channelType: targetType }
-      });
-      if (existing) {
-        targetType = 'CUSTOM';
-      }
+    const institute = await prisma.institute.findUnique({
+      where: { id: instituteId },
+      select: { subscriptionPlan: true }
+    });
+    if (institute?.subscriptionPlan === 'BASIC' || institute?.subscriptionPlan === 'VERIFIED') {
+      return NextResponse.json({ success: false, error: 'Chat channels are locked on your subscription plan' }, { status: 403 });
     }
 
     const channel = await prisma.conversation.create({
       data: {
         instituteId,
         title: title.trim(),
-        channelType: targetType,
+        channelType: 'CUSTOM',
         isReadOnly: !!isReadOnly,
         type: 'INSTITUTE',
         createdById: session.user.id,
@@ -151,14 +209,30 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Report ID and Action required' }, { status: 400 });
     }
 
-    if (action === 'DELETE') {
-      const report = await prisma.messageReport.findUnique({
-        where: { id: reportId },
-        select: { messageId: true }
-      });
-      if (report?.messageId) {
-        await prisma.message.delete({ where: { id: report.messageId } });
+    const report = await prisma.messageReport.findUnique({
+      where: { id: reportId },
+      include: {
+        message: {
+          include: { conversation: { select: { instituteId: true } } }
+        }
       }
+    });
+    if (!report) {
+      return NextResponse.json({ success: false, error: 'Report not found' }, { status: 404 });
+    }
+
+    const instituteId = report.message?.conversation?.instituteId;
+    if (instituteId) {
+      const isManager = await prisma.instituteManager.findFirst({
+        where: { userId: session.user.id, instituteId }
+      });
+      if (!isManager && session.user.role !== 'ADMIN') {
+        return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
+      }
+    }
+
+    if (action === 'DELETE' && report.messageId) {
+      await prisma.message.delete({ where: { id: report.messageId } });
     }
 
     await prisma.messageReport.update({
@@ -183,6 +257,25 @@ export async function DELETE(request: NextRequest) {
 
     if (!channelId) {
       return NextResponse.json({ success: false, error: 'Channel ID is required' }, { status: 400 });
+    }
+
+    const channel = await prisma.conversation.findUnique({
+      where: { id: channelId }
+    });
+
+    if (!channel || channel.channelType !== 'CUSTOM') {
+      return NextResponse.json({ success: false, error: 'Can only delete custom channels' }, { status: 400 });
+    }
+
+    if (!channel.instituteId) {
+      return NextResponse.json({ success: false, error: 'Invalid channel' }, { status: 400 });
+    }
+
+    const isManager = await prisma.instituteManager.findFirst({
+      where: { userId: session.user.id, instituteId: channel.instituteId }
+    });
+    if (!isManager && session.user.role !== 'ADMIN') {
+      return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
     }
 
     await prisma.conversation.delete({ where: { id: channelId } });
