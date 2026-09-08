@@ -56,10 +56,10 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    const publishedCount = blogs.filter(b => b.status === 'PUBLISHED').length;
-    const pendingCount = blogs.filter(b => b.status === 'PENDING_REVIEW').length;
-    const rejectedCount = blogs.filter(b => b.status === 'REJECTED').length;
-    const totalViews = blogs.reduce((acc, b) => acc + (b.viewCount || 0), 0);
+    const publishedCount = blogs.filter((b: any) => b.status === 'PUBLISHED').length;
+    const pendingCount = blogs.filter((b: any) => b.status === 'PENDING_REVIEW').length;
+    const rejectedCount = blogs.filter((b: any) => b.status === 'REJECTED').length;
+    const totalViews = blogs.reduce((acc: any, b: any) => acc + (b.viewCount || 0), 0);
 
     return NextResponse.json({
       success: true,

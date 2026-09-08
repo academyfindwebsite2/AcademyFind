@@ -103,7 +103,7 @@ export async function GET(request: NextRequest) {
 
     // Format member counts according to channel scope
     const totalCommunityMembers = activeStudents + activeTeachers + managers;
-    const formattedChannels = channels.map((ch) => {
+    const formattedChannels = channels.map((ch: any) => {
       let count = ch.memberCount;
       if (["GENERAL", "ANNOUNCEMENTS", "QNA", "STUDENTS"].includes(ch.channelType || "")) {
         count = totalCommunityMembers;
@@ -125,7 +125,7 @@ export async function GET(request: NextRequest) {
         plan: institute.subscriptionPlan,
         stats: {
           totalChannels: channels.length,
-          customChannels: channels.filter(c => c.channelType === 'CUSTOM').length,
+          customChannels: channels.filter((c: any) => c.channelType === 'CUSTOM').length,
           totalMembers: totalCommunityMembers,
           pendingReports: reports.length,
         },

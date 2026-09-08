@@ -130,12 +130,12 @@ export async function GET(
     });
     const totalVisits = visits.length || 1;
     const deviceData = Object.keys(deviceMap)
-      .map(k => ({
+      .map((k: any) => ({
         name: k,
         value: deviceMap[k],
         percentage: Math.round((deviceMap[k] / totalVisits) * 100)
       }))
-      .sort((a, b) => b.value - a.value);
+      .sort((a: any, b: any) => b.value - a.value);
 
     // Aggregate City data
     const cityMap: Record<string, number> = {};
@@ -144,12 +144,12 @@ export async function GET(
       cityMap[city] = (cityMap[city] || 0) + 1;
     });
     const cityData = Object.keys(cityMap)
-      .map(k => ({
+      .map((k: any) => ({
         name: k,
         value: cityMap[k],
         percentage: Math.round((cityMap[k] / totalVisits) * 100)
       }))
-      .sort((a, b) => b.value - a.value)
+      .sort((a: any, b: any) => b.value - a.value)
       .slice(0, 8); // Top 8 cities
 
     return NextResponse.json({
