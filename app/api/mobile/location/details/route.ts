@@ -65,14 +65,74 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // 3. Google Place Details API call
+  // 3. Google Place Details API (Places API New with Referer support + Photon fallback)
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY || 'AIzaSyCJVo2m1ic_xT4BLDELw6h63mOjO9PqquE';
 
   try {
+    // 3a. Try Google Places API (New) - supports Referer-restricted keys
+    const cleanPlaceId = placeId.startsWith('places/') ? placeId.replace('places/', '') : placeId;
+    const newPlacesRes = await fetch(
+      `https://places.googleapis.com/v1/places/${encodeURIComponent(cleanPlaceId)}?fields=id,displayName,location,formattedAddress`,
+      {
+        headers: {
+          'X-Goog-Api-Key': apiKey,
+          'X-Goog-FieldMask': 'id,displayName,location,formattedAddress',
+          'Referer': 'https://www.academyfind.com'
+        }
+      }
+    );
+
+    if (newPlacesRes.ok) {
+      const newPlacesData = await newPlacesRes.json();
+      if (newPlacesData.location?.latitude != null && newPlacesData.location?.longitude != null) {
+        return NextResponse.json({
+          result: {
+            formatted_address: newPlacesData.formattedAddress || searchParams.get('address') || 'Selected Location',
+            name: newPlacesData.displayName?.text || '',
+            geometry: {
+              location: {
+                lat: newPlacesData.location.latitude,
+                lng: newPlacesData.location.longitude
+              }
+            }
+          }
+        });
+      }
+    }
+
+    // 3b. Fallback to Legacy Google Places API
     const res = await fetch(
-      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(placeId)}&fields=geometry,formatted_address,name&key=${apiKey}`
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(placeId)}&fields=geometry,formatted_address,name&key=${apiKey}`,
+      { headers: { 'Referer': 'https://www.academyfind.com' } }
     );
     const data = await res.json();
+    if (data?.result?.geometry?.location) {
+      return NextResponse.json(data);
+    }
+
+    // 3c. Fallback to Photon geocoding if placeId fails or Google restricts
+    const address = searchParams.get('address');
+    if (address) {
+      const photonRes = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(address)}&limit=1`);
+      if (photonRes.ok) {
+        const photonData = await photonRes.json();
+        const feat = photonData?.features?.[0];
+        if (feat?.geometry?.coordinates?.length >= 2) {
+          return NextResponse.json({
+            result: {
+              formatted_address: address,
+              geometry: {
+                location: {
+                  lat: feat.geometry.coordinates[1],
+                  lng: feat.geometry.coordinates[0]
+                }
+              }
+            }
+          });
+        }
+      }
+    }
+
     return NextResponse.json(data);
   } catch (error: any) {
     console.error('Location details error:', error);
