@@ -38,8 +38,8 @@ export async function GET(
       },
     });
 
-    const student = memberships.find((m) => m.role === 'STUDENT');
-    const teacher = memberships.find((m) => m.role === 'TEACHER');
+    const student = memberships.find((m: any) => m.role === 'STUDENT');
+    const teacher = memberships.find((m: any) => m.role === 'TEACHER');
 
     return NextResponse.json({
       success: true,
@@ -174,14 +174,14 @@ export async function POST(
         `New ${roleLabel} Join Request`,
         `${applicantName} requested to join ${institute.name} as a ${role.toLowerCase()}.`,
         id
-      ).catch(() => {});
+      ).catch(() => { });
 
       notifyUserPush({
         userId: mgr.userId,
         title: `New ${roleLabel} Join Request 📋`,
         body: `${applicantName} requested to join ${institute.name}.`,
         data: { route: `/(manager)/${id}/members` },
-      }).catch(() => {});
+      }).catch(() => { });
     }
 
     return NextResponse.json({
