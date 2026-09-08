@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth/auth";
-import { headers } from "next/headers";
+import { getSession } from "@/lib/auth/getSession";
+import { notifyUserPush } from "@/lib/pushNotifications";
 
 export async function POST(req: Request) {
     try {
-        const session = await auth.api.getSession({ headers: await headers() });
-        if (!session) {
+        const session = await getSession();
+        if (!session?.user) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
@@ -108,6 +108,13 @@ export async function POST(req: Request) {
                 }
             });
         });
+
+        notifyUserPush({
+            userId,
+            title: `Invitation from ${institute.name} ✉️`,
+            body: `You have been invited to join ${institute.name} as a ${role.toLowerCase()}.`,
+            data: { route: `/institute/${instituteId}` },
+        }).catch(() => {});
 
         return NextResponse.json({ success: true });
     } catch (error) {
