@@ -95,6 +95,7 @@ export async function POST(request: NextRequest) {
 
     const tagNames = tagNamesStr ? tagNamesStr.split(',').map((t: string) => t.trim()).filter(Boolean) : [];
     const generatedSlug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    const relatedInstituteId = (formData.get('relatedInstituteId') || formData.get('instituteId')) as string | null;
 
     const input: BlogEditorSaveInput = {
       title,
@@ -105,6 +106,7 @@ export async function POST(request: NextRequest) {
       categoryId,
       brandId,
       tagNames,
+      relatedInstituteId: relatedInstituteId || undefined,
       metaTitle: title.substring(0, 70),
       metaDescription: excerpt ? excerpt.substring(0, 180) : title.substring(0, 180),
       focusKeyword: "",
@@ -156,6 +158,7 @@ export async function PUT(request: NextRequest) {
     }
 
     const tagNames = tagNamesStr ? tagNamesStr.split(',').map((t: string) => t.trim()).filter(Boolean) : [];
+    const relatedInstituteId = (formData.get('relatedInstituteId') || formData.get('instituteId')) as string | null;
 
     const input: BlogEditorSaveInput = {
       id,
@@ -167,6 +170,7 @@ export async function PUT(request: NextRequest) {
       categoryId,
       brandId: existing.brandId || "",
       tagNames,
+      relatedInstituteId: relatedInstituteId !== null ? (relatedInstituteId || undefined) : (existing.relatedInstituteId || undefined),
       metaTitle: existing.metaTitle || title.substring(0, 70),
       metaDescription: existing.metaDescription || excerpt?.substring(0, 180) || title.substring(0, 180),
       focusKeyword: existing.focusKeyword || "",
