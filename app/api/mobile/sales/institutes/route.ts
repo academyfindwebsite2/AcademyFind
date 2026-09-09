@@ -72,9 +72,10 @@ export async function GET(request: NextRequest) {
     else if (sortBy === 'views') orderByCondition = { viewCount: "desc" };
 
     const page = Math.max(1, Number(searchParams.get('page')) || 1);
-    const limit = Math.min(50, Math.max(10, Number(searchParams.get('limit')) || 30));
+    const limit = Math.min(50, Math.max(10, Number(searchParams.get('limit')) || 20));
+    const includeMeta = searchParams.get('includeMeta') !== 'false' && page === 1;
 
-    const [total, institutes, cities, allCategories] = await Promise.all([
+    const queries: Promise<any>[] = [
       prisma.institute.count({ where: whereCondition }),
       prisma.institute.findMany({
         where: whereCondition,
@@ -106,9 +107,19 @@ export async function GET(request: NextRequest) {
         skip: (page - 1) * limit,
         orderBy: orderByCondition,
       }),
-      prisma.city.findMany({ orderBy: { name: "asc" } }),
-      prisma.category.findMany({ orderBy: { name: "asc" } }),
-    ]);
+    ];
+
+    if (includeMeta) {
+      queries.push(prisma.city.findMany({ orderBy: { name: "asc" } }));
+      queries.push(prisma.category.findMany({ orderBy: { name: "asc" } }));
+    }
+
+    const results = await Promise.all(queries);
+    const total = results[0];
+    const institutes = results[1];
+    const cities = includeMeta ? results[2] : [];
+    const allCategories = includeMeta ? results[3] : [];
+    const totalPages = Math.ceil(total / limit);
 
     return NextResponse.json({ 
       success: true, 
@@ -116,7 +127,8 @@ export async function GET(request: NextRequest) {
         institutes,
         total,
         page,
-        totalPages: Math.ceil(total / limit),
+        totalPages,
+        hasMore: page < totalPages,
         assignedCategories,
         cities,
         categories: allCategories,
