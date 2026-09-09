@@ -16,28 +16,47 @@ export async function GET(request: NextRequest) {
     const id = searchParams.get('id') || session.user.id;
     const status = searchParams.get('status');
     const search = searchParams.get('search');
+    const categoryId = searchParams.get('categoryId');
 
     const where: any = { salesManagerId: id };
     if (status && status !== 'ALL') {
       where.contactStatus = status;
     }
+
+    const instituteWhere: any = {};
     if (search) {
-      where.institute = { name: { contains: search, mode: "insensitive" } };
+      instituteWhere.OR = [
+        { name: { contains: search, mode: "insensitive" } },
+        { address: { contains: search, mode: "insensitive" } },
+        { city: { name: { contains: search, mode: "insensitive" } } },
+      ];
+    }
+    if (categoryId && categoryId !== 'ALL') {
+      instituteWhere.categories = {
+        some: { categoryId }
+      };
+    }
+    if (Object.keys(instituteWhere).length > 0) {
+      where.institute = instituteWhere;
     }
 
-    const [assignments, assignedAreas] = await Promise.all([
+    const [assignments, assignedAreas, categories] = await Promise.all([
       prisma.salesAssignment.findMany({
         where,
         include: {
           institute: {
             select: {
+              id: true,
               name: true,
               slug: true,
               email: true,
               phone: true,
+              address: true,
+              latitude: true,
+              longitude: true,
               city: { select: { name: true } },
               categories: {
-                include: { category: { select: { name: true } } },
+                include: { category: { select: { id: true, name: true } } },
                 take: 2,
               },
             }
@@ -47,25 +66,34 @@ export async function GET(request: NextRequest) {
               id: true,
               areaName: true,
               radiusKm: true,
+              latitude: true,
+              longitude: true,
             }
           }
         },
-        orderBy: { updatedAt: "desc" },
+        orderBy: [{ contactStatus: "asc" }, { deadline: "asc" }, { updatedAt: "desc" }],
       }),
       prisma.salesAreaAssignment.findMany({
         where: { salesManagerId: id },
         select: {
           id: true,
           areaName: true,
+          latitude: true,
+          longitude: true,
           radiusKm: true,
           deadline: true,
           createdAt: true,
         },
         orderBy: { createdAt: "desc" }
+      }),
+      prisma.category.findMany({
+        where: { isActive: true },
+        select: { id: true, name: true },
+        orderBy: { name: "asc" },
       })
     ]);
 
-    return NextResponse.json({ success: true, data: assignments, areas: assignedAreas });
+    return NextResponse.json({ success: true, data: assignments, areas: assignedAreas, categories });
   } catch (error: any) {
     console.error("Sales Assignments API Error:", error);
     return NextResponse.json({ success: false, error: 'Internal Server Error' }, { status: 500 });

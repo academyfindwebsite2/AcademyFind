@@ -14,13 +14,15 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id') || session.user.id;
 
-    const [assignments, assignedAreas] = await Promise.all([
+    const [assignments, assignedAreas, assignedEnquiriesCount, assignedEnquiries] = await Promise.all([
       prisma.salesAssignment.findMany({
         where: { salesManagerId: id },
         include: {
           institute: {
             select: {
+              id: true,
               name: true,
+              slug: true,
               city: { select: { name: true } },
               categories: {
                 include: { category: { select: { name: true } } },
@@ -49,6 +51,30 @@ export async function GET(request: NextRequest) {
           }
         },
         orderBy: { createdAt: "desc" }
+      }),
+      prisma.instituteEnquiry.count({
+        where: {
+          assignedSalesManagerId: id,
+          isForwarded: false,
+        }
+      }),
+      prisma.instituteEnquiry.findMany({
+        where: {
+          assignedSalesManagerId: id,
+          isForwarded: false,
+        },
+        include: {
+          institute: {
+            select: {
+              id: true,
+              name: true,
+              phone: true,
+              slug: true,
+            }
+          }
+        },
+        orderBy: { createdAt: "desc" },
+        take: 5,
       })
     ]);
 
@@ -76,12 +102,44 @@ export async function GET(request: NextRequest) {
       )
       .sort((a: any, b: any) => new Date(a.deadline!).getTime() - new Date(b.deadline!).getTime());
 
+    // Process assigned areas with statistics
+    const processedAreas = assignedAreas.map((area: any) => {
+      const totalInstitutes = area.institutes?.length || 0;
+      const onboardedCount = area.institutes?.filter((i: any) => i.contactStatus === 'ONBOARDED').length || 0;
+      const contactedCount = area.institutes?.filter((i: any) => i.contactStatus === 'CONTACTED').length || 0;
+      const pendingCount = area.institutes?.filter((i: any) => i.contactStatus === 'NOT_CONTACTED' || !i.contactStatus).length || 0;
+      const percentage = totalInstitutes > 0 ? Math.round((onboardedCount / totalInstitutes) * 100) : 0;
+
+      return {
+        id: area.id,
+        areaName: area.areaName,
+        radiusKm: area.radiusKm,
+        totalInstitutes,
+        onboardedCount,
+        contactedCount,
+        pendingCount,
+        percentage,
+      };
+    });
+
     return NextResponse.json({ 
       success: true, 
       data: {
-        stats: { total, notContacted, messaged, called, contacted, onboarded, upgraded, overdue },
+        stats: {
+          total,
+          notContacted,
+          messaged,
+          called,
+          contacted,
+          onboarded,
+          upgraded,
+          overdue,
+          callbacksCount: assignedEnquiriesCount,
+        },
         upcomingDeadlines,
-        assignedAreas,
+        assignedAreas: processedAreas,
+        assignedEnquiries,
+        assignedEnquiriesCount,
         recentActivity: assignments.slice(0, 5)
       } 
     });

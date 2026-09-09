@@ -71,7 +71,11 @@ export async function GET(request: NextRequest) {
     else if (sortBy === 'oldest') orderByCondition = { createdAt: "asc" };
     else if (sortBy === 'views') orderByCondition = { viewCount: "desc" };
 
-    const [institutes, cities, allCategories] = await Promise.all([
+    const page = Math.max(1, Number(searchParams.get('page')) || 1);
+    const limit = Math.min(50, Math.max(10, Number(searchParams.get('limit')) || 30));
+
+    const [total, institutes, cities, allCategories] = await Promise.all([
+      prisma.institute.count({ where: whereCondition }),
       prisma.institute.findMany({
         where: whereCondition,
         select: {
@@ -80,6 +84,7 @@ export async function GET(request: NextRequest) {
           slug: true,
           phone: true,
           email: true,
+          address: true,
           subscriptionPlan: true,
           isActive: true,
           isPublished: true,
@@ -97,7 +102,8 @@ export async function GET(request: NextRequest) {
             }
           }
         },
-        take: 50,
+        take: limit,
+        skip: (page - 1) * limit,
         orderBy: orderByCondition,
       }),
       prisma.city.findMany({ orderBy: { name: "asc" } }),
@@ -108,6 +114,9 @@ export async function GET(request: NextRequest) {
       success: true, 
       data: {
         institutes,
+        total,
+        page,
+        totalPages: Math.ceil(total / limit),
         assignedCategories,
         cities,
         categories: allCategories,
