@@ -23,14 +23,22 @@ export async function GET(
     }
 
     // Fetch dashboard data in parallel
-    const [institute, totalLeads, newLeads, totalMembers, pendingMembers, recentLeads, todayViews] = await Promise.all([
+    const [institute, totalLeads, newLeads, totalMembers, pendingMembers, recentLeads, todayViews, totalSaves, sumDailyViews] = await Promise.all([
       prisma.institute.findUnique({
         where: { id: instituteId },
         select: {
           id: true, name: true, slug: true, logo: true, gallery: true,
           averageRating: true, reviewCount: true, isVerified: true, isActive: true,
           subscriptionPlan: true, planExpiresAt: true, planWeight: true,
+          viewCount: true,
           city: { select: { name: true } },
+          _count: {
+            select: {
+              shortlistedBy: true,
+              reviews: true,
+              enquiries: true,
+            },
+          },
         },
       }),
       prisma.instituteEnquiry.count({ where: { instituteId } }),
@@ -45,17 +53,36 @@ export async function GET(
       prisma.instituteDailyView.findFirst({
         where: { instituteId, date: new Date(new Date().toISOString().split('T')[0]) },
       }),
+      prisma.userShortlist.count({ where: { instituteId } }),
+      prisma.instituteDailyView.aggregate({
+        where: { instituteId },
+        _sum: { viewCount: true },
+      }),
     ]);
+
+    const savesCount = totalSaves || institute?._count?.shortlistedBy || 0;
+    const allTimeViews = Math.max(institute?.viewCount || 0, sumDailyViews?._sum?.viewCount || 0);
+    const viewsToday = todayViews?.viewCount || 0;
 
     return NextResponse.json({
       success: true,
       data: {
         institute,
-        stats: { totalLeads, newLeads, totalMembers, pendingMembers, todayViews: todayViews?.viewCount || 0 },
+        stats: {
+          totalLeads,
+          newLeads,
+          totalMembers,
+          pendingMembers,
+          shortlistedBy: savesCount,
+          shortlists: savesCount,
+          totalViews: allTimeViews,
+          todayViews: viewsToday,
+        },
         recentLeads,
       },
     });
   } catch (error: any) {
+    console.error('Error in mobile manager dashboard GET:', error);
     return NextResponse.json({ success: false, error: 'Internal Server Error' }, { status: 500 });
   }
 }
