@@ -26,7 +26,12 @@ export async function GET() {
       pendingClaims,
       pendingInstituteRequests,
       pendingPayments,
-      newEnquiries
+      newEnquiries,
+      pendingSalesRequests,
+      inboundLeadCount,
+      lifeCoachCount,
+      pendingMemberships,
+      pendingChatReports
     ] = await Promise.all([
       prisma.institute.count(),
       prisma.institute.count({ where: { isActive: true } }),
@@ -37,6 +42,11 @@ export async function GET() {
       prisma.instituteRequest.count({ where: { status: 'PENDING' } }),
       prisma.subscriptionPayment.count({ where: { status: 'PENDING' } }),
       prisma.instituteEnquiry.count({ where: { status: 'NEW', isForwarded: false } }),
+      prisma.salesAssignmentRequest.count({ where: { status: 'PENDING' } }),
+      prisma.inboundLead.count({ where: { status: 'NEW' } }),
+      prisma.lifeCoachRequest.count({ where: { status: 'PENDING' } }),
+      prisma.instituteMembership.count({ where: { status: 'PENDING' } }),
+      prisma.messageReport.count({ where: { status: 'PENDING' } }),
     ]);
 
     return NextResponse.json({
@@ -51,7 +61,12 @@ export async function GET() {
           pendingClaims,
           pendingInstituteRequests,
           pendingPayments,
-          newEnquiries
+          newEnquiries,
+          pendingSalesRequests,
+          inboundLeadCount,
+          lifeCoachCount,
+          pendingMemberships,
+          pendingChatReports
         },
       },
     });

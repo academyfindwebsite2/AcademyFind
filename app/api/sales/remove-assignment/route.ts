@@ -1,13 +1,10 @@
-import { auth } from "@/lib/auth/auth";
+import { getSession } from "@/lib/auth/getSession";
 import { prisma } from "@/lib/prisma";
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    });
+    const session = await getSession();
 
     if (!session || session.user.role !== "ADMIN") {
       return NextResponse.json({ error: "Admin access required" }, { status: 403 });

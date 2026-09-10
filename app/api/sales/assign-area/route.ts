@@ -1,7 +1,6 @@
-import { auth } from "@/lib/auth/auth";
+import { getSession } from "@/lib/auth/getSession";
 import { prisma } from "@/lib/prisma";
 import { meili } from "@/lib/meilisearch";
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { sendExpoPushNotification } from "@/lib/pushNotifications";
 import { sendEmail } from "@/lib/notifications/email";
@@ -22,7 +21,7 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): nu
 // Query: ?lat=28.65&lng=77.19&radius=3&salesManagerId=xxx&areaName=Karol+Bagh
 export async function GET(req: NextRequest) {
     try {
-        const session = await auth.api.getSession({ headers: await headers() });
+        const session = await getSession();
         if (!session || session.user.role !== "ADMIN") {
             return NextResponse.json({ error: "Admin access required" }, { status: 403 });
         }
@@ -183,7 +182,7 @@ export async function GET(req: NextRequest) {
 // ─── POST: Bulk assign institutes in area ───────────────────────────────────
 export async function POST(req: NextRequest) {
     try {
-        const session = await auth.api.getSession({ headers: await headers() });
+        const session = await getSession();
         if (!session || session.user.role !== "ADMIN") {
             return NextResponse.json({ error: "Admin access required" }, { status: 403 });
         }
