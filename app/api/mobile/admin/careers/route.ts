@@ -11,6 +11,15 @@ export async function GET(request: NextRequest) {
 
     const { searchParams } = new URL(request.url);
     const jobId = searchParams.get('jobId');
+    const type = searchParams.get('type');
+
+    if (type === 'talent-pool' || searchParams.get('talentPool') === 'true') {
+      const resumes = await prisma.generalResume.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 100,
+      });
+      return NextResponse.json({ success: true, data: resumes });
+    }
 
     if (jobId) {
       const [job, applications] = await Promise.all([
@@ -27,15 +36,18 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: true, data: { job, applications } });
     }
 
-    const careers = await prisma.jobPosting.findMany({
-      orderBy: { createdAt: 'desc' },
-      include: {
-        _count: { select: { applications: true } },
-      },
-      take: 50,
-    });
+    const [careers, talentPoolCount] = await Promise.all([
+      prisma.jobPosting.findMany({
+        orderBy: { createdAt: 'desc' },
+        include: {
+          _count: { select: { applications: true } },
+        },
+        take: 50,
+      }),
+      prisma.generalResume.count(),
+    ]);
 
-    return NextResponse.json({ success: true, data: careers });
+    return NextResponse.json({ success: true, data: careers, talentPoolCount });
   } catch (error: any) {
     console.error('Careers API Error:', error);
     return NextResponse.json({ success: false, error: 'Server Error' }, { status: 500 });
@@ -71,8 +83,14 @@ export async function DELETE(request: NextRequest) {
 
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
+    const type = searchParams.get('type');
 
     if (!id) return NextResponse.json({ success: false, error: 'Missing ID' }, { status: 400 });
+
+    if (type === 'talent-pool') {
+      await prisma.generalResume.delete({ where: { id } });
+      return NextResponse.json({ success: true, message: 'Talent pool resume deleted' });
+    }
 
     await prisma.jobPosting.delete({ where: { id } });
 

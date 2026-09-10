@@ -8,16 +8,42 @@ export async function GET(request: NextRequest) {
     const session = await getSession();
     if (session?.user?.role !== 'ADMIN') return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
 
+    const { searchParams } = new URL(request.url);
+    const walletId = searchParams.get('walletId');
+    const userId = searchParams.get('userId');
+
+    // If specific wallet or user transaction history is requested
+    if (walletId || userId) {
+      const wallet = await prisma.userWallet.findFirst({
+        where: walletId ? { id: walletId } : { userId: userId! },
+        include: {
+          user: { select: { id: true, name: true, email: true } },
+          transactions: {
+            orderBy: { createdAt: 'desc' },
+            take: 100,
+          },
+        },
+      });
+
+      if (!wallet) return NextResponse.json({ success: false, error: 'Wallet not found' }, { status: 404 });
+      return NextResponse.json({ success: true, data: wallet });
+    }
+
     const wallets = await prisma.userWallet.findMany({
       orderBy: { balance: 'desc' },
       include: {
         user: { select: { id: true, name: true, email: true } },
+        transactions: {
+          orderBy: { createdAt: 'desc' },
+          take: 5,
+        },
       },
       take: 50,
     });
 
     return NextResponse.json({ success: true, data: wallets });
   } catch (error: any) {
+    console.error('Wallets GET Error:', error);
     return NextResponse.json({ success: false, error: 'Server Error' }, { status: 500 });
   }
 }
@@ -47,7 +73,13 @@ export async function POST(request: NextRequest) {
 
     const updatedWallet = await prisma.userWallet.findUnique({
       where: { userId },
-      include: { user: { select: { id: true, name: true, email: true } } },
+      include: {
+        user: { select: { id: true, name: true, email: true } },
+        transactions: {
+          orderBy: { createdAt: 'desc' },
+          take: 50,
+        },
+      },
     });
 
     return NextResponse.json({ success: true, data: updatedWallet });
