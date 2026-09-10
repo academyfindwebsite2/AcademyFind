@@ -109,9 +109,10 @@ export async function PUT(req: NextRequest) {
     const session = await requireAdmin();
 
     const body = await req.json();
-    const { requestId, action, adminRemark, deadline, includeReassign } = body;
+    const { requestId, id, action, adminRemark, deadline, includeReassign } = body;
+    const targetRequestId = requestId || id;
 
-    if (!requestId || !action || !["APPROVE", "REJECT"].includes(action)) {
+    if (!targetRequestId || !action || !["APPROVE", "REJECT"].includes(action)) {
       return NextResponse.json(
         { success: false, error: "Request ID and valid action (APPROVE or REJECT) are required" },
         { status: 400 }
@@ -119,7 +120,7 @@ export async function PUT(req: NextRequest) {
     }
 
     const requestItem = await prisma.salesAssignmentRequest.findUnique({
-      where: { id: requestId },
+      where: { id: targetRequestId },
       include: {
         institute: { select: { id: true, name: true, slug: true } },
         category: { select: { id: true, name: true, slug: true } },
