@@ -16,8 +16,36 @@ export async function deleteInstituteRequestAction(id: string) {
     }
 }
 
-export async function updateInstituteRequestStatus(id: string, status: string, notes: string | null) {
+import { approveInstituteRequest } from "@/lib/User/admin/adminApprovalInstitute";
+
+export async function updateInstituteRequestStatus(id: string, status: string, notes: string | null): Promise<{
+    success: boolean;
+    error?: string;
+    message?: string;
+    publicListingUrl?: string;
+    managerDashboardUrl?: string;
+    managerName?: string;
+    instituteName?: string;
+    phone?: string | null;
+    waMessage?: string;
+}> {
     try {
+        if (status === "APPROVED") {
+            const approveRes = await approveInstituteRequest(id);
+            if (!approveRes.success) {
+                return approveRes;
+            }
+            if (notes !== null && notes !== undefined) {
+                await prisma.instituteRequest.update({
+                    where: { id },
+                    data: { adminNotes: notes }
+                });
+            }
+            revalidatePath("/af-ass-manage/instituteRequests");
+            revalidatePath(`/af-ass-manage/instituteRequests/${id}`);
+            return approveRes;
+        }
+
         await prisma.instituteRequest.update({
             where: { id },
             data: { 

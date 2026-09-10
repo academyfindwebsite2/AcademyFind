@@ -8,11 +8,74 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
+import {
+    buildInstituteRequestLinks,
+    buildInstituteRequestWhatsAppMessage,
+} from "@/lib/institutes/instituteRequestLinks";
+
+export { buildInstituteRequestLinks, buildInstituteRequestWhatsAppMessage };
+
+export async function sendInstituteRequestApprovalEmail(params: {
+    toEmail: string;
+    managerName: string;
+    instituteName: string;
+    publicListingUrl: string;
+    managerDashboardUrl: string;
+}) {
+    try {
+        await resend.emails.send({
+            from: "AcademyFind <no-reply@academyfind.com>",
+            to: params.toEmail,
+            subject: "Your Institute Listing Request has been Approved! 🎉",
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333; line-height: 1.6;">
+                    <div style="text-align: center; padding: 20px 0;">
+                        <h1 style="color: #f59e0b; margin: 0;">AcademyFind</h1>
+                    </div>
+                    <h2 style="color: #1e293b;">Congratulations, ${params.managerName}!</h2>
+                    <p>Your request to list <strong>${params.instituteName}</strong> on AcademyFind has been officially verified & <strong>APPROVED</strong> by our admin team.</p>
+                    <p>Your institute profile is now officially live on AcademyFind and visible to students nationwide.</p>
+                    
+                    <div style="text-align: center; margin: 30px 0;">
+                        <a href="${params.managerDashboardUrl}" style="display: inline-block; background-color: #f59e0b; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">Go to Manager Dashboard</a>
+                    </div>
+
+                    <p style="text-align: center;">
+                        <a href="${params.publicListingUrl}" style="color: #3b82f6; text-decoration: underline; font-weight: bold;">View your public profile page</a>
+                    </p>
+
+                    <div style="margin: 30px 0; padding: 20px; background-color: #fcf9f2; border-left: 4px solid #f59e0b; border-radius: 8px;">
+                        <h3 style="margin-top: 0; color: #b45309; font-size: 16px;">What you can do in your Manager Dashboard:</h3>
+                        <ul style="color: #78350f; font-size: 14px; margin-bottom: 0; padding-left: 20px;">
+                            <li>✅ Update institute info, courses, batches & fee structure</li>
+                            <li>✅ Add facilities, faculty & gallery photos</li>
+                            <li>✅ View student enquiry leads & admission callbacks</li>
+                            <li>✅ Respond directly to student reviews</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="margin: 30px 0; padding: 25px; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; border-radius: 12px; text-align: center;">
+                        <h3 style="margin-top: 0; color: #b45309; font-size: 18px;">Unlock Your Institute's Full Potential 🚀</h3>
+                        <p style="color: #78350f; font-size: 14px; margin-bottom: 15px;">Want to get more student admissions? Upgrade your plan to get direct WhatsApp leads and top search ranking.</p>
+                        <a href="${params.managerDashboardUrl}/billing" style="display: inline-block; background-color: #1e293b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">View Premium Plans</a>
+                    </div>
+                    
+                    <p style="color: #64748b; font-size: 14px; margin-top: 30px;">If you have any questions or need assistance, feel free to reach out to our support team.</p>
+                    <p style="color: #64748b; font-size: 14px;">Best Regards,<br/><strong>The AcademyFind Team</strong></p>
+                </div>
+            `
+        });
+        console.log(`Institute Request approval email sent successfully to ${params.toEmail}`);
+    } catch (emailError) {
+        console.error("Failed to send institute request approval email:", emailError);
+    }
+}
+
 export async function approveInstituteRequest(requestId: string) {
     try {
         const request = await prisma.instituteRequest.findUnique({
             where: { id: requestId },
-            include: { institute: true, user: { select: { email: true, name: true } } }
+            include: { institute: true, user: { select: { email: true, name: true, phone: true } } }
         });
 
         if (!request) return { success: false, error: "Request record not found." };
@@ -78,7 +141,7 @@ export async function approveInstituteRequest(requestId: string) {
             })
         ];
 
-        // DB Transaction execute karein
+        // DB Transaction execute
         await prisma.$transaction(transactionOperations);
 
         // Also ensure institute channels exist and add manager
@@ -87,7 +150,6 @@ export async function approveInstituteRequest(requestId: string) {
 
         console.log(`Institute ${request.instituteId} approved, Syncing to Meilisearch...`);
 
-        // Fix: Meilisearch task wait ko non-blocking banaya taaki server action pipeline fast respond kare
         const syncresult = await syncSingleInstituteToMeili(request.instituteId);
         if (!syncresult.success) {
             console.error("Database updated but MeiliSync Error:", syncresult.error);
@@ -108,40 +170,40 @@ export async function approveInstituteRequest(requestId: string) {
             console.error("Sales manager claim notification error:", e);
         }
 
+        const { publicListingUrl, managerDashboardUrl } = buildInstituteRequestLinks(request.institute);
+        const managerName = request.ownerName || request.user?.name || "Manager";
+        const instituteName = request.institute.name;
+        const targetEmail = request.user?.email || request.institute.email;
+        const targetPhone = request.ownerPhone || request.user?.phone || request.institute.phone;
+
         // Send Email to the Manager
-        if (request.user?.email) {
-            try {
-                await resend.emails.send({
-                    from: "AcademyFind <no-reply@academyfind.com>", // Replace with your verified sender domain if different
-                    to: request.user.email,
-                    subject: "Your Institute Listing has been Approved! 🎉",
-                    html: `
-                        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
-                            <h2 style="color: #f59e0b;">Congratulations, ${request.user.name || 'Manager'}!</h2>
-                            <p>Your request to list <strong>${request.institute.name}</strong> on AcademyFind has been approved by our admin team.</p>
-                            <p>Your listing is now live and visible to students.</p>
-                            
-                            <div style="margin: 30px 0; padding: 20px; background-color: #fcf9f2; border-left: 4px solid #f59e0b; border-radius: 4px;">
-                                <h3 style="margin-top: 0; color: #b45309;">Next Steps</h3>
-                                <p>You can now manage your institute's profile, respond to reviews, and view analytics directly from your Manager Dashboard.</p>
-                                <p style="color: #b45309; font-weight: bold;">⚠️ Important: Please make sure to log in using the exact same email address (${request.user.email}) that you used to submit this listing, otherwise you won't be able to access your manager dashboard.</p>
-                                <a href="https://academyfind.com/manager" style="display: inline-block; background-color: #f59e0b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 10px;">Go to Manager Dashboard</a>
-                            </div>
-                            
-                            <p>If you have any questions or need assistance, feel free to reach out to our support team.</p>
-                            <br/>
-                            <p>Best Regards,<br/><strong>The AcademyFind Team</strong></p>
-                        </div>
-                    `
-                });
-                console.log(`Approval email sent to ${request.user.email}`);
-            } catch (emailError) {
-                console.error("Failed to send approval email:", emailError);
-                // We don't fail the entire process if just the email fails
-            }
+        if (targetEmail) {
+            await sendInstituteRequestApprovalEmail({
+                toEmail: targetEmail,
+                managerName,
+                instituteName,
+                publicListingUrl,
+                managerDashboardUrl,
+            });
         }
 
-        return { success: true, message: "Institute Approved & Assigned to Manager (Basic Plan)!" };
+        const waMessage = buildInstituteRequestWhatsAppMessage({
+            managerName,
+            instituteName,
+            publicListingUrl,
+            managerDashboardUrl,
+        });
+
+        return {
+            success: true,
+            message: "Institute Approved & Assigned to Manager (Basic Plan)!",
+            publicListingUrl,
+            managerDashboardUrl,
+            managerName,
+            instituteName,
+            phone: targetPhone,
+            waMessage,
+        };
     } catch (error) {
         console.error("Approval action error:", error);
         return { success: false, error: "Approval pipeline failed." };

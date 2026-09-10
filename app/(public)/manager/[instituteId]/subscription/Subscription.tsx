@@ -165,14 +165,17 @@ export default function SubscriptionClient({ currentPlan, currentBillingCycle, i
                                 ))}
                             </ul>
 
-                            <Button onClick={() => handleCheckout(plan.id)} className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${isCurrentCycleAndPlan || (!isCurrentCycleAndPlan && currentPlan === plan.id) || currentPlanRank > (planPriority[plan.id] ?? 0)
+                            <Button 
+                                disabled={isCurrentCycleAndPlan || currentPlanRank > (planPriority[plan.id] ?? 0)}
+                                onClick={() => handleCheckout(plan.id)} 
+                                className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${isCurrentCycleAndPlan || currentPlanRank > (planPriority[plan.id] ?? 0)
                                 ? "bg-stone-100 text-stone-400 cursor-not-allowed border border-stone-200"
                                 : "bg-stone-900 text-white hover:bg-blue-600 shadow-sm hover:shadow-md hover:-translate-y-1"
                                 }`}>
                                 {isCurrentCycleAndPlan
                                     ? "Active"
                                     : currentPlan === plan.id
-                                        ? "Active on other cycle"
+                                        ? (isAnnual ? "Switch to Annual" : "Switch to Monthly")
                                         : currentPlanRank > (planPriority[plan.id] ?? 0)
                                             ? "Included in current plan"
                                             : "Upgrade Now"}

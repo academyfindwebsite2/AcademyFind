@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import AdminRequestStatusForm from "@/components/admin/AdminRequestStatusForm";
 import AdminClaimWhatsAppButton from "@/components/admin/AdminClaimWhatsAppButton";
+import AdminRequestNotifyButton from "@/components/admin/AdminRequestNotifyButton";
 
 export default async function InstituteRequestDetailPage({
     params
@@ -74,6 +75,9 @@ export default async function InstituteRequestDetailPage({
                     }`}>
                         {request.status}
                     </span>
+                    {request.status === 'APPROVED' && (
+                        <AdminRequestNotifyButton request={request} />
+                    )}
                     {request.status === "PENDING" && request.institute && (
                         <ApprovalButtons requestId={request.id} />
                     )}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ApprovalButtons from "@/components/admin/AdminApprovalButtons";
 import AdminDeleteButton from "@/components/admin/AdminDeleteButton";
+import AdminRequestNotifyButton from "@/components/admin/AdminRequestNotifyButton";
 import { deleteInstituteRequestAction } from "./actions";
 
 export default async function AdminApprovalsPage({
@@ -210,6 +211,11 @@ export default async function AdminApprovalsPage({
                                                 >
                                                     <ExternalLink className="w-4 h-4" /> View Institute
                                                 </Link>
+                                            )}
+
+                                            {/* Show Notify Manager button if approved */}
+                                            {req.status === "APPROVED" && (
+                                                <AdminRequestNotifyButton request={req} />
                                             )}
 
                                             {/* Only show approval buttons if the request is still PENDING */}
