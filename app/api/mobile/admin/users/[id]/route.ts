@@ -17,12 +17,35 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     const body = await request.json();
 
     const updateData: any = {};
-    if (body.role) updateData.role = body.role; // USER, ADMIN, MANAGER, SALES_MANAGER
+    if (body.role !== undefined) updateData.role = body.role;
     if (body.isActive !== undefined) updateData.isActive = body.isActive;
+    if (body.name !== undefined) updateData.name = body.name;
+    if (body.phone !== undefined) updateData.phone = body.phone;
+    if (body.canAddInstitute !== undefined) updateData.canAddInstitute = body.canAddInstitute;
 
     const user = await prisma.user.update({
       where: { id },
       data: updateData,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        phone: true,
+        image: true,
+        role: true,
+        isActive: true,
+        canAddInstitute: true,
+        emailVerified: true,
+        createdAt: true,
+        lastLoginAt: true,
+        _count: {
+          select: {
+            instituteRequests: true,
+            claims: true,
+            reviews: true,
+          },
+        },
+      },
     });
 
     return NextResponse.json({ success: true, message: 'User updated successfully', data: user });

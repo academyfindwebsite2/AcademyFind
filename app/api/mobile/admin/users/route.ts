@@ -10,17 +10,37 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const q = searchParams.get('q') || '';
     const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '20');
+    const limit = parseInt(searchParams.get('limit') || '50');
 
     const where: any = {};
-    if (q) where.OR = [{ name: { contains: q, mode: 'insensitive' } }, { email: { contains: q, mode: 'insensitive' } }];
+    if (q) where.OR = [
+      { name: { contains: q, mode: 'insensitive' } },
+      { email: { contains: q, mode: 'insensitive' } },
+      { phone: { contains: q, mode: 'insensitive' } },
+    ];
 
     const [users, total] = await Promise.all([
       prisma.user.findMany({
         where,
         select: {
-          id: true, name: true, email: true, image: true, role: true,
-          createdAt: true, emailVerified: true,
+          id: true,
+          name: true,
+          email: true,
+          phone: true,
+          image: true,
+          role: true,
+          isActive: true,
+          canAddInstitute: true,
+          emailVerified: true,
+          createdAt: true,
+          lastLoginAt: true,
+          _count: {
+            select: {
+              instituteRequests: true,
+              claims: true,
+              reviews: true,
+            },
+          },
         },
         orderBy: { createdAt: 'desc' },
         skip: (page - 1) * limit,
@@ -29,7 +49,13 @@ export async function GET(request: NextRequest) {
       prisma.user.count({ where }),
     ]);
 
-    return NextResponse.json({ success: true, data: { users, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } } });
+    return NextResponse.json({
+      success: true,
+      data: {
+        users,
+        pagination: { page, limit, total, totalPages: Math.ceil(total / limit) },
+      },
+    });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: 'Internal Server Error' }, { status: 500 });
   }
