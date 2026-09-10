@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       take: 50,
     });
 
-    const enrichedRequests = requests.map(req => {
+    const enrichedRequests = requests.map((req: any) => {
       const links = req.institute ? buildInstituteRequestLinks(req.institute) : null;
       const managerName = req.ownerName || req.user?.name || "Manager";
       const instituteName = req.institute?.name || "Institute";
