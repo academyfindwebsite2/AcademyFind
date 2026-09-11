@@ -13,11 +13,18 @@ function VerifyEmailContent() {
   
   const email = searchParams.get("email");
   const otp = searchParams.get("otp");
+  const type = searchParams.get("type");
   
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [message, setMessage] = useState("Verifying your email...");
 
   useEffect(() => {
+    if (type === "forget-password" && email) {
+      const targetOtp = otp ? `&otp=${encodeURIComponent(otp)}` : "";
+      router.replace(`/forgot-password?email=${encodeURIComponent(email)}${targetOtp}`);
+      return;
+    }
+
     if (!email || !otp) {
       setStatus("error");
       setMessage("Invalid or missing verification link parameters.");

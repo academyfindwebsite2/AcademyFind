@@ -1,6 +1,8 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import ForgotPasswordComponent from "./ForgotPassword";
 import { getPlatformStats } from "@/lib/stats";
+import { Loader2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Forgot Password | AcademyFind",
@@ -16,6 +18,16 @@ export const metadata: Metadata = {
 
 export default async function ForgotPasswordPage() {
   const stats = await getPlatformStats();
-  return <ForgotPasswordComponent stats={stats} />;
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-slate-50">
+          <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
+        </div>
+      }
+    >
+      <ForgotPasswordComponent stats={stats} />
+    </Suspense>
+  );
 }
 

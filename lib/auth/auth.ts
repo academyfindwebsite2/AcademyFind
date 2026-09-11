@@ -60,13 +60,13 @@ export const auth = betterAuth({
     },
     // Optional: Boost performance by allowing Better Auth to use SQL joins (v1.4+)
     experimental: {
-        joins: true, 
+        joins: true,
     },
     rateLimit: {
         window: 60, // 60 seconds
         max: 1000, // Increase max requests to avoid 429 errors from mobile app
     },
-    emailAndPassword: {  
+    emailAndPassword: {
         enabled: true,
         requireEmailVerification: true,
     },
@@ -96,44 +96,65 @@ export const auth = betterAuth({
         }
     },
 
-    plugins:[
+    plugins: [
         emailOTP({
-            async sendVerificationOTP({email, otp, type}){
+            expiresIn: 600, // 10 minutes expiry for all OTP codes and links
+            async sendVerificationOTP({ email, otp, type }) {
                 let subject = "";
-                let htmlContent = "";
+                let heading = "AcademyFind";
+                let messageText = "";
+                let actionText = "Verify Automatically";
+                const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://academyfind.com';
+                let actionLink = `${baseUrl}/verify-email?email=${encodeURIComponent(email)}&otp=${otp}&type=${type}`;
 
-                // 2. Type ke hisaab se Email ka Text aur Subject set karo
-                if(type === "sign-in"){
+                if (type === "sign-in") {
                     subject = "Your Login Code - AcademyFind";
-                    htmlContent = `<p>Welcome back! Use the following code to sign in:</p>`;
-                } else if(type === "email-verification"){
+                    heading = "Sign In to AcademyFind";
+                    messageText = "Welcome back! Use the verification code below to complete your sign in:";
+                    actionText = "Sign In Automatically";
+                } else if (type === "email-verification") {
                     subject = "Verify Your Email - AcademyFind";
-                    htmlContent = `<p>Welcome to AcademyFind! Please verify your email address using this code:</p>`;
-                } else if(type === "forget-password"){
+                    heading = "Verify Your Email Address";
+                    messageText = "Welcome to AcademyFind! Please verify your email address using this verification code:";
+                    actionText = "Verify Email";
+                } else if (type === "forget-password") {
                     subject = "Reset Your Password - AcademyFind";
-                    htmlContent = `<p>We received a request to reset your password. Use this code to proceed:</p>`;
+                    heading = "Reset Your Password";
+                    messageText = "We received a request to reset your password. Use the verification code below or click the button to set your new password:";
+                    actionText = "Reset Password";
+                    actionLink = `${baseUrl}/forgot-password?email=${encodeURIComponent(email)}&otp=${otp}`;
                 }
 
-                const verificationLink = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/verify-email?email=${encodeURIComponent(email)}&otp=${otp}&type=${type}`;
-
-                // 3. Resend ko use karke Email bhejo
+                // Resend email
                 try {
                     const result = await resend.emails.send({
-                        from: 'AcademyFind <Verification@academyfind.com>', 
+                        from: 'AcademyFind <Verification@academyfind.com>',
                         to: email,
                         subject: subject,
                         html: `
-                            <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
-                                <h2 style="color: #f59e0b;">AcademyFind</h2>
-                                ${htmlContent}
-                                <div style="margin: 20px 0; padding: 15px; background-color: #f3f4f6; border-radius: 8px; text-align: center;">
-                                    <strong style="font-size: 28px; letter-spacing: 4px; color: #1f2937;">${otp}</strong>
+                            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 32px 24px; background-color: #ffffff; border: 1px solid #f1f5f9; border-radius: 16px; color: #1e293b;">
+                                <div style="text-align: center; margin-bottom: 24px;">
+                                    <div style="display: inline-block; padding: 8px 16px; background-color: #fef3c7; border-radius: 9999px;">
+                                        <span style="font-size: 18px; font-weight: 700; color: #d97706; letter-spacing: 0.5px;">AcademyFind</span>
+                                    </div>
+                                    <h2 style="font-size: 22px; font-weight: 700; color: #0f172a; margin-top: 16px; margin-bottom: 8px;">${heading}</h2>
+                                    <p style="font-size: 15px; color: #64748b; line-height: 1.5; margin: 0;">${messageText}</p>
                                 </div>
-                                <div style="text-align: center; margin-bottom: 20px;">
-                                    <a href="${verificationLink}" style="display: inline-block; padding: 12px 24px; background-color: #f59e0b; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px;">Verify Automatically</a>
-                                    <p style="font-size: 12px; margin-top: 10px; color: #6b7280;">Or click this link: <a href="${verificationLink}" style="color: #3b82f6;">${verificationLink}</a></p>
+
+                                <div style="margin: 24px 0; padding: 20px; background-color: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; text-align: center;">
+                                    <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 6px;">Your 6-Digit Code</div>
+                                    <strong style="font-size: 32px; letter-spacing: 6px; color: #d97706; font-family: monospace;">${otp}</strong>
                                 </div>
-                                <p style="font-size: 14px; color: #6b7280;">This code is valid for a limited time. Please do not share it with anyone.</p>
+
+                                <div style="text-align: center; margin: 28px 0 20px;">
+                                    <a href="${actionLink}" style="display: inline-block; padding: 14px 32px; background-color: #f59e0b; color: #ffffff; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 15px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);">${actionText}</a>
+                                    <p style="font-size: 12px; margin-top: 14px; color: #94a3b8;">Or click or copy this URL into your browser:<br/><a href="${actionLink}" style="color: #f59e0b; word-break: break-all;">${actionLink}</a></p>
+                                </div>
+
+                                <hr style="border: none; border-top: 1px solid #f1f5f9; margin: 24px 0;" />
+                                <p style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin: 0; text-align: center;">
+                                    This code is valid for 10 minutes. If you did not request this, please ignore this email or contact our support team.
+                                </p>
                             </div>
                         `,
                     });
@@ -143,7 +164,7 @@ export const auth = betterAuth({
                     } else {
                         console.log(`✅ Successfully sent ${type} OTP via Resend to ${email}`);
                     }
-                    
+
                 } catch (err) {
                     console.error(`❌ Failed to send ${type} email via Resend:`, err);
                 }
