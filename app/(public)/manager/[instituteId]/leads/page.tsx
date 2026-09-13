@@ -358,11 +358,10 @@ export default async function EnquiriesPage({
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
         <Link
           href={buildFilterUrl({ pipeline: "ALL" })}
-          className={`p-4 rounded-2xl border transition-all ${
-            currentPipeline === "ALL"
-              ? "bg-stone-900 text-white border-stone-900 shadow-sm"
-              : "bg-white border-stone-200 hover:border-stone-400 text-stone-900"
-          }`}
+          className={`p-4 rounded-2xl border transition-all ${currentPipeline === "ALL"
+            ? "bg-stone-900 text-white border-stone-900 shadow-sm"
+            : "bg-white border-stone-200 hover:border-stone-400 text-stone-900"
+            }`}
         >
           <span className={`text-[11px] font-bold uppercase tracking-wider block ${currentPipeline === "ALL" ? "text-stone-300" : "text-stone-400"}`}>
             Total Leads
@@ -375,13 +374,12 @@ export default async function EnquiriesPage({
 
         <Link
           href={buildFilterUrl({ pipeline: "UNASSIGNED" })}
-          className={`p-4 rounded-2xl border transition-all ${
-            currentPipeline === "UNASSIGNED"
-              ? "bg-amber-500 text-white border-amber-500 shadow-sm"
-              : unassignedCount > 0
+          className={`p-4 rounded-2xl border transition-all ${currentPipeline === "UNASSIGNED"
+            ? "bg-amber-500 text-white border-amber-500 shadow-sm"
+            : unassignedCount > 0
               ? "bg-amber-50/70 border-amber-200 hover:border-amber-300 text-amber-950"
               : "bg-white border-stone-200 hover:border-stone-400 text-stone-900"
-          }`}
+            }`}
         >
           <div className="flex items-center justify-between">
             <span className={`text-[11px] font-bold uppercase tracking-wider block ${currentPipeline === "UNASSIGNED" ? "text-amber-100" : "text-amber-700"}`}>
@@ -397,11 +395,10 @@ export default async function EnquiriesPage({
 
         <Link
           href={buildFilterUrl({ pipeline: "FOLLOW_UP" })}
-          className={`p-4 rounded-2xl border transition-all ${
-            currentPipeline === "FOLLOW_UP"
-              ? "bg-violet-600 text-white border-violet-600 shadow-sm"
-              : "bg-white border-stone-200 hover:border-stone-400 text-stone-900"
-          }`}
+          className={`p-4 rounded-2xl border transition-all ${currentPipeline === "FOLLOW_UP"
+            ? "bg-violet-600 text-white border-violet-600 shadow-sm"
+            : "bg-white border-stone-200 hover:border-stone-400 text-stone-900"
+            }`}
         >
           <span className={`text-[11px] font-bold uppercase tracking-wider block ${currentPipeline === "FOLLOW_UP" ? "text-violet-200" : "text-slate-400"}`}>
             In Follow-Up
@@ -414,13 +411,12 @@ export default async function EnquiriesPage({
 
         <Link
           href={buildFilterUrl({ pipeline: "OVERDUE" })}
-          className={`p-4 rounded-2xl border transition-all ${
-            currentPipeline === "OVERDUE"
-              ? "bg-rose-600 text-white border-rose-600 shadow-sm"
-              : overdueCount > 0
+          className={`p-4 rounded-2xl border transition-all ${currentPipeline === "OVERDUE"
+            ? "bg-rose-600 text-white border-rose-600 shadow-sm"
+            : overdueCount > 0
               ? "bg-rose-50 border-rose-200 hover:border-rose-300 text-rose-950"
               : "bg-white border-stone-200 hover:border-stone-400 text-stone-900"
-          }`}
+            }`}
         >
           <div className="flex items-center justify-between">
             <span className={`text-[11px] font-bold uppercase tracking-wider block ${currentPipeline === "OVERDUE" ? "text-rose-100" : "text-rose-700"}`}>
@@ -436,11 +432,10 @@ export default async function EnquiriesPage({
 
         <Link
           href={buildFilterUrl({ pipeline: "ADMISSIONS" })}
-          className={`p-4 rounded-2xl border transition-all col-span-2 sm:col-span-1 ${
-            currentPipeline === "ADMISSIONS"
-              ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
-              : "bg-white border-stone-200 hover:border-stone-400 text-stone-900"
-          }`}
+          className={`p-4 rounded-2xl border transition-all col-span-2 sm:col-span-1 ${currentPipeline === "ADMISSIONS"
+            ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
+            : "bg-white border-stone-200 hover:border-stone-400 text-stone-900"
+            }`}
         >
           <span className={`text-[11px] font-bold uppercase tracking-wider block ${currentPipeline === "ADMISSIONS" ? "text-emerald-100" : "text-emerald-700"}`}>
             Admissions Converted
@@ -460,25 +455,23 @@ export default async function EnquiriesPage({
             <span className="text-xs font-bold text-stone-400 uppercase tracking-wider mr-1 flex items-center gap-1">
               <Filter className="w-3 h-3" /> Stage:
             </span>
-            {pipelineFilters.map((tab) => {
+            {pipelineFilters.map((tab: any) => {
               const isActive = currentPipeline === tab.id;
               return (
                 <Link
                   key={tab.id}
                   href={buildFilterUrl({ pipeline: tab.id })}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
-                    isActive
-                      ? "bg-stone-900 text-white shadow-xs"
-                      : tab.alert
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${isActive
+                    ? "bg-stone-900 text-white shadow-xs"
+                    : tab.alert
                       ? "bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200"
                       : "bg-stone-100 text-stone-600 hover:bg-stone-200"
-                  }`}
+                    }`}
                 >
                   <span>{tab.label}</span>
                   <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
-                      isActive ? "bg-white/20 text-white" : "bg-white text-stone-700 shadow-2xs"
-                    }`}
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${isActive ? "bg-white/20 text-white" : "bg-white text-stone-700 shadow-2xs"
+                      }`}
                   >
                     {tab.count}
                   </span>
@@ -502,11 +495,10 @@ export default async function EnquiriesPage({
               <Link
                 key={tab.id}
                 href={buildFilterUrl({ source: tab.id })}
-                className={`px-3 py-1 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
-                  isActive
-                    ? "bg-violet-100 text-violet-800 font-bold border border-violet-200"
-                    : "bg-stone-50 text-stone-600 hover:bg-stone-100 border border-stone-100"
-                }`}
+                className={`px-3 py-1 rounded-xl text-xs font-semibold whitespace-nowrap transition ${isActive
+                  ? "bg-violet-100 text-violet-800 font-bold border border-violet-200"
+                  : "bg-stone-50 text-stone-600 hover:bg-stone-100 border border-stone-100"
+                  }`}
               >
                 <span>{tab.label}</span> ({tab.count})
               </Link>
@@ -547,15 +539,14 @@ export default async function EnquiriesPage({
             return (
               <div
                 key={enquiry.id}
-                className={`p-6 border rounded-3xl shadow-xs bg-white transition-all hover:border-stone-400 ${
-                  enquiry.convertedToAdmission
-                    ? "border-emerald-200 bg-emerald-50/10"
-                    : isOverdue
+                className={`p-6 border rounded-3xl shadow-xs bg-white transition-all hover:border-stone-400 ${enquiry.convertedToAdmission
+                  ? "border-emerald-200 bg-emerald-50/10"
+                  : isOverdue
                     ? "border-rose-200/80 bg-rose-50/20"
                     : enquiry.parentId
-                    ? "border-amber-200"
-                    : "border-stone-200"
-                }`}
+                      ? "border-amber-200"
+                      : "border-stone-200"
+                  }`}
               >
                 {/* 1. Top Header: Student info + Status Badges */}
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
@@ -632,27 +623,25 @@ export default async function EnquiriesPage({
                 {/* 3. Follow-up Banner (Overdue / Today / Upcoming) */}
                 {enquiry.nextFollowUp && !enquiry.convertedToAdmission && (
                   <div
-                    className={`mb-3 p-3 rounded-2xl border text-xs flex items-center justify-between gap-3 ${
-                      isOverdue
-                        ? "bg-rose-50 border-rose-200 text-rose-950"
-                        : isToday
+                    className={`mb-3 p-3 rounded-2xl border text-xs flex items-center justify-between gap-3 ${isOverdue
+                      ? "bg-rose-50 border-rose-200 text-rose-950"
+                      : isToday
                         ? "bg-amber-50 border-amber-200 text-amber-950"
                         : "bg-blue-50/70 border-blue-200 text-blue-950"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-2">
                       <Clock
-                        className={`w-4 h-4 ${
-                          isOverdue ? "text-rose-600" : isToday ? "text-amber-600" : "text-blue-600"
-                        }`}
+                        className={`w-4 h-4 ${isOverdue ? "text-rose-600" : isToday ? "text-amber-600" : "text-blue-600"
+                          }`}
                       />
                       <div>
                         <span className="font-bold block">
                           {isOverdue
                             ? "⚠️ Follow-up Overdue!"
                             : isToday
-                            ? "🔔 Follow-up Due Today!"
-                            : "📅 Scheduled Follow-up"}
+                              ? "🔔 Follow-up Due Today!"
+                              : "📅 Scheduled Follow-up"}
                         </span>
                         <span className="text-[11px] opacity-90">
                           {formatIST(enquiry.nextFollowUp, "PPP 'at' p")}

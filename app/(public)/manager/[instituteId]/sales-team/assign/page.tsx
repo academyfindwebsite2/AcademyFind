@@ -43,11 +43,14 @@ export default async function AssignLeadsPage({
 
   if (!institute) return notFound();
 
+  type IsmItem = (typeof allIsms)[number];
+  type LeadDbItem = (typeof leads)[number];
+
   const selectedIsm = ismId
-    ? allIsms.find((a) => a.userId === ismId)?.user || null
+    ? allIsms.find((a: IsmItem) => a.userId === ismId)?.user || null
     : allIsms[0]?.user || null;
 
-  const formattedLeads = leads.map((l) => ({
+  const formattedLeads = leads.map((l: LeadDbItem) => ({
     ...l,
     createdAt: l.createdAt.toISOString(),
   }));

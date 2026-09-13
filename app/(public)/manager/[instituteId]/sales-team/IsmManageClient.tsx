@@ -28,14 +28,16 @@ interface UserResult {
   alreadyAssigned: boolean;
 }
 
+export interface PendingInviteItem {
+  id: string;
+  message: string | null;
+  createdAt: Date | string;
+  user: { name: string | null; email: string; image: string | null };
+}
+
 interface Props {
   instituteId: string;
-  pendingInvites: Array<{
-    id: string;
-    message: string | null;
-    createdAt: Date | string;
-    user: { name: string | null; email: string; image: string | null };
-  }>;
+  pendingInvites: PendingInviteItem[];
 }
 
 export default function IsmManageClient({ instituteId, pendingInvites }: Props) {
@@ -154,7 +156,7 @@ export default function IsmManageClient({ instituteId, pendingInvites }: Props) 
 
           {showPending && (
             <div className="border-t border-amber-200 divide-y divide-amber-100">
-              {pendingInvites.map((inv: any) => (
+              {pendingInvites.map((inv: PendingInviteItem) => (
                 <div key={inv.id} className="flex items-center gap-3 px-5 py-3">
                   {inv.user.image ? (
                     <img src={inv.user.image} alt="" className="w-8 h-8 rounded-full object-cover shrink-0" />
@@ -229,7 +231,7 @@ export default function IsmManageClient({ instituteId, pendingInvites }: Props) 
               </div>
             )}
             {!isSearching &&
-              results.map((user) => (
+              results.map((user: UserResult) => (
                 <button
                   key={user.id}
                   onClick={() => !user.alreadyAssigned && selectUser(user)}
