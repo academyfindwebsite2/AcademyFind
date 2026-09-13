@@ -79,7 +79,7 @@ export default async function AssignLeadsPage({
           </div>
           <div className="flex items-center gap-2">
             <span className="bg-indigo-50 text-indigo-800 border border-indigo-100 px-3.5 py-1.5 rounded-2xl font-bold text-xs">
-              {leads.filter((l) => !l.assignedIsmId).length} Unassigned Leads
+              {leads.filter((l: any) => !l.assignedIsmId).length} Unassigned Leads
             </span>
           </div>
         </div>
