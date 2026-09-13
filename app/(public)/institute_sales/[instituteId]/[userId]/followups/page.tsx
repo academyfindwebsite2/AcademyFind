@@ -33,6 +33,8 @@ export default async function IsmFollowUpsPage({
     }),
   ]);
 
+  type FollowUpLeadItem = (typeof overdueLeads)[number];
+
   return (
     <div className="w-full space-y-8 animate-in fade-in duration-500">
       <div>
@@ -52,7 +54,7 @@ export default async function IsmFollowUpsPage({
             <AlertTriangle className="w-5 h-5" /> Overdue ({overdueLeads.length})
           </h2>
           <div className="space-y-2">
-            {overdueLeads.map((lead: any) => (
+            {overdueLeads.map((lead: FollowUpLeadItem) => (
               <Link
                 key={lead.id}
                 href={`/institute_sales/${instituteId}/${userId}/leads/${lead.id}`}
@@ -70,7 +72,7 @@ export default async function IsmFollowUpsPage({
                 <div className="text-right shrink-0 flex items-center gap-3">
                   <div>
                     <p className="text-xs font-bold text-red-700">
-                      Was due: {formatIST(lead.nextFollowUp, "dd MMM · hh:mm a")}
+                      Was due: {lead.nextFollowUp ? formatIST(lead.nextFollowUp, "dd MMM · hh:mm a") : "—"}
                     </p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-red-300 group-hover:text-red-500 transition" />
@@ -93,7 +95,7 @@ export default async function IsmFollowUpsPage({
           </div>
         ) : (
           <div className="space-y-2">
-            {upcomingLeads.map((lead: any) => (
+            {upcomingLeads.map((lead: FollowUpLeadItem) => (
               <Link
                 key={lead.id}
                 href={`/institute_sales/${instituteId}/${userId}/leads/${lead.id}`}
@@ -111,10 +113,10 @@ export default async function IsmFollowUpsPage({
                 <div className="text-right shrink-0 flex items-center gap-3">
                   <div>
                     <p className="text-xs font-bold text-orange-600">
-                      {formatIST(lead.nextFollowUp, "dd MMM")}
+                      {lead.nextFollowUp ? formatIST(lead.nextFollowUp, "dd MMM") : "—"}
                     </p>
                     <p className="text-[10px] text-slate-400">
-                      {formatIST(lead.nextFollowUp, "hh:mm a")}
+                      {lead.nextFollowUp ? formatIST(lead.nextFollowUp, "hh:mm a") : ""}
                     </p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-violet-500 transition" />

@@ -44,13 +44,14 @@ export default async function IsmLeadsPage({
   });
 
   const counts = await Promise.all(
-    STATUS_OPTIONS.map((s) =>
+    STATUS_OPTIONS.map((s: string) =>
       prisma.instituteEnquiry.count({
         where: s === "ALL" ? { instituteId, assignedIsmId: userId } : { instituteId, assignedIsmId: userId, status: s },
       })
     )
   );
-  const statusCounts = Object.fromEntries(STATUS_OPTIONS.map((s, i) => [s, counts[i]]));
+  const statusCounts = Object.fromEntries(STATUS_OPTIONS.map((s: string, i: number) => [s, counts[i]]));
+  type IsmLeadItem = (typeof leads)[number];
 
   return (
     <div className="w-full space-y-6">
@@ -91,7 +92,7 @@ export default async function IsmLeadsPage({
         <div className="text-xs font-bold text-slate-400 flex items-center gap-1.5 mr-1 shrink-0">
           <Filter className="w-3.5 h-3.5" /> Filter:
         </div>
-        {STATUS_OPTIONS.map((s) => (
+        {STATUS_OPTIONS.map((s: string) => (
           <Link
             key={s}
             prefetch={false}
@@ -132,7 +133,7 @@ export default async function IsmLeadsPage({
                   </td>
                 </tr>
               ) : (
-                leads.map((lead: any) => (
+                leads.map((lead: IsmLeadItem) => (
                   <tr key={lead.id} className="hover:bg-slate-50/60 transition group">
                     <td className="p-4 whitespace-nowrap text-xs text-slate-500">
                       <div className="flex items-center gap-1">

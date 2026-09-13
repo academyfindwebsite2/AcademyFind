@@ -6,9 +6,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatIST(dateInput: string | Date, formatStr: string = "PPP 'at' p") {
+export function formatIST(dateInput?: string | Date | null, formatStr: string = "PPP 'at' p"): string {
+  if (!dateInput) return "";
   // Convert the input to a Date object
   const date = new Date(dateInput);
+  if (isNaN(date.getTime())) return "";
 
   // Format the date strictly in Asia/Kolkata timezone using Intl.DateTimeFormat
   // Since date-fns inherently uses the system's local timezone (which is often UTC on servers like Vercel),

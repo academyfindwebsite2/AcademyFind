@@ -19,7 +19,8 @@ export async function GET(request: NextRequest) {
     where: { instituteId, isActive: true },
     select: { userId: true },
   });
-  const assignedIds = new Set(alreadyAssigned.map((a: any) => a.userId));
+  type AssignedIsmUser = (typeof alreadyAssigned)[number];
+  const assignedIds = new Set(alreadyAssigned.map((a: AssignedIsmUser) => a.userId));
 
   const users = await prisma.user.findMany({
     where: {
@@ -41,9 +42,10 @@ export async function GET(request: NextRequest) {
     take: 8,
     orderBy: { name: "asc" },
   });
+  type SearchUserItem = (typeof users)[number];
 
   return NextResponse.json({
-    users: users.map((u: any) => ({
+    users: users.map((u: SearchUserItem) => ({
       ...u,
       alreadyAssigned: assignedIds.has(u.id),
     })),

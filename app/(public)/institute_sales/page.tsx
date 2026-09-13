@@ -60,9 +60,12 @@ export default async function InstituteSalesPortalPage() {
     redirect(`/institute_sales/${assignments[0].instituteId}/${userId}`);
   }
 
+  type AssignmentItem = (typeof assignments)[number];
+  type PendingInviteItem = (typeof pendingInvites)[number];
+
   // Calculate summary stats for each assigned institute
   const instituteStats = await Promise.all(
-    assignments.map(async (a) => {
+    assignments.map(async (a: AssignmentItem) => {
       const [totalLeads, activeFollowUps, totalAdmissions] = await Promise.all([
         prisma.instituteEnquiry.count({
           where: { instituteId: a.instituteId, assignedIsmId: userId },
@@ -91,7 +94,7 @@ export default async function InstituteSalesPortalPage() {
     })
   );
   const statsMap = Object.fromEntries(
-    instituteStats.map((s) => [s.instituteId, s])
+    instituteStats.map((s: { instituteId: string; totalLeads: number; activeFollowUps: number; totalAdmissions: number }) => [s.instituteId, s])
   );
 
   return (
@@ -127,7 +130,7 @@ export default async function InstituteSalesPortalPage() {
               <span>You have {pendingInvites.length} pending Sales Manager invite{pendingInvites.length > 1 ? "s" : ""}:</span>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              {pendingInvites.map((invite: any) => (
+              {pendingInvites.map((invite: PendingInviteItem) => (
                 <div
                   key={invite.id}
                   className="bg-white p-4 rounded-2xl border border-amber-100 flex items-center justify-between gap-3 shadow-2xs"
@@ -182,7 +185,7 @@ export default async function InstituteSalesPortalPage() {
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {assignments.map((assignment: any) => {
+              {assignments.map((assignment: AssignmentItem) => {
                 const inst = assignment.institute;
                 const stats = statsMap[inst.id] || {
                   totalLeads: 0,

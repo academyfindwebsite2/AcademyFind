@@ -111,7 +111,7 @@ export default async function IsmDashboardPage({
           { label: "Follow-ups", value: followUpLeads, icon: <CalendarClock className="w-5 h-5" />, color: "bg-orange-50 border-orange-200 text-orange-700" },
           { label: "Overdue", value: overdueFollowUps, icon: <AlertTriangle className="w-5 h-5" />, color: overdueFollowUps > 0 ? "bg-red-50 border-red-200 text-red-700" : "bg-slate-50 border-slate-200 text-slate-700" },
           { label: "Converted", value: convertedLeads, icon: <GraduationCap className="w-5 h-5" />, color: "bg-green-50 border-green-200 text-green-700" },
-        ].map((stat) => (
+        ].map((stat: { label: string; value: number; icon: React.ReactNode; color: string }) => (
           <div key={stat.label} className={`border rounded-2xl p-4 flex flex-col gap-2 ${stat.color}`}>
             <div className="opacity-60">{stat.icon}</div>
             <div className="text-2xl font-black">{stat.value}</div>
@@ -136,7 +136,7 @@ export default async function IsmDashboardPage({
             {recentLeads.length === 0 ? (
               <div className="p-8 text-center text-slate-400 text-sm">No leads assigned yet.</div>
             ) : (
-              recentLeads.map((lead: any) => (
+              recentLeads.map((lead: (typeof recentLeads)[number]) => (
                 <Link
                   key={lead.id}
                   href={`/institute_sales/${instituteId}/${userId}/leads/${lead.id}`}
@@ -180,7 +180,7 @@ export default async function IsmDashboardPage({
                 <p>No upcoming follow-ups! 🎉</p>
               </div>
             ) : (
-              upcomingFollowUps.map((lead: any) => (
+              upcomingFollowUps.map((lead: (typeof upcomingFollowUps)[number]) => (
                 <Link
                   key={lead.id}
                   href={`/institute_sales/${instituteId}/${userId}/leads/${lead.id}`}
@@ -194,10 +194,10 @@ export default async function IsmDashboardPage({
                   </div>
                   <div className="text-right shrink-0">
                     <p className="text-xs font-bold text-orange-600">
-                      {formatIST(lead.nextFollowUp, "dd MMM")}
+                      {lead.nextFollowUp ? formatIST(lead.nextFollowUp, "dd MMM") : "—"}
                     </p>
                     <p className="text-[10px] text-slate-400">
-                      {formatIST(lead.nextFollowUp, "hh:mm a")}
+                      {lead.nextFollowUp ? formatIST(lead.nextFollowUp, "hh:mm a") : ""}
                     </p>
                   </div>
                 </Link>

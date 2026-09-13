@@ -128,7 +128,7 @@ export default async function IsmLeadDetailPage({
               {lead.ismActivities.length === 0 ? (
                 <div className="p-6 text-center text-slate-400 text-sm">No activity yet.</div>
               ) : (
-                lead.ismActivities.map((act: any) => (
+                lead.ismActivities.map((act: (typeof lead)["ismActivities"][number]) => (
                   <div key={act.id} className="p-4 flex gap-3">
                     <div className="mt-0.5 shrink-0">{activityIcon(act.type)}</div>
                     <div className="min-w-0">

@@ -27,8 +27,11 @@ export default async function IsmAdmissionsPage({
     orderBy: { admissionDate: "desc" },
   });
 
-  const totalRevenue = admissions.reduce((sum, a) => sum + a.paidAmount, 0);
-  const totalOutstanding = admissions.reduce((sum, a) => sum + (a.totalFee - a.paidAmount), 0);
+  type IsmAdmissionItem = (typeof admissions)[number];
+  type IsmInstallmentItem = IsmAdmissionItem["installments"][number];
+
+  const totalRevenue = admissions.reduce((sum: number, a: IsmAdmissionItem) => sum + a.paidAmount, 0);
+  const totalOutstanding = admissions.reduce((sum: number, a: IsmAdmissionItem) => sum + (a.totalFee - a.paidAmount), 0);
 
   return (
     <div className="w-full space-y-8 animate-in fade-in duration-500">
@@ -49,7 +52,7 @@ export default async function IsmAdmissionsPage({
           { label: "Total Admissions", value: admissions.length, color: "bg-green-50 border-green-200 text-green-800" },
           { label: "Collected", value: `₹${totalRevenue.toLocaleString("en-IN")}`, color: "bg-emerald-50 border-emerald-200 text-emerald-800" },
           { label: "Outstanding", value: `₹${totalOutstanding.toLocaleString("en-IN")}`, color: totalOutstanding > 0 ? "bg-red-50 border-red-200 text-red-800" : "bg-slate-50 border-slate-200 text-slate-600" },
-        ].map((s) => (
+        ].map((s: { label: string; value: string | number; color: string }) => (
           <div key={s.label} className={`border rounded-2xl p-4 ${s.color}`}>
             <p className="text-xl font-black">{s.value}</p>
             <p className="text-xs font-semibold opacity-70 mt-0.5">{s.label}</p>
@@ -65,9 +68,9 @@ export default async function IsmAdmissionsPage({
         </div>
       ) : (
         <div className="space-y-4">
-          {admissions.map((admission: any) => {
+          {admissions.map((admission: IsmAdmissionItem) => {
             const outstanding = admission.totalFee - admission.paidAmount;
-            const paidInstallments = admission.installments.filter((i: any) => i.status === "PAID").length;
+            const paidInstallments = admission.installments.filter((i: IsmInstallmentItem) => i.status === "PAID").length;
             return (
               <div key={admission.id} className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
                 <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -101,7 +104,7 @@ export default async function IsmAdmissionsPage({
                     <div className="px-5 py-2 bg-slate-50 text-xs font-bold text-slate-500 uppercase tracking-wider flex justify-between">
                       <span>Installments ({paidInstallments}/{admission.installments.length} paid)</span>
                     </div>
-                    {admission.installments.map((inst: any) => (
+                    {admission.installments.map((inst: IsmInstallmentItem) => (
                       <div key={inst.id} className="px-5 py-3 flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
                           {inst.status === "PAID"

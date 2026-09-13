@@ -15,6 +15,8 @@ import {
   Building2,
 } from "lucide-react";
 
+import { IsmInstituteSwitcher } from "@/components/instituteSalesManager/IsmInstituteSwitcher";
+
 export const metadata: Metadata = {
   title: "Institute Sales Dashboard | AcademyFind",
   robots: { index: false, follow: false },
@@ -25,7 +27,7 @@ export default async function InstituteSalesLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: any;
+  params: Promise<{ instituteId: string; userId: string }>;
 }) {
   const { instituteId, userId } = await params;
 
@@ -103,24 +105,11 @@ export default async function InstituteSalesLayout({
             </div>
 
             {allAssignments.length > 1 && (
-              <div className="mt-3 pt-3 border-t border-slate-100">
-                <label className="text-[11px] font-bold text-slate-400 block mb-1">Active Institute:</label>
-                <select
-                  defaultValue={instituteId}
-                  onChange={(e) => {
-                    if (typeof window !== "undefined") {
-                      window.location.href = `/institute_sales/${e.target.value}/${userId}`;
-                    }
-                  }}
-                  className="w-full text-xs font-semibold bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-400"
-                >
-                  {allAssignments.map((a) => (
-                    <option key={a.instituteId} value={a.instituteId}>
-                      {a.institute.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <IsmInstituteSwitcher
+                currentInstituteId={instituteId}
+                userId={userId}
+                assignments={allAssignments}
+              />
             )}
           </div>
 

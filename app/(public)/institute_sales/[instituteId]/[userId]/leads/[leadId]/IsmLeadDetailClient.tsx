@@ -24,6 +24,12 @@ import { useRouter } from "next/navigation";
 const STATUSES = ["NEW", "PENDING", "MESSAGED", "CALLED", "FOLLOW_UP", "DNP", "JUNK", "APPROVED"];
 const CALL_OUTCOMES = ["Answered", "DNP (Did Not Pick)", "Busy", "Wrong Number", "Callback Requested"];
 
+interface InstallmentState {
+  amount: string;
+  dueDate: string;
+  note: string;
+}
+
 interface Props {
   lead: any;
   instituteId: string;
@@ -57,7 +63,7 @@ export default function IsmLeadDetailClient({ lead, instituteId, userId, waLogUr
   const [courseName, setCourseName] = useState("");
   const [totalFee, setTotalFee] = useState("");
   const [admissionNote, setAdmissionNote] = useState("");
-  const [installments, setInstallments] = useState([{ amount: "", dueDate: "", note: "" }]);
+  const [installments, setInstallments] = useState<InstallmentState[]>([{ amount: "", dueDate: "", note: "" }]);
 
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; msg: string } | null>(null);
 
@@ -121,13 +127,13 @@ export default function IsmLeadDetailClient({ lead, instituteId, userId, waLogUr
 
   async function handleConvert() {
     if (!totalFee || isNaN(Number(totalFee))) return showFeedback("error", "Enter a valid total fee.");
-    const insts = installments.filter((i) => i.amount && i.dueDate);
+    const insts = installments.filter((i: InstallmentState) => i.amount && i.dueDate);
     startTransition(async () => {
       const res = await convertToAdmission(lead.id, {
         courseName,
         totalFee: Number(totalFee),
         admissionNote,
-        installments: insts.map((i) => ({ amount: Number(i.amount), dueDate: i.dueDate, note: i.note })),
+        installments: insts.map((i: InstallmentState) => ({ amount: Number(i.amount), dueDate: i.dueDate, note: i.note })),
       });
       if (res.success) {
         showFeedback("success", "🎉 Lead converted to admission!");
@@ -194,7 +200,7 @@ export default function IsmLeadDetailClient({ lead, instituteId, userId, waLogUr
       <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3">
         <h3 className="font-bold text-slate-700 text-sm uppercase tracking-wider">Update Lead Status</h3>
         <div className="flex flex-wrap gap-2">
-          {STATUSES.map((s) => (
+          {STATUSES.map((s: string) => (
             <button
               key={s}
               onClick={() => handleStatusChange(s)}
@@ -331,7 +337,7 @@ export default function IsmLeadDetailClient({ lead, instituteId, userId, waLogUr
               {/* Installments */}
               <div className="space-y-2">
                 <p className="text-xs font-bold text-slate-600 uppercase tracking-wider">Fee Installments</p>
-                {installments.map((inst, idx) => (
+                {installments.map((inst: InstallmentState, idx: number) => (
                   <div key={idx} className="flex gap-2 items-center">
                     <input
                       type="number"
@@ -355,7 +361,7 @@ export default function IsmLeadDetailClient({ lead, instituteId, userId, waLogUr
                       className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
                     />
                     {installments.length > 1 && (
-                      <button onClick={() => setInstallments(installments.filter((_, i) => i !== idx))} className="text-red-400 hover:text-red-600">
+                      <button onClick={() => setInstallments(installments.filter((_: InstallmentState, i: number) => i !== idx))} className="text-red-400 hover:text-red-600">
                         <X className="w-4 h-4" />
                       </button>
                     )}
@@ -410,7 +416,7 @@ export default function IsmLeadDetailClient({ lead, instituteId, userId, waLogUr
                   onChange={(e) => setCallOutcome(e.target.value)}
                   className="w-full mt-1 px-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400"
                 >
-                  {CALL_OUTCOMES.map((o) => <option key={o} value={o}>{o}</option>)}
+                  {CALL_OUTCOMES.map((o: string) => <option key={o} value={o}>{o}</option>)}
                 </select>
               </div>
               <div>
