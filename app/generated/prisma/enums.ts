@@ -77,7 +77,8 @@ export const InstituteMemberRole = {
   STUDENT: 'STUDENT',
   TEACHER: 'TEACHER',
   MANAGER: 'MANAGER',
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
+  SALES_MANAGER: 'SALES_MANAGER'
 } as const
 
 export type InstituteMemberRole = (typeof InstituteMemberRole)[keyof typeof InstituteMemberRole]
@@ -241,7 +242,8 @@ export const Role = {
   USER: 'USER',
   INSTITUTE_MANAGER: 'INSTITUTE_MANAGER',
   ADMIN: 'ADMIN',
-  SALES_MANAGER: 'SALES_MANAGER'
+  SALES_MANAGER: 'SALES_MANAGER',
+  INSTITUTE_SALES_MANAGER: 'INSTITUTE_SALES_MANAGER'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]

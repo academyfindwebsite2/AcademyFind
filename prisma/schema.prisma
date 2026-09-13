@@ -47,6 +47,13 @@ model User {
   salesEnquiryAssignments  InstituteEnquiry[]        @relation("SalesEnquiryAssignments")
   salesRequests            SalesAssignmentRequest[]  @relation("SalesAssignmentRequests")
   reviewedSalesRequests    SalesAssignmentRequest[]  @relation("ReviewedSalesRequests")
+  ismAssignments           InstituteSalesManagerAssignment[] @relation("IsmAssignments")
+  ismAssignedBy            InstituteSalesManagerAssignment[] @relation("IsmAssignedBy")
+  ismLeadAssignments       InstituteEnquiry[]        @relation("IsmEnquiryAssignments")
+  ismActivities            IsmLeadActivity[]         @relation("IsmActivities")
+  ismAdmissions            AdmissionRecord[]         @relation("IsmAdmissions")
+  ismInvitesReceived       IsmInviteRequest[]        @relation("IsmInvites")
+  ismInvitesSent           IsmInviteRequest[]        @relation("IsmInvitesSent")
   sessions                 Session[]
   payments                 SubscriptionPayment[]
   compareLists             UserCompareList[]
@@ -427,6 +434,9 @@ model Institute {
   shortlistedBy       UserShortlist[]
   blogPosts           BlogPost[]                 @relation("InstituteBlogPosts")
   memberships         InstituteMembership[]
+  ismAssignments      InstituteSalesManagerAssignment[]
+  admissionRecords    AdmissionRecord[]
+  ismInviteRequests   IsmInviteRequest[]
 
   studentRecords StudentInstituteRecord[]
   teacherRecords TeacherInstituteRecord[]
@@ -620,6 +630,12 @@ model InstituteEnquiry {
   salesManagerNote       String?               @db.Text
   assignedSalesManagerId String?
   assignedSalesManager   User?                 @relation("SalesEnquiryAssignments", fields: [assignedSalesManagerId], references: [id], onDelete: SetNull)
+  assignedIsmId          String?
+  assignedIsm            User?                 @relation("IsmEnquiryAssignments", fields: [assignedIsmId], references: [id], onDelete: SetNull)
+  ismNote                String?               @db.Text
+  nextFollowUp           DateTime?
+  followUpNote           String?               @db.Text
+  convertedToAdmission   Boolean               @default(false)
   lastUpdatedByRole      String?
   lastUpdatedByName      String?
   parentId               String?
@@ -631,9 +647,12 @@ model InstituteEnquiry {
   distributionLogs       LeadDistributionLog[] @relation("DistributionLogs")
   statusHistory          EnquiryStatusHistory[]
   comments               EnquiryComment[]
+  ismActivities          IsmLeadActivity[]
+  admissionRecord        AdmissionRecord?
 
   @@index([instituteId])
   @@index([assignedSalesManagerId])
+  @@index([assignedIsmId])
   @@map("institute_enquiry")
 }
 
@@ -751,6 +770,7 @@ enum InstituteMemberRole {
   TEACHER
   MANAGER
   ADMIN
+  SALES_MANAGER
 }
 
 enum MembershipStatus {
@@ -1620,6 +1640,7 @@ enum Role {
   INSTITUTE_MANAGER
   ADMIN
   SALES_MANAGER
+  INSTITUTE_SALES_MANAGER
 }
 
 enum SubscriptionPlan {
@@ -2646,4 +2667,99 @@ model EnquiryComment {
 
   @@index([enquiryId])
   @@map("enquiry_comment")
+}
+
+// ─── INSTITUTE SALES MANAGER MODELS ────────────────────────────────────────
+
+model InstituteSalesManagerAssignment {
+  id          String    @id @default(cuid())
+  userId      String
+  instituteId String
+  assignedById String
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        User      @relation("IsmAssignments", fields: [userId], references: [id], onDelete: Cascade)
+  institute   Institute @relation(fields: [instituteId], references: [id], onDelete: Cascade)
+  assignedBy  User      @relation("IsmAssignedBy", fields: [assignedById], references: [id])
+
+  @@unique([userId, instituteId])
+  @@index([instituteId])
+  @@index([userId])
+  @@map("institute_sales_manager_assignment")
+}
+
+model IsmLeadActivity {
+  id          String   @id @default(cuid())
+  enquiryId   String
+  ismId       String
+  type        String   // NOTE, WHATSAPP_SENT, CALL_LOGGED, STATUS_CHANGED, FOLLOWUP_SET, CONVERTED
+  content     String?  @db.Text
+  meta        Json?    // extra data (e.g. old/new status for STATUS_CHANGED)
+  createdAt   DateTime @default(now())
+  enquiry     InstituteEnquiry @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  ism         User             @relation("IsmActivities", fields: [ismId], references: [id])
+
+  @@index([enquiryId])
+  @@index([ismId])
+  @@map("ism_lead_activity")
+}
+
+model AdmissionRecord {
+  id            String          @id @default(cuid())
+  enquiryId     String          @unique
+  instituteId   String
+  ismId         String
+  studentName   String
+  courseName    String?
+  totalFee      Float           @default(0)
+  paidAmount    Float           @default(0)
+  feeStatus     String          @default("PENDING") // PENDING, PARTIAL, PAID
+  admissionNote String?         @db.Text
+  admissionDate DateTime        @default(now())
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  enquiry       InstituteEnquiry @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  institute     Institute        @relation(fields: [instituteId], references: [id], onDelete: Cascade)
+  ism           User             @relation("IsmAdmissions", fields: [ismId], references: [id])
+  installments  FeeInstallment[]
+
+  @@index([instituteId])
+  @@index([ismId])
+  @@map("admission_record")
+}
+
+model FeeInstallment {
+  id          String          @id @default(cuid())
+  admissionId String
+  amount      Float
+  dueDate     DateTime
+  paidDate    DateTime?
+  status      String          @default("UPCOMING") // UPCOMING, PAID, OVERDUE
+  note        String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  admission   AdmissionRecord @relation(fields: [admissionId], references: [id], onDelete: Cascade)
+
+  @@index([admissionId])
+  @@map("fee_installment")
+}
+
+model IsmInviteRequest {
+  id          String    @id @default(cuid())
+  userId      String
+  instituteId String
+  sentById    String
+  status      String    @default("PENDING") // PENDING, ACCEPTED, DECLINED
+  message     String?   @db.Text
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        User      @relation("IsmInvites", fields: [userId], references: [id], onDelete: Cascade)
+  institute   Institute @relation(fields: [instituteId], references: [id], onDelete: Cascade)
+  sentBy      User      @relation("IsmInvitesSent", fields: [sentById], references: [id])
+
+  @@index([userId])
+  @@index([instituteId])
+  @@index([status])
+  @@map("ism_invite_request")
 }

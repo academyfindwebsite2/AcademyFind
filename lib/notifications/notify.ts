@@ -1,6 +1,6 @@
 import type { NotificationType } from "@/app/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
-import { notifyAdminsPush } from "@/lib/pushNotifications";
+import { notifyAdminsPush, notifyUserPush } from "@/lib/pushNotifications";
 
 export async function notifyUser(
   userId: string,
@@ -10,9 +10,20 @@ export async function notifyUser(
   entityId?: string,
 ) {
   try {
-    return await prisma.userNotification.create({
+    const notif = await prisma.userNotification.create({
       data: { userId, type, title, body, entityId },
     });
+
+    if (body) {
+      notifyUserPush({
+        userId,
+        title,
+        body,
+        data: { entityId, type },
+      }).catch((err) => console.error("User push error:", err));
+    }
+
+    return notif;
   } catch (error) {
     console.error("Unable to create user notification", error);
     return null;

@@ -36,6 +36,20 @@ export async function GET() {
                         }
                     },
                     take: 1
+                },
+                ismAssignments: {
+                    where: { isActive: true },
+                    select: { instituteId: true },
+                    take: 1
+                },
+                ismInvitesReceived: {
+                    where: { status: "PENDING" },
+                    select: {
+                        id: true,
+                        institute: {
+                            select: { id: true, name: true }
+                        }
+                    }
                 }
             }
         });

@@ -481,7 +481,12 @@ export const ModelName = {
   AdvertisementAnalytic: 'AdvertisementAnalytic',
   SystemSetting: 'SystemSetting',
   EnquiryStatusHistory: 'EnquiryStatusHistory',
-  EnquiryComment: 'EnquiryComment'
+  EnquiryComment: 'EnquiryComment',
+  InstituteSalesManagerAssignment: 'InstituteSalesManagerAssignment',
+  IsmLeadActivity: 'IsmLeadActivity',
+  AdmissionRecord: 'AdmissionRecord',
+  FeeInstallment: 'FeeInstallment',
+  IsmInviteRequest: 'IsmInviteRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -497,7 +502,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userWallet" | "walletTransaction" | "userReputation" | "userPreference" | "userPreferredCategory" | "userPreferenceCity" | "reputationLog" | "session" | "account" | "verification" | "institute" | "city" | "category" | "categoryCityContent" | "instituteCategory" | "instituteManager" | "review" | "reviewReply" | "instituteClaim" | "userShortlist" | "userHistory" | "instituteEnquiry" | "teacherProfile" | "studentProfile" | "instituteMembership" | "studentInstituteRecord" | "teacherInstituteRecord" | "conversation" | "conversationParticipant" | "message" | "messageAttachment" | "messageReaction" | "messageRead" | "messageReport" | "chatSettings" | "userNotification" | "userBlock" | "contactMessage" | "contactReply" | "instituteRequest" | "subscriptionPayment" | "salesAssignment" | "salesCategoryAssignment" | "salesAreaAssignment" | "salesAssignmentRequest" | "lifeCoachRequest" | "adminNotification" | "jobPosting" | "jobApplication" | "generalResume" | "instituteDailyView" | "instituteVisit" | "instituteFacility" | "instituteBatch" | "batchStudent" | "batchTeacher" | "instituteHighlightStat" | "instituteAchievement" | "instituteFAQ" | "instituteOperatingHour" | "userCompareList" | "compareListInstitute" | "communityQuestion" | "communityAnswer" | "notablePersons" | "instituteComparisonCache" | "leadDistributionLog" | "blogAuthorProfile" | "blogCategory" | "blogTag" | "blogPost" | "blogSlugHistory" | "blogRevision" | "blogView" | "blogBookmark" | "blogAuthorFollower" | "blogSubscriber" | "blogReport" | "blogPostTag" | "blogComment" | "blogReaction" | "blogFAQ" | "blogBrand" | "cRMIntegration" | "inboundLeadIntegration" | "inboundLead" | "userEducation" | "userExperience" | "userAchievement" | "userSkill" | "visitorSession" | "visitorEvent" | "advertisement" | "advertisementAnalytic" | "systemSetting" | "enquiryStatusHistory" | "enquiryComment"
+    modelProps: "user" | "userWallet" | "walletTransaction" | "userReputation" | "userPreference" | "userPreferredCategory" | "userPreferenceCity" | "reputationLog" | "session" | "account" | "verification" | "institute" | "city" | "category" | "categoryCityContent" | "instituteCategory" | "instituteManager" | "review" | "reviewReply" | "instituteClaim" | "userShortlist" | "userHistory" | "instituteEnquiry" | "teacherProfile" | "studentProfile" | "instituteMembership" | "studentInstituteRecord" | "teacherInstituteRecord" | "conversation" | "conversationParticipant" | "message" | "messageAttachment" | "messageReaction" | "messageRead" | "messageReport" | "chatSettings" | "userNotification" | "userBlock" | "contactMessage" | "contactReply" | "instituteRequest" | "subscriptionPayment" | "salesAssignment" | "salesCategoryAssignment" | "salesAreaAssignment" | "salesAssignmentRequest" | "lifeCoachRequest" | "adminNotification" | "jobPosting" | "jobApplication" | "generalResume" | "instituteDailyView" | "instituteVisit" | "instituteFacility" | "instituteBatch" | "batchStudent" | "batchTeacher" | "instituteHighlightStat" | "instituteAchievement" | "instituteFAQ" | "instituteOperatingHour" | "userCompareList" | "compareListInstitute" | "communityQuestion" | "communityAnswer" | "notablePersons" | "instituteComparisonCache" | "leadDistributionLog" | "blogAuthorProfile" | "blogCategory" | "blogTag" | "blogPost" | "blogSlugHistory" | "blogRevision" | "blogView" | "blogBookmark" | "blogAuthorFollower" | "blogSubscriber" | "blogReport" | "blogPostTag" | "blogComment" | "blogReaction" | "blogFAQ" | "blogBrand" | "cRMIntegration" | "inboundLeadIntegration" | "inboundLead" | "userEducation" | "userExperience" | "userAchievement" | "userSkill" | "visitorSession" | "visitorEvent" | "advertisement" | "advertisementAnalytic" | "systemSetting" | "enquiryStatusHistory" | "enquiryComment" | "instituteSalesManagerAssignment" | "ismLeadActivity" | "admissionRecord" | "feeInstallment" | "ismInviteRequest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -7753,6 +7758,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    InstituteSalesManagerAssignment: {
+      payload: Prisma.$InstituteSalesManagerAssignmentPayload<ExtArgs>
+      fields: Prisma.InstituteSalesManagerAssignmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InstituteSalesManagerAssignmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InstituteSalesManagerAssignmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload>
+        }
+        findFirst: {
+          args: Prisma.InstituteSalesManagerAssignmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InstituteSalesManagerAssignmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload>
+        }
+        findMany: {
+          args: Prisma.InstituteSalesManagerAssignmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload>[]
+        }
+        create: {
+          args: Prisma.InstituteSalesManagerAssignmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload>
+        }
+        createMany: {
+          args: Prisma.InstituteSalesManagerAssignmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InstituteSalesManagerAssignmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload>[]
+        }
+        delete: {
+          args: Prisma.InstituteSalesManagerAssignmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload>
+        }
+        update: {
+          args: Prisma.InstituteSalesManagerAssignmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.InstituteSalesManagerAssignmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InstituteSalesManagerAssignmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InstituteSalesManagerAssignmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.InstituteSalesManagerAssignmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteSalesManagerAssignmentPayload>
+        }
+        aggregate: {
+          args: Prisma.InstituteSalesManagerAssignmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInstituteSalesManagerAssignment>
+        }
+        groupBy: {
+          args: Prisma.InstituteSalesManagerAssignmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InstituteSalesManagerAssignmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InstituteSalesManagerAssignmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InstituteSalesManagerAssignmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    IsmLeadActivity: {
+      payload: Prisma.$IsmLeadActivityPayload<ExtArgs>
+      fields: Prisma.IsmLeadActivityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IsmLeadActivityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IsmLeadActivityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload>
+        }
+        findFirst: {
+          args: Prisma.IsmLeadActivityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IsmLeadActivityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload>
+        }
+        findMany: {
+          args: Prisma.IsmLeadActivityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload>[]
+        }
+        create: {
+          args: Prisma.IsmLeadActivityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload>
+        }
+        createMany: {
+          args: Prisma.IsmLeadActivityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IsmLeadActivityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload>[]
+        }
+        delete: {
+          args: Prisma.IsmLeadActivityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload>
+        }
+        update: {
+          args: Prisma.IsmLeadActivityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload>
+        }
+        deleteMany: {
+          args: Prisma.IsmLeadActivityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IsmLeadActivityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IsmLeadActivityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload>[]
+        }
+        upsert: {
+          args: Prisma.IsmLeadActivityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmLeadActivityPayload>
+        }
+        aggregate: {
+          args: Prisma.IsmLeadActivityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIsmLeadActivity>
+        }
+        groupBy: {
+          args: Prisma.IsmLeadActivityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IsmLeadActivityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IsmLeadActivityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IsmLeadActivityCountAggregateOutputType> | number
+        }
+      }
+    }
+    AdmissionRecord: {
+      payload: Prisma.$AdmissionRecordPayload<ExtArgs>
+      fields: Prisma.AdmissionRecordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdmissionRecordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdmissionRecordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload>
+        }
+        findFirst: {
+          args: Prisma.AdmissionRecordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdmissionRecordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload>
+        }
+        findMany: {
+          args: Prisma.AdmissionRecordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload>[]
+        }
+        create: {
+          args: Prisma.AdmissionRecordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload>
+        }
+        createMany: {
+          args: Prisma.AdmissionRecordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdmissionRecordCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload>[]
+        }
+        delete: {
+          args: Prisma.AdmissionRecordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload>
+        }
+        update: {
+          args: Prisma.AdmissionRecordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdmissionRecordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdmissionRecordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdmissionRecordUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload>[]
+        }
+        upsert: {
+          args: Prisma.AdmissionRecordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdmissionRecordPayload>
+        }
+        aggregate: {
+          args: Prisma.AdmissionRecordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdmissionRecord>
+        }
+        groupBy: {
+          args: Prisma.AdmissionRecordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdmissionRecordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdmissionRecordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdmissionRecordCountAggregateOutputType> | number
+        }
+      }
+    }
+    FeeInstallment: {
+      payload: Prisma.$FeeInstallmentPayload<ExtArgs>
+      fields: Prisma.FeeInstallmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FeeInstallmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FeeInstallmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload>
+        }
+        findFirst: {
+          args: Prisma.FeeInstallmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FeeInstallmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload>
+        }
+        findMany: {
+          args: Prisma.FeeInstallmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload>[]
+        }
+        create: {
+          args: Prisma.FeeInstallmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload>
+        }
+        createMany: {
+          args: Prisma.FeeInstallmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FeeInstallmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload>[]
+        }
+        delete: {
+          args: Prisma.FeeInstallmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload>
+        }
+        update: {
+          args: Prisma.FeeInstallmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.FeeInstallmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FeeInstallmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FeeInstallmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.FeeInstallmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeInstallmentPayload>
+        }
+        aggregate: {
+          args: Prisma.FeeInstallmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFeeInstallment>
+        }
+        groupBy: {
+          args: Prisma.FeeInstallmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FeeInstallmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FeeInstallmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FeeInstallmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    IsmInviteRequest: {
+      payload: Prisma.$IsmInviteRequestPayload<ExtArgs>
+      fields: Prisma.IsmInviteRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IsmInviteRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IsmInviteRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.IsmInviteRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IsmInviteRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload>
+        }
+        findMany: {
+          args: Prisma.IsmInviteRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload>[]
+        }
+        create: {
+          args: Prisma.IsmInviteRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload>
+        }
+        createMany: {
+          args: Prisma.IsmInviteRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IsmInviteRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.IsmInviteRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload>
+        }
+        update: {
+          args: Prisma.IsmInviteRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.IsmInviteRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IsmInviteRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IsmInviteRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.IsmInviteRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IsmInviteRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.IsmInviteRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIsmInviteRequest>
+        }
+        groupBy: {
+          args: Prisma.IsmInviteRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IsmInviteRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IsmInviteRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IsmInviteRequestCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -8179,6 +8554,11 @@ export const InstituteEnquiryScalarFieldEnum = {
   adminNote: 'adminNote',
   salesManagerNote: 'salesManagerNote',
   assignedSalesManagerId: 'assignedSalesManagerId',
+  assignedIsmId: 'assignedIsmId',
+  ismNote: 'ismNote',
+  nextFollowUp: 'nextFollowUp',
+  followUpNote: 'followUpNote',
+  convertedToAdmission: 'convertedToAdmission',
   lastUpdatedByRole: 'lastUpdatedByRole',
   lastUpdatedByName: 'lastUpdatedByName',
   parentId: 'parentId',
@@ -9384,6 +9764,80 @@ export const EnquiryCommentScalarFieldEnum = {
 export type EnquiryCommentScalarFieldEnum = (typeof EnquiryCommentScalarFieldEnum)[keyof typeof EnquiryCommentScalarFieldEnum]
 
 
+export const InstituteSalesManagerAssignmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  instituteId: 'instituteId',
+  assignedById: 'assignedById',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InstituteSalesManagerAssignmentScalarFieldEnum = (typeof InstituteSalesManagerAssignmentScalarFieldEnum)[keyof typeof InstituteSalesManagerAssignmentScalarFieldEnum]
+
+
+export const IsmLeadActivityScalarFieldEnum = {
+  id: 'id',
+  enquiryId: 'enquiryId',
+  ismId: 'ismId',
+  type: 'type',
+  content: 'content',
+  meta: 'meta',
+  createdAt: 'createdAt'
+} as const
+
+export type IsmLeadActivityScalarFieldEnum = (typeof IsmLeadActivityScalarFieldEnum)[keyof typeof IsmLeadActivityScalarFieldEnum]
+
+
+export const AdmissionRecordScalarFieldEnum = {
+  id: 'id',
+  enquiryId: 'enquiryId',
+  instituteId: 'instituteId',
+  ismId: 'ismId',
+  studentName: 'studentName',
+  courseName: 'courseName',
+  totalFee: 'totalFee',
+  paidAmount: 'paidAmount',
+  feeStatus: 'feeStatus',
+  admissionNote: 'admissionNote',
+  admissionDate: 'admissionDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdmissionRecordScalarFieldEnum = (typeof AdmissionRecordScalarFieldEnum)[keyof typeof AdmissionRecordScalarFieldEnum]
+
+
+export const FeeInstallmentScalarFieldEnum = {
+  id: 'id',
+  admissionId: 'admissionId',
+  amount: 'amount',
+  dueDate: 'dueDate',
+  paidDate: 'paidDate',
+  status: 'status',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FeeInstallmentScalarFieldEnum = (typeof FeeInstallmentScalarFieldEnum)[keyof typeof FeeInstallmentScalarFieldEnum]
+
+
+export const IsmInviteRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  instituteId: 'instituteId',
+  sentById: 'sentById',
+  status: 'status',
+  message: 'message',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IsmInviteRequestScalarFieldEnum = (typeof IsmInviteRequestScalarFieldEnum)[keyof typeof IsmInviteRequestScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -10247,6 +10701,11 @@ export type GlobalOmitConfig = {
   systemSetting?: Prisma.SystemSettingOmit
   enquiryStatusHistory?: Prisma.EnquiryStatusHistoryOmit
   enquiryComment?: Prisma.EnquiryCommentOmit
+  instituteSalesManagerAssignment?: Prisma.InstituteSalesManagerAssignmentOmit
+  ismLeadActivity?: Prisma.IsmLeadActivityOmit
+  admissionRecord?: Prisma.AdmissionRecordOmit
+  feeInstallment?: Prisma.FeeInstallmentOmit
+  ismInviteRequest?: Prisma.IsmInviteRequestOmit
 }
 
 /* Types for Logging */

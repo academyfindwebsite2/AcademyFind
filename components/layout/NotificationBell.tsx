@@ -156,6 +156,8 @@ export function NotificationBell() {
                 const targetUrl =
                   n.type === "MESSAGE" && n.entityId
                     ? `/chat/${n.entityId}`
+                    : (n.title?.includes("Sales Manager") || n.body?.includes("Sales Manager")) && n.entityId
+                    ? `/ism-invite/${n.entityId}`
                     : n.actionUrl || null;
 
                 const content = (

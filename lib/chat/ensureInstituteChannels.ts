@@ -64,7 +64,7 @@ export async function ensureInstituteChannels(instituteId: string) {
 export async function addMemberToInstituteChannels(
   userId: string,
   instituteId: string,
-  role: "STUDENT" | "TEACHER" | "MANAGER" | "ADMIN",
+  role: "STUDENT" | "TEACHER" | "MANAGER" | "ADMIN" | "SALES_MANAGER" | string,
 ) {
   const channels = await ensureInstituteChannels(instituteId);
   const allowed = channels.filter(({ channelType }: any) => {

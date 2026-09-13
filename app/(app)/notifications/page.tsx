@@ -76,8 +76,12 @@ export default async function NotificationsPage() {
       title: n.title,
       message: n.body, // Mapping body to standard message field
       isRead: n.isRead,
-      referenceId: n.entityId, // Mapping entityId to standard reference field
-      actionUrl: n.type === "MESSAGE" && n.entityId ? `/chat/${n.entityId}` : null,
+      actionUrl:
+        n.type === "MESSAGE" && n.entityId
+          ? `/chat/${n.entityId}`
+          : (n.title?.includes("Sales Manager") || n.body?.includes("Sales Manager")) && n.entityId
+          ? `/ism-invite/${n.entityId}`
+          : null,
       createdAt: n.createdAt,
     }));
   }

@@ -507,3 +507,28 @@ export type EnquiryStatusHistory = Prisma.EnquiryStatusHistoryModel
  * 
  */
 export type EnquiryComment = Prisma.EnquiryCommentModel
+/**
+ * Model InstituteSalesManagerAssignment
+ * 
+ */
+export type InstituteSalesManagerAssignment = Prisma.InstituteSalesManagerAssignmentModel
+/**
+ * Model IsmLeadActivity
+ * 
+ */
+export type IsmLeadActivity = Prisma.IsmLeadActivityModel
+/**
+ * Model AdmissionRecord
+ * 
+ */
+export type AdmissionRecord = Prisma.AdmissionRecordModel
+/**
+ * Model FeeInstallment
+ * 
+ */
+export type FeeInstallment = Prisma.FeeInstallmentModel
+/**
+ * Model IsmInviteRequest
+ * 
+ */
+export type IsmInviteRequest = Prisma.IsmInviteRequestModel

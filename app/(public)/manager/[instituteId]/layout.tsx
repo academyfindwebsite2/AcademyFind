@@ -2,7 +2,7 @@ import { PremiumLock } from "@/components/manager/PremiumLock";
 import { ManagerSidebarWrapper } from "@/components/manager/ManagerSidebarWrapper";
 import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/prisma";
-import { ArrowLeft, ArrowRight, BarChart2, BarChart3, CreditCard, LayoutDashboardIcon, MessageSquare, User, UserRound, Users, PackageOpen, MessageCircle, FileText, Zap, Building2, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, BarChart2, BarChart3, CreditCard, LayoutDashboardIcon, MessageSquare, User, UserRound, Users, PackageOpen, MessageCircle, FileText, Zap, Building2, Sparkles, UserCheck, GraduationCap } from "lucide-react";
 import { Metadata } from "next";
 import { headers } from "next/headers";
 import Link from "next/link";
@@ -108,10 +108,15 @@ export default async function ManagerDashBoardLayout({
 
     if (!institute) return <div>Institute not found.</div>;
 
-    // Count pending membership requests
-    const pendingCount = await prisma.instituteMembership.count({
-        where: { instituteId, status: "PENDING" },
-    });
+    // Count pending membership requests & admissions
+    const [pendingCount, admissionCount] = await Promise.all([
+        prisma.instituteMembership.count({
+            where: { instituteId, status: "PENDING" },
+        }),
+        prisma.admissionRecord.count({
+            where: { instituteId },
+        }),
+    ]);
 
     const plan = institute.subscriptionPlan; // BASIC, PREMIUM, ULTRA
 
@@ -252,6 +257,19 @@ export default async function ManagerDashBoardLayout({
                         />
                         <ManagerSidebarLink href={`/manager/${instituteId}/leads`} icon={<MessageSquare />} label="Student Leads" locked={plan === "BASIC" || plan == "VERIFIED"} />
 
+                        <ManagerSidebarLink
+                            href={`/manager/${instituteId}/sales-team`}
+                            icon={<UserCheck />}
+                            label="Sales Team"
+                            locked={plan === "BASIC" || plan === "VERIFIED"}
+                        />
+                        <ManagerSidebarLink
+                            href={`/manager/${instituteId}/admissions`}
+                            icon={<GraduationCap />}
+                            label="Admissions"
+                            badge={admissionCount > 0 ? admissionCount : undefined}
+                            locked={plan === "BASIC" || plan === "VERIFIED"}
+                        />
                         <ManagerSidebarLink
                             href={`/manager/${instituteId}/blogs`}
                             icon={<FileText />}

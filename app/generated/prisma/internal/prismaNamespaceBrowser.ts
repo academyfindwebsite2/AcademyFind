@@ -148,7 +148,12 @@ export const ModelName = {
   AdvertisementAnalytic: 'AdvertisementAnalytic',
   SystemSetting: 'SystemSetting',
   EnquiryStatusHistory: 'EnquiryStatusHistory',
-  EnquiryComment: 'EnquiryComment'
+  EnquiryComment: 'EnquiryComment',
+  InstituteSalesManagerAssignment: 'InstituteSalesManagerAssignment',
+  IsmLeadActivity: 'IsmLeadActivity',
+  AdmissionRecord: 'AdmissionRecord',
+  FeeInstallment: 'FeeInstallment',
+  IsmInviteRequest: 'IsmInviteRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -554,6 +559,11 @@ export const InstituteEnquiryScalarFieldEnum = {
   adminNote: 'adminNote',
   salesManagerNote: 'salesManagerNote',
   assignedSalesManagerId: 'assignedSalesManagerId',
+  assignedIsmId: 'assignedIsmId',
+  ismNote: 'ismNote',
+  nextFollowUp: 'nextFollowUp',
+  followUpNote: 'followUpNote',
+  convertedToAdmission: 'convertedToAdmission',
   lastUpdatedByRole: 'lastUpdatedByRole',
   lastUpdatedByName: 'lastUpdatedByName',
   parentId: 'parentId',
@@ -1757,6 +1767,80 @@ export const EnquiryCommentScalarFieldEnum = {
 } as const
 
 export type EnquiryCommentScalarFieldEnum = (typeof EnquiryCommentScalarFieldEnum)[keyof typeof EnquiryCommentScalarFieldEnum]
+
+
+export const InstituteSalesManagerAssignmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  instituteId: 'instituteId',
+  assignedById: 'assignedById',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InstituteSalesManagerAssignmentScalarFieldEnum = (typeof InstituteSalesManagerAssignmentScalarFieldEnum)[keyof typeof InstituteSalesManagerAssignmentScalarFieldEnum]
+
+
+export const IsmLeadActivityScalarFieldEnum = {
+  id: 'id',
+  enquiryId: 'enquiryId',
+  ismId: 'ismId',
+  type: 'type',
+  content: 'content',
+  meta: 'meta',
+  createdAt: 'createdAt'
+} as const
+
+export type IsmLeadActivityScalarFieldEnum = (typeof IsmLeadActivityScalarFieldEnum)[keyof typeof IsmLeadActivityScalarFieldEnum]
+
+
+export const AdmissionRecordScalarFieldEnum = {
+  id: 'id',
+  enquiryId: 'enquiryId',
+  instituteId: 'instituteId',
+  ismId: 'ismId',
+  studentName: 'studentName',
+  courseName: 'courseName',
+  totalFee: 'totalFee',
+  paidAmount: 'paidAmount',
+  feeStatus: 'feeStatus',
+  admissionNote: 'admissionNote',
+  admissionDate: 'admissionDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdmissionRecordScalarFieldEnum = (typeof AdmissionRecordScalarFieldEnum)[keyof typeof AdmissionRecordScalarFieldEnum]
+
+
+export const FeeInstallmentScalarFieldEnum = {
+  id: 'id',
+  admissionId: 'admissionId',
+  amount: 'amount',
+  dueDate: 'dueDate',
+  paidDate: 'paidDate',
+  status: 'status',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FeeInstallmentScalarFieldEnum = (typeof FeeInstallmentScalarFieldEnum)[keyof typeof FeeInstallmentScalarFieldEnum]
+
+
+export const IsmInviteRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  instituteId: 'instituteId',
+  sentById: 'sentById',
+  status: 'status',
+  message: 'message',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IsmInviteRequestScalarFieldEnum = (typeof IsmInviteRequestScalarFieldEnum)[keyof typeof IsmInviteRequestScalarFieldEnum]
 
 
 export const SortOrder = {
