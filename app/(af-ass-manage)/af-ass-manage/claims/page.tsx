@@ -134,7 +134,10 @@ export default async function AdminClaimPage({
                     {/* Claimer Details */}
                     <td className="p-4">
                       <div className="font-semibold text-slate-900 flex items-center gap-1.5">
-                        <User className="w-3.5 h-3.5 text-slate-400" /> {claim.fullName}
+                        <User className="w-3.5 h-3.5 text-slate-400" />
+                        <Link prefetch={false} href={`/af-ass-manage/claims/${claim.id}`} className="hover:text-blue-600 transition underline-offset-2 hover:underline">
+                          {claim.fullName}
+                        </Link>
                       </div>
                       <div className="text-xs text-slate-500 mt-1 space-y-1">
                         <div className="flex items-center gap-1.5">
@@ -158,9 +161,11 @@ export default async function AdminClaimPage({
 
                     {/* Message */}
                     <td className="p-4">
-                      <div className="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 italic line-clamp-3">
-                        {claim.message || "No specific message provided."}
-                      </div>
+                      <Link prefetch={false} href={`/af-ass-manage/claims/${claim.id}`} className="block group">
+                        <div className="text-xs text-slate-600 bg-slate-50 group-hover:bg-slate-100 group-hover:border-slate-300 p-2.5 rounded-xl border border-slate-100 transition italic line-clamp-3">
+                          {claim.message || "No specific message provided."}
+                        </div>
+                      </Link>
                     </td>
 
                     {/* Status Badge */}

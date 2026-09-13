@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle, XCircle, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { CheckCircle, XCircle, Loader2, Eye } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { updateClaimStatus } from "@/lib/User/admin/adminClaim";
@@ -43,74 +44,19 @@ interface AdminClaimRowActionsProps {
   onDeleteClaim?: (id: string) => Promise<{ success: boolean; error?: string }>;
 }
 
-export function getProductionBaseUrl(): string {
-  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  if (envUrl && !envUrl.includes("localhost")) {
-    return envUrl.replace(/\/$/, "");
-  }
-  if (
-    typeof window !== "undefined" &&
-    window.location.origin &&
-    !window.location.origin.includes("localhost")
-  ) {
-    return window.location.origin;
-  }
-  return "https://www.academyfind.com";
-}
+import {
+  getProductionBaseUrl,
+  buildApprovalLinks,
+  buildApprovalWhatsAppMessage,
+  buildApprovalWhatsAppUrl,
+} from "@/lib/institutes/claimLinks";
 
-export function buildApprovalLinks(claim: ClaimData) {
-  const baseUrl = getProductionBaseUrl();
-  const instituteId = claim.institute?.id || claim.instituteId;
-  const rawSlug =
-    claim.institute?.slug ||
-    claim.institute?.name?.toLowerCase().replace(/[^a-z0-9]+/g, "-") ||
-    "";
-  const slug = rawSlug.replace(/^-+|-+$/g, "");
-
-  const publicListingUrl = slug
-    ? `${baseUrl}/institute/${instituteId}-${slug}`
-    : `${baseUrl}/institute/${instituteId}`;
-  const managerDashboardUrl = `${baseUrl}/manager/${instituteId}`;
-
-  return { publicListingUrl, managerDashboardUrl };
-}
-
-export function buildApprovalWhatsAppMessage(claim: ClaimData): string {
-  const { publicListingUrl, managerDashboardUrl } = buildApprovalLinks(claim);
-  const managerName = claim.fullName || claim.user?.name || "Manager";
-  const instituteName = claim.institute?.name || "Your Institute";
-
-  return `\u{1F389} *Congratulations ${managerName}!*
-
-We are pleased to inform you that your claim request for *${instituteName}* has been officially verified & *APPROVED* on AcademyFind!
-
-You now have full manager access to your profile:
-
-\u{1F310} *View Your Public Listing:*
-${publicListingUrl}
-
-\u{1F4CA} *Access Manager Dashboard:*
-${managerDashboardUrl}
-
-*What you can do in your dashboard:*
-\u2705 Update institute info, courses, & fee structure
-\u2705 Add batches, facilities & gallery photos
-\u2705 View student enquiry leads & callbacks
-\u2705 Respond to student reviews
-
-If you need any assistance, feel free to reply directly to this message.
-
-Best Regards,
-*Team AcademyFind*
-\u{1F310} www.academyfind.com`;
-}
-
-export function buildApprovalWhatsAppUrl(claim: ClaimData): string {
-  const waPhone = formatWhatsAppNumber(claim.phone);
-  if (!waPhone) return "";
-  const message = buildApprovalWhatsAppMessage(claim);
-  return `https://api.whatsapp.com/send?phone=${waPhone}&text=${encodeURIComponent(message)}`;
-}
+export {
+  getProductionBaseUrl,
+  buildApprovalLinks,
+  buildApprovalWhatsAppMessage,
+  buildApprovalWhatsAppUrl,
+};
 
 export default function AdminClaimRowActions({
   claim,
@@ -175,6 +121,17 @@ export default function AdminClaimRowActions({
   return (
     <>
       <div className="flex items-center justify-end gap-2">
+        {/* View Details Button */}
+        <Link prefetch={false} href={`/af-ass-manage/claims/${claim.id}`}>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-pointer"
+            title="View Claim Details"
+          >
+            <Eye className="w-4 h-4" />
+          </button>
+        </Link>
+
         {currentStatus === "PENDING" ? (
           <>
             {/* Reject Button */}
