@@ -199,12 +199,12 @@ export default async function EnquiriesPage({
 
   // Format and unify list
   const combinedLeads: UnifiedLead[] = [
-    ...directEnquiries.map((e): UnifiedLead => ({
+    ...directEnquiries.map((e: any): UnifiedLead => ({
       ...e,
       isDirectPortal: true,
       source: e.source || "ACADEMYFIND",
     })),
-    ...inboundLeads.map((l): UnifiedLead => ({
+    ...inboundLeads.map((l: any): UnifiedLead => ({
       ...l,
       isDirectPortal: false,
       source: l.source,
