@@ -79,8 +79,9 @@ export default function GlobalCallbackFAB({ defaultName, defaultPhone }: GlobalC
                     align="end"
                     sideOffset={12}
                     collisionPadding={{ left: 16, right: 16, top: 16, bottom: 16 }}
-                    className="w-[320px] sm:w-[90vw] sm:max-w-[340px] z-[100] rounded-3xl p-0 overflow-hidden shadow-2xl border border-slate-200 origin-bottom-right animate-in zoom-in-95 duration-200"            >
-                    <div className="bg-amber-400 p-5 text-white text-center relative">
+                    className="w-[320px] sm:w-[90vw] sm:max-w-[340px] z-[100] rounded-3xl p-0 overflow-hidden shadow-2xl border border-slate-200 origin-bottom-right animate-in zoom-in-95 duration-200 max-h-[85vh] flex flex-col"
+                >
+                    <div className="bg-amber-400 p-5 text-white text-center relative shrink-0">
                         <button 
                             onClick={() => setIsOpen(false)}
                             className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-amber-500/50 transition-colors"
@@ -94,7 +95,7 @@ export default function GlobalCallbackFAB({ defaultName, defaultPhone }: GlobalC
                         </p>
                     </div>
 
-                    <div className="p-5 bg-white">
+                    <div className="p-5 bg-white overflow-y-auto">
                         {isSuccess ? (
                             <div className="text-center py-6 animate-in zoom-in duration-300">
                                 <CheckCircle2 className="w-14 h-14 text-emerald-500 mx-auto mb-3" />
@@ -137,6 +138,15 @@ export default function GlobalCallbackFAB({ defaultName, defaultPhone }: GlobalC
                                             placeholder="+91 98765 43210"
                                             defaultValue={defaultPhone || ""}
                                             className="w-full mt-1 p-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-400 focus:bg-white transition-all"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Message <span className="text-slate-400 normal-case">(optional)</span></label>
+                                        <textarea
+                                            name="message"
+                                            rows={3}
+                                            placeholder="Tell us what you need help with... (optional)"
+                                            className="w-full mt-1 p-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-amber-400 focus:bg-white transition-all resize-none"
                                         />
                                     </div>
                                 </div>

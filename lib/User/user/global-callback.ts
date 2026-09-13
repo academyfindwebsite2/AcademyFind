@@ -27,19 +27,23 @@ export async function requestGlobalCallback(formData: FormData) {
             }
         });
 
+        const notifText = userMessage?.trim()
+            ? `${name} (${phone}) requested a callback: "${userMessage.trim()}"`
+            : `${name} (${phone}) requested a general callback.`;
+
         await prisma.adminNotification.create({
             data: {
                 type: "NEW_CALLBACK_REQUEST",
                 title: "New Callback Request",
-                message: `${name} (${phone}) requested a general callback.`,
-                actionUrl: "/af-ass-manage/requests"
+                message: notifText,
+                actionUrl: "/af-ass-manage/life-coach"
             }
         });
 
         notifyAdminsPush({
             title: "📞 New Callback Request!",
-            body: `${name} (${phone}) requested a callback.`,
-            data: { screen: '(admin)/requests' }
+            body: notifText,
+            data: { screen: '(admin)/life-coach' }
         });
 
         return { success: true };

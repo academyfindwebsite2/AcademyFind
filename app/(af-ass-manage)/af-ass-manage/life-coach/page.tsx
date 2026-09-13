@@ -83,6 +83,7 @@ export default async function AdminLifeCoachLeadsPage({
               <tr className="bg-stone-50/50 border-b border-stone-100/50 text-xs uppercase tracking-wider text-slate-500 font-bold">
                 <th className="p-4">Student Name</th>
                 <th className="p-4">Contact Info</th>
+                <th className="p-4">Message / Query</th>
                 <th className="p-4">Date</th>
                 <th className="p-4">Status</th>
                 <th className="p-4 text-right">Action</th>
@@ -91,7 +92,7 @@ export default async function AdminLifeCoachLeadsPage({
             <tbody className="divide-y divide-stone-100/50">
               {requests.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-slate-400 italic">No counseling requests found for "{currentFilter}".</td>
+                  <td colSpan={6} className="p-8 text-center text-slate-400 italic">No counseling requests found for "{currentFilter}".</td>
                 </tr>
               ) : (
                 requests.map((req: any) => (
@@ -100,6 +101,15 @@ export default async function AdminLifeCoachLeadsPage({
                     <td className="p-4 text-sm text-slate-600 space-y-1">
                       <div className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-slate-400" /> {req.phone}</div>
                       {req.email && <div className="flex items-center gap-2"><Mail className="w-3.5 h-3.5 text-slate-400" /> {req.email}</div>}
+                    </td>
+                    <td className="p-4 max-w-[280px]">
+                      {req.message ? (
+                        <p className="text-xs text-slate-700 font-medium line-clamp-2" title={req.message}>
+                          {req.message}
+                        </p>
+                      ) : (
+                        <span className="text-xs text-slate-400 italic">No message provided</span>
+                      )}
                     </td>
                     <td className="p-4 text-sm text-slate-500">
                       <div className="flex flex-col">
