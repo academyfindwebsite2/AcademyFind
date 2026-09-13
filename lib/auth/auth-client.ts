@@ -9,6 +9,11 @@ export const authClient = createAuthClient({
         inferAdditionalFields<typeof auth>(),
         oneTapClient({
             clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+            promptOptions: {
+                fedCM: false,
+            },
+            cancelOnTapOutside: true,
+            context: "signin",
         })
     ]
 });

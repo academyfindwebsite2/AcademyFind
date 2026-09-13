@@ -2,187 +2,374 @@
 
 import { useState } from "react";
 import {
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    DialogDescription,
-    DialogHeader,
-    DialogTrigger,
-    DialogClose,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
 } from "@/components/ui/dialog";
-
-import { CheckCircle2 } from "lucide-react";
-
-const plans = [
-    {
-        id: "VERIFIED",
-        name: "Verified",
-        pricing: {
-            monthly: { original: 499, offer: 199 },
-            annual: { original: 4999, offer: 1999 }
-        },
-        desc: "Build trust and start capturing student leads.",
-        features: [
-            "Edit Public Profile",
-            "Student Reviews",
-            "Verified Badge",
-            "Direct Student Leads and Inquiries"
-        ]
-    },
-    {
-        id: "PREMIUM",
-        name: "Premium",
-        pricing: {
-            monthly: { original: 999, offer: 499 },
-            annual: { original: 9999, offer: 4999 }
-        },
-        desc: "Showcase faculty, results, and track analytics.",
-        features: [
-            "Everything in Verified",
-            "Rich Media (photos/videos)(upto 4)",
-            "Student Community",
-            "Institute Forum",
-            "Institute Chat Groups",
-            "Blog Publishing",
-            "Reply to Reviews",
-            "Verified Student and Teacher Profiles Display",
-            "See Who saved your profile",
-            "View Analytics of your public Profile(views + logged in user)",
-        ]
-    },
-    {
-        id: "ULTRA",
-        name: "Elite",
-        pricing: {
-            monthly: { original: 2999, offer: 999 },
-            annual: { original: 29999, offer: 9999 }
-        },
-        desc: "Maximum visibility and top search rankings.",
-        features: [
-            "Everything in Premium",
-            "Top Priority Search Ranking",
-            "Area-Specific Visibility",
-            "Category-Specific Visibility"
-        ]
-    },
-];
+import {
+  Check,
+  Crown,
+  Trophy,
+  BarChart3,
+  Users,
+  MessageSquare,
+  BarChart2,
+  Sliders,
+  Rocket,
+} from "lucide-react";
+import {
+  SUBSCRIPTION_PLANS,
+  SUBSCRIPTION_BENEFITS,
+  PlanConfig,
+  PlanFeature,
+} from "@/lib/subscription/plans";
 
 export function PricingModal({ children }: { children: React.ReactNode }) {
-    const [isAnnual, setIsAnnual] = useState(false);
+  const [isAnnual, setIsAnnual] = useState(true);
 
+  const renderFeatureItem = (feature: PlanFeature, index: number) => {
+    // 🏆 Special Highlight Box: Trophy
+    if (feature.highlight === "trophy") {
+      return (
+        <li
+          key={index}
+          className="bg-amber-50/80 border border-amber-200/90 rounded-2xl p-3 flex items-start gap-2.5 shadow-xs"
+        >
+          <div className="w-7 h-7 rounded-xl bg-amber-400 flex items-center justify-center text-white shrink-0 shadow-xs mt-0.5">
+            <Trophy className="w-3.5 h-3.5 text-amber-950" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h4 className="font-extrabold text-xs text-slate-900 leading-tight">
+              {feature.text}
+            </h4>
+            {feature.subtext && (
+              <p className="text-[10px] text-slate-500 mt-0.5 leading-snug font-medium">
+                {feature.subtext}
+              </p>
+            )}
+          </div>
+        </li>
+      );
+    }
+
+    // 📊 Special Highlight Box: LMS
+    if (feature.highlight === "lms") {
+      return (
+        <li
+          key={index}
+          className="bg-amber-50/80 border border-amber-200/90 rounded-2xl p-3 flex items-start gap-2.5 shadow-xs"
+        >
+          <div className="w-7 h-7 rounded-xl bg-amber-400 flex items-center justify-center text-white shrink-0 shadow-xs mt-0.5">
+            <BarChart3 className="w-3.5 h-3.5 text-amber-950" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <h4 className="font-extrabold text-xs text-slate-900 leading-tight">
+                {feature.text}
+              </h4>
+              {feature.badge && (
+                <span className="bg-red-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded tracking-wider uppercase">
+                  {feature.badge}
+                </span>
+              )}
+            </div>
+            {feature.subtext && (
+              <p className="text-[10px] text-slate-500 mt-0.5 leading-snug font-medium">
+                {feature.subtext}
+              </p>
+            )}
+          </div>
+        </li>
+      );
+    }
+
+    // 👥 Special Feature: Users
+    if (feature.highlight === "users") {
+      return (
+        <li key={index} className="flex items-start gap-2">
+          <div className="w-4 h-4 rounded-full bg-amber-400 flex items-center justify-center text-amber-950 shrink-0 mt-0.5 shadow-xs">
+            <Users className="w-2.5 h-2.5" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <span className="text-xs font-bold text-slate-900 leading-tight block">
+              {feature.text}
+            </span>
+            {feature.subtext && (
+              <p className="text-[10px] text-slate-500 mt-0.5 leading-snug font-medium">
+                {feature.subtext}
+              </p>
+            )}
+          </div>
+        </li>
+      );
+    }
+
+    // 💬 Special Feature: Forum
+    if (feature.highlight === "forum") {
+      return (
+        <li key={index} className="flex items-start gap-2">
+          <div className="w-4 h-4 rounded-full bg-amber-400 flex items-center justify-center text-amber-950 shrink-0 mt-0.5 shadow-xs">
+            <MessageSquare className="w-2.5 h-2.5" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <span className="text-xs font-bold text-slate-900 leading-tight block">
+              {feature.text}
+            </span>
+            {feature.subtext && (
+              <p className="text-[10px] text-slate-500 mt-0.5 leading-snug font-medium">
+                {feature.subtext}
+              </p>
+            )}
+          </div>
+        </li>
+      );
+    }
+
+    // Standard Feature Item
     return (
-        <Dialog>
-            <DialogTrigger asChild>
-                {children}
-            </DialogTrigger>
-
-            <DialogContent className="rounded-[2rem] border-0 p-6 md:p-10 bg-white max-h-[90vh] overflow-y-auto overflow-x-hidden w-[95vw] max-w-5xl!
-      data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-bottom-4
-  data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-bottom-4
-  data-[state=closed]:duration-300 data-[state=open]:duration-300">
-
-                <DialogHeader className="sr-only">
-                    <DialogTitle>Pricing Plans</DialogTitle>
-                    <DialogDescription>
-                        Upgrade your institute profile to get more leads.
-                    </DialogDescription>
-                </DialogHeader>
-
-                {/* Header & Toggle */}
-                <div className="flex flex-col items-center mt-6 mb-10">
-                    <h2 className="text-3xl font-extrabold text-slate-900 mb-2 py-1 leading-normal">Choose Your Plan</h2>
-
-                    {/* 🚀 PROMO BANNER */}
-                    <div className="mb-6 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-amber-800 px-6 py-2.5 rounded-full text-sm font-bold shadow-sm inline-block text-center max-w-full">
-                        🎉 <span className="text-amber-900">Early Bird Offer:</span> Special pricing valid only till <span className="bg-amber-200/50 px-2 py-0.5 rounded-md whitespace-nowrap mx-1">30th September</span>!
-                    </div>
-
-                    {/* Amber Toggle */}
-                    <div className="bg-slate-100 p-1.5 rounded-full inline-flex relative shadow-inner border border-slate-200">
-                        <button
-                            onClick={() => setIsAnnual(false)}
-                            className={`relative w-32 py-2 text-sm font-bold rounded-full transition-colors z-10 ${!isAnnual ? 'text-amber-900' : 'text-slate-500 hover:text-slate-700'}`}
-                        >
-                            Monthly
-                        </button>
-                        <button
-                            onClick={() => setIsAnnual(true)}
-                            className={`relative w-32 py-2 text-sm font-bold rounded-full transition-colors z-10 ${isAnnual ? 'text-amber-900' : 'text-slate-500 hover:text-slate-700'}`}
-                        >
-                            Annually
-                        </button>
-                        {/* Amber Animated Pill */}
-                        <div
-                            className={`absolute top-1.5 bottom-1.5 w-32 bg-amber-400 rounded-full shadow-sm transition-transform duration-300 ease-out ${isAnnual ? 'translate-x-full' : 'translate-x-0'}`}
-                        />
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-                    {plans.map((plan: any) => {
-                        const priceData = isAnnual ? plan.pricing.annual : plan.pricing.monthly;
-                        const isPremium = plan.id === "PREMIUM";
-
-                        return (
-                            <div
-                                key={plan.id}
-                                // 🚀 FIX: p-8 se p-5 kar diya, aur rounded-3xl se 2xl
-                                className={`relative p-5 rounded-2xl border-2 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${isPremium ? 'border-amber-400 bg-amber-50/30' : 'border-slate-100 bg-white hover:border-amber-200'
-                                    }`}
-                            >
-                                {isPremium && (
-                                    // 🚀 FIX: Badge ko thoda chota kiya
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                                        Most Popular
-                                    </div>
-                                )}
-
-                                <h3 className="text-lg font-extrabold text-slate-800">{plan.name}</h3>
-
-                                {/* 🚀 FIX: Margins kam kiye (mt-4 -> mt-2) */}
-                                <div className="mt-2 mb-1 flex items-baseline gap-2">
-                                    <span className="text-3xl font-black text-amber-400">
-                                        ₹{priceData.offer.toLocaleString('en-IN')}
-                                    </span>
-                                    <span className="text-xs text-slate-500 font-medium">
-                                        /{isAnnual ? 'yr' : 'mo'}
-                                    </span>
-                                </div>
-                                <div className="mb-2">
-                                    <span className="text-xs text-slate-400 line-through font-semibold">
-                                        ₹{priceData.original.toLocaleString('en-IN')}
-                                    </span>
-                                </div>
-
-                                {/* 🚀 FIX: Height aur margin kam kiya */}
-                                <p className="text-xs text-slate-500 mt-1 mb-4 leading-relaxed font-medium">
-                                    {plan.desc}
-                                </p>
-
-                                {/* 🚀 FIX: space-y-4 ko space-y-2.5 kiya */}
-                                <ul className="space-y-2.5 mb-5 flex-1">
-                                    {plan.features.map((feature: any, i: any) => (
-                                        <li key={i} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
-                                            <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-                                            <span className="leading-tight">{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                {/* <DialogClose asChild className="transition">
-                        <button className={`w-full py-2.5 rounded-xl text-sm font-bold transition-colors ${
-                            isPremium 
-                            ? 'bg-amber-500 text-white hover:bg-amber-600' 
-                            : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
-                        }`}>
-                            Get Started
-                        </button>
-                        </DialogClose> */}
-                            </div>
-                        );
-                    })}
-                </div>
-            </DialogContent>
-        </Dialog>
+      <li key={index} className="flex items-start gap-2">
+        <div className="w-4 h-4 rounded-full bg-amber-400 flex items-center justify-center text-amber-950 shrink-0 mt-0.5 shadow-xs">
+          <Check className="w-2.5 h-2.5 stroke-[3]" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <span
+            className={`text-xs leading-tight block ${
+              feature.isBold ? "font-bold text-slate-900" : "font-medium text-slate-700"
+            }`}
+          >
+            {feature.text}
+          </span>
+          {feature.subtext && (
+            <p className="text-[10px] text-slate-500 mt-0.5 leading-snug font-medium">
+              {feature.subtext}
+            </p>
+          )}
+        </div>
+      </li>
     );
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+
+      <DialogContent
+        className="rounded-[2.5rem] border-0 p-6 md:p-8 bg-white max-h-[92vh] overflow-y-auto overflow-x-hidden w-[96vw] max-w-6xl shadow-2xl
+        data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-bottom-4
+        data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-bottom-4"
+      >
+        <DialogHeader className="sr-only">
+          <DialogTitle>Subscription Plans</DialogTitle>
+          <DialogDescription>
+            Upgrade your institute profile to get discovered, attract students, and grow faster.
+          </DialogDescription>
+        </DialogHeader>
+
+        {/* 🚀 Header & Toggle */}
+        <div className="relative text-center pt-2">
+          {/* Decorative Top Right Slogan */}
+          <div className="hidden sm:block absolute right-2 top-0 text-right">
+            <span className="text-xs font-bold text-amber-900/90 tracking-wide transform -rotate-3 inline-block font-serif italic">
+              Education
+              <br />
+              Connects People
+            </span>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Subscription <span className="text-amber-500">Plan</span>
+          </h2>
+          <p className="text-xs sm:text-sm font-semibold text-slate-500 mt-1">
+            Get Discovered. Attract Students. Grow Faster.
+          </p>
+
+          {/* Toggle */}
+          <div className="mt-5 flex items-center justify-center gap-3">
+            <div className="bg-sky-50/70 p-1.5 rounded-full inline-flex border border-sky-100 shadow-xs relative">
+              <button
+                type="button"
+                onClick={() => setIsAnnual(false)}
+                className={`relative z-10 px-6 py-1.5 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer ${
+                  !isAnnual
+                    ? "bg-amber-400 text-slate-950 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Monthly
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsAnnual(true)}
+                className={`relative z-10 px-6 py-1.5 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer ${
+                  isAnnual
+                    ? "bg-amber-400 text-slate-950 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Annually
+              </button>
+            </div>
+
+            <div className="hidden sm:flex items-center gap-1.5 text-[#059669]">
+              <span className="text-xs font-bold italic tracking-tight font-serif">
+                Save more with Annual Plan
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* 🚀 3 Plan Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch pt-6">
+          {SUBSCRIPTION_PLANS.map((plan: PlanConfig) => {
+            const isVerified = plan.id === "VERIFIED";
+            const isPremium = plan.id === "PREMIUM";
+            const isElite = plan.id === "ULTRA";
+
+            const priceData = isAnnual ? plan.pricing.annual : plan.pricing.monthly;
+
+            return (
+              <div
+                key={plan.id}
+                className={`relative rounded-3xl p-5 flex flex-col justify-between transition-all duration-300 bg-white ${
+                  isPremium
+                    ? "border-2 border-amber-400 shadow-xl shadow-amber-200/30"
+                    : "border border-slate-200 shadow-sm hover:border-amber-300"
+                }`}
+              >
+                {/* Crown badge for Premium */}
+                {isPremium && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-slate-950 font-black text-[10px] uppercase tracking-wider px-4 py-1 rounded-full shadow-sm flex items-center gap-1">
+                    <Crown className="w-3 h-3 fill-current" />
+                    <span>MOST POPULAR</span>
+                  </div>
+                )}
+
+                {/* Best Growth Badge for Elite */}
+                {isElite && (
+                  <div className="absolute -top-2.5 right-4 bg-emerald-100 text-emerald-800 font-extrabold text-[9px] px-2.5 py-0.5 rounded-full border border-emerald-200 shadow-xs">
+                    Best for Maximum Growth
+                  </div>
+                )}
+
+                <div>
+                  <h3 className="text-xl font-black tracking-tight text-slate-900 mt-1">
+                    {plan.name}
+                  </h3>
+                  <p className="text-xs text-slate-600 mt-1 leading-snug min-h-[32px]">
+                    {plan.desc}
+                  </p>
+
+                  {/* Price */}
+                  <div className="mt-4 mb-4 pb-4 border-b border-slate-100">
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-3xl font-black text-amber-500 tracking-tight">
+                        ₹{priceData.offer.toLocaleString("en-IN")}
+                      </span>
+                      <span className="text-xs font-semibold text-slate-500">
+                        /{isAnnual ? "yr" : "mo"}
+                      </span>
+
+                      {isAnnual && (
+                        <span className="ml-auto bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9px] font-extrabold px-2 py-0.5 rounded-full whitespace-nowrap">
+                          Save with Annual Plan
+                        </span>
+                      )}
+                    </div>
+
+                    {isAnnual && priceData.original && (
+                      <div className="text-[11px] text-slate-400 font-semibold line-through mt-0.5">
+                        ₹{priceData.original.toLocaleString("en-IN")}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-2.5 mb-6">
+                    {plan.features.map((feature, i) => renderFeatureItem(feature, i))}
+                  </ul>
+                </div>
+
+                {/* Button */}
+                <div className="pt-2">
+                  <div
+                    className={`w-full py-3 rounded-2xl font-black text-center text-xs sm:text-sm ${
+                      isVerified
+                        ? "bg-white border-2 border-amber-400 text-slate-900"
+                        : "bg-amber-400 text-slate-950 shadow-md shadow-amber-400/20"
+                    }`}
+                  >
+                    {plan.actionText}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* 🚀 Bottom Benefits Banner */}
+        <div className="bg-amber-50/40 border border-amber-200/70 rounded-3xl p-4 sm:p-5 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-900 shrink-0">
+                <Users className="w-4 h-4 text-amber-600" />
+              </div>
+              <div>
+                <h4 className="font-extrabold text-slate-900 text-xs">Reach More Students</h4>
+                <p className="text-[10px] text-slate-500 leading-tight">
+                  Get discovered by thousands.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-900 shrink-0">
+                <BarChart2 className="w-4 h-4 text-amber-600" />
+              </div>
+              <div>
+                <h4 className="font-extrabold text-slate-900 text-xs">Better Enquiries</h4>
+                <p className="text-[10px] text-slate-500 leading-tight">
+                  Quality leads that convert.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-900 shrink-0">
+                <Sliders className="w-4 h-4 text-amber-600" />
+              </div>
+              <div>
+                <h4 className="font-extrabold text-slate-900 text-xs">Manage Easily</h4>
+                <p className="text-[10px] text-slate-500 leading-tight">
+                  Save time with tools like LMS.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-900 shrink-0">
+                <Rocket className="w-4 h-4 text-amber-600" />
+              </div>
+              <div>
+                <h4 className="font-extrabold text-slate-900 text-xs">Grow Faster</h4>
+                <p className="text-[10px] text-slate-500 leading-tight">
+                  Build brand & admissions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="text-center pt-2">
+          <h3 className="text-sm font-extrabold text-slate-900">Join AcademyFind Today</h3>
+          <p className="text-[11px] text-slate-500 font-medium">
+            More Students. Better Opportunities. A Brighter Future.
+          </p>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
 }
