@@ -54,7 +54,7 @@ export async function GET(
   const message = encodeURIComponent(
     `Hello ${studentName}, thank you for your enquiry about ${instituteName}. How can we help you?`
   );
-  const waUrl = `https://wa.me/${waNumber}?text=${message}`;
+  const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${message}`;
 
   return NextResponse.redirect(waUrl);
 }

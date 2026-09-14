@@ -153,7 +153,8 @@ export const ModelName = {
   IsmLeadActivity: 'IsmLeadActivity',
   AdmissionRecord: 'AdmissionRecord',
   FeeInstallment: 'FeeInstallment',
-  IsmInviteRequest: 'IsmInviteRequest'
+  IsmInviteRequest: 'IsmInviteRequest',
+  InstituteCommunicationTemplate: 'InstituteCommunicationTemplate'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -567,6 +568,9 @@ export const InstituteEnquiryScalarFieldEnum = {
   lastUpdatedByRole: 'lastUpdatedByRole',
   lastUpdatedByName: 'lastUpdatedByName',
   parentId: 'parentId',
+  course: 'course',
+  batch: 'batch',
+  tags: 'tags',
   source: 'source',
   sourceDetails: 'sourceDetails',
   createdAt: 'createdAt',
@@ -1841,6 +1845,21 @@ export const IsmInviteRequestScalarFieldEnum = {
 } as const
 
 export type IsmInviteRequestScalarFieldEnum = (typeof IsmInviteRequestScalarFieldEnum)[keyof typeof IsmInviteRequestScalarFieldEnum]
+
+
+export const InstituteCommunicationTemplateScalarFieldEnum = {
+  id: 'id',
+  instituteId: 'instituteId',
+  type: 'type',
+  title: 'title',
+  subject: 'subject',
+  content: 'content',
+  variables: 'variables',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InstituteCommunicationTemplateScalarFieldEnum = (typeof InstituteCommunicationTemplateScalarFieldEnum)[keyof typeof InstituteCommunicationTemplateScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -11,6 +11,7 @@ import { syncBlogPostToMeili } from "./meilisync";
 import { calculateReadingTime } from "@/lib/utils";
 import { creditWallet } from "@/lib/wallet/credit";
 import { AF_COINS_EARN } from "@/lib/wallet/af-coins";
+import { sendBlogSubmissionNotification } from "@/lib/notifications/blogNotifications";
 
 const blogEditorSchema = z.object({
   id: z.string().min(1).optional(),
@@ -255,6 +256,19 @@ async function persistBlogPost(
 
   if (value.intent === "publish" && !value.id) {
     await creditWallet(userId, AF_COINS_EARN.WRITE_BLOG, "BLOG_POST", "Earned coins for writing a new blog post");
+  }
+
+  // Automatic email and WhatsApp notification for people who submit blogs
+  if (value.intent === "publish" && existingPost?.status !== "PENDING_REVIEW" && existingPost?.status !== "PUBLISHED") {
+    try {
+      await sendBlogSubmissionNotification({
+        userId,
+        writerName: author.displayName,
+        articleTitle: value.title,
+      });
+    } catch (notificationError) {
+      console.error("Failed to send blog submission notification:", notificationError);
+    }
   }
 
   // Sync to Meilisearch search index

@@ -442,6 +442,7 @@ model Institute {
   teacherRecords TeacherInstituteRecord[]
 
   conversations Conversation[]
+  communicationTemplates InstituteCommunicationTemplate[]
 
   @@index([cityId])
   @@index([slug])
@@ -639,6 +640,9 @@ model InstituteEnquiry {
   lastUpdatedByRole      String?
   lastUpdatedByName      String?
   parentId               String?
+  course                 String?
+  batch                  String?
+  tags                   String[]              @default([])
   source                 String                @default("ACADEMYFIND")
   sourceDetails          Json?
   createdAt              DateTime              @default(now())
@@ -2692,13 +2696,13 @@ model InstituteSalesManagerAssignment {
 model IsmLeadActivity {
   id          String   @id @default(cuid())
   enquiryId   String
-  ismId       String
+  ismId       String?
   type        String   // NOTE, WHATSAPP_SENT, CALL_LOGGED, STATUS_CHANGED, FOLLOWUP_SET, CONVERTED
   content     String?  @db.Text
   meta        Json?    // extra data (e.g. old/new status for STATUS_CHANGED)
   createdAt   DateTime @default(now())
   enquiry     InstituteEnquiry @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
-  ism         User             @relation("IsmActivities", fields: [ismId], references: [id])
+  ism         User?            @relation("IsmActivities", fields: [ismId], references: [id], onDelete: SetNull)
 
   @@index([enquiryId])
   @@index([ismId])
@@ -2763,3 +2767,22 @@ model IsmInviteRequest {
   @@index([status])
   @@map("ism_invite_request")
 }
+
+model InstituteCommunicationTemplate {
+  id          String    @id @default(cuid())
+  instituteId String
+  type        String    // WHATSAPP | EMAIL
+  title       String
+  subject     String?
+  content     String    @db.Text
+  variables   String[]  @default(["name", "instituteName", "course"])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  institute   Institute @relation(fields: [instituteId], references: [id], onDelete: Cascade)
+
+  @@index([instituteId])
+  @@index([type])
+  @@map("institute_communication_template")
+}
+

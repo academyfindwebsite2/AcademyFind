@@ -99,8 +99,8 @@ export default function InboundLeadsExplorer({
   // Update lead status
   const handleStatusChange = async (leadId: string, newStatus: string) => {
     // Optimistic UI update
-    setLeadsList((prev) =>
-      prev.map((l) => (l.id === leadId ? { ...l, status: newStatus } : l))
+    setLeadsList((prev: any) =>
+      prev.map((l: any) => (l.id === leadId ? { ...l, status: newStatus } : l))
     );
 
     const res = await updateInboundLeadStatus(leadId, newStatus);
@@ -116,8 +116,8 @@ export default function InboundLeadsExplorer({
     setIsSavingNotes(true);
     const res = await updateInboundLeadNotes(leadId, notesText);
     if (res.success) {
-      setLeadsList((prev) =>
-        prev.map((l) => (l.id === leadId ? { ...l, notes: notesText } : l))
+      setLeadsList((prev: any) =>
+        prev.map((l: any) => (l.id === leadId ? { ...l, notes: notesText } : l))
       );
       toast.success("Notes saved!");
       setEditingNotesId(null);
@@ -131,7 +131,7 @@ export default function InboundLeadsExplorer({
   const handleDeleteLead = async (leadId: string, leadName: string) => {
     if (!confirm(`Are you sure you want to delete lead "${leadName}"?`)) return;
 
-    setLeadsList((prev) => prev.filter((l) => l.id !== leadId));
+    setLeadsList((prev: any) => prev.filter((l: any) => l.id !== leadId));
     const res = await deleteInboundLead(leadId);
     if (res.success) {
       toast.success("Lead deleted successfully!");
@@ -141,7 +141,7 @@ export default function InboundLeadsExplorer({
   };
 
   const filteredLeads = useMemo(() => {
-    return leadsList.filter((lead) => {
+    return leadsList.filter((lead: any) => {
       // Institute filter
       if (
         selectedInstituteId !== "ALL" &&
@@ -262,41 +262,37 @@ export default function InboundLeadsExplorer({
         <div className="flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => setSelectedProvider("ALL")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
-              selectedProvider === "ALL"
-                ? "bg-stone-900 text-white shadow-xs"
-                : "bg-stone-100 text-stone-600 hover:bg-stone-200"
-            }`}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${selectedProvider === "ALL"
+              ? "bg-stone-900 text-white shadow-xs"
+              : "bg-stone-100 text-stone-600 hover:bg-stone-200"
+              }`}
           >
             All Sources
           </button>
           <button
             onClick={() => setSelectedProvider("GOOGLE")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${
-              selectedProvider === "GOOGLE"
-                ? "bg-red-600 text-white shadow-xs"
-                : "bg-red-50 text-red-700 hover:bg-red-100 border border-red-100"
-            }`}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${selectedProvider === "GOOGLE"
+              ? "bg-red-600 text-white shadow-xs"
+              : "bg-red-50 text-red-700 hover:bg-red-100 border border-red-100"
+              }`}
           >
             <SiGoogle className="w-2.5 h-2.5" /> Google Ads
           </button>
           <button
             onClick={() => setSelectedProvider("META")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${
-              selectedProvider === "META"
-                ? "bg-[#0866FF] text-white shadow-xs"
-                : "bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-100"
-            }`}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${selectedProvider === "META"
+              ? "bg-[#0866FF] text-white shadow-xs"
+              : "bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-100"
+              }`}
           >
             <SiMeta className="w-2.5 h-2.5" /> Meta Ads
           </button>
           <button
             onClick={() => setSelectedProvider("WEBHOOK")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${
-              selectedProvider === "WEBHOOK"
-                ? "bg-emerald-600 text-white shadow-xs"
-                : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-100"
-            }`}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${selectedProvider === "WEBHOOK"
+              ? "bg-emerald-600 text-white shadow-xs"
+              : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-100"
+              }`}
           >
             <Code className="w-2.5 h-2.5" /> Webhooks
           </button>
@@ -311,7 +307,7 @@ export default function InboundLeadsExplorer({
               className="w-full px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-700 focus:outline-hidden focus:ring-2 focus:ring-stone-400/20 cursor-pointer"
             >
               <option value="ALL">All Institutes ({institutes.length})</option>
-              {institutes.map((inst) => (
+              {institutes.map((inst: any) => (
                 <option key={inst.id} value={inst.id}>
                   {inst.name}
                 </option>
@@ -328,26 +324,24 @@ export default function InboundLeadsExplorer({
         </span>
         <button
           onClick={() => setSelectedStatus("ALL")}
-          className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
-            selectedStatus === "ALL"
-              ? "bg-stone-900 text-white"
-              : "bg-stone-100 text-stone-600 hover:bg-stone-200"
-          }`}
+          className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${selectedStatus === "ALL"
+            ? "bg-stone-900 text-white"
+            : "bg-stone-100 text-stone-600 hover:bg-stone-200"
+            }`}
         >
           All ({leadsList.length})
         </button>
-        {CRM_STATUSES.map((st) => {
-          const count = leadsList.filter((l) => l.status === st.id).length;
+        {CRM_STATUSES.map((st: any) => {
+          const count = leadsList.filter((l: any) => l.status === st.id).length;
           const isActive = selectedStatus === st.id;
           return (
             <button
               key={st.id}
               onClick={() => setSelectedStatus(st.id)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer border ${
-                isActive
-                  ? `${st.bg} ring-2 ring-stone-900/10 shadow-xs font-extrabold`
-                  : "bg-white border-stone-200 text-stone-600 hover:bg-stone-50"
-              }`}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer border ${isActive
+                ? `${st.bg} ring-2 ring-stone-900/10 shadow-xs font-extrabold`
+                : "bg-white border-stone-200 text-stone-600 hover:bg-stone-50"
+                }`}
             >
               <span>{st.label}</span>
               <span className="text-[10px] px-1 py-0.1 rounded-full bg-stone-100 text-stone-600 font-mono">
@@ -378,18 +372,18 @@ export default function InboundLeadsExplorer({
           selectedProvider !== "ALL" ||
           selectedStatus !== "ALL" ||
           searchQuery) && (
-          <button
-            onClick={() => {
-              setSelectedInstituteId("ALL");
-              setSelectedProvider("ALL");
-              setSelectedStatus("ALL");
-              setSearchQuery("");
-            }}
-            className="text-xs font-bold text-stone-500 hover:text-stone-800 underline cursor-pointer"
-          >
-            Reset Filters
-          </button>
-        )}
+            <button
+              onClick={() => {
+                setSelectedInstituteId("ALL");
+                setSelectedProvider("ALL");
+                setSelectedStatus("ALL");
+                setSearchQuery("");
+              }}
+              className="text-xs font-bold text-stone-500 hover:text-stone-800 underline cursor-pointer"
+            >
+              Reset Filters
+            </button>
+          )}
       </div>
 
       {/* Leads Table / Cards List */}
@@ -403,9 +397,9 @@ export default function InboundLeadsExplorer({
           </h3>
           <p className="text-xs text-stone-500 max-w-sm mx-auto">
             {searchQuery ||
-            selectedProvider !== "ALL" ||
-            selectedStatus !== "ALL" ||
-            selectedInstituteId !== "ALL"
+              selectedProvider !== "ALL" ||
+              selectedStatus !== "ALL" ||
+              selectedInstituteId !== "ALL"
               ? "Try adjusting your search query or filters to see more leads."
               : "When institutes connect their Google or Meta Ads campaigns, received leads will stream in here automatically."}
           </p>
@@ -426,7 +420,7 @@ export default function InboundLeadsExplorer({
                 </tr>
               </thead>
               <tbody className="divide-y divide-stone-100 font-medium text-stone-700">
-                {filteredLeads.map((lead) => {
+                {filteredLeads.map((lead: any) => {
                   const formattedPhone = formatWhatsAppNumber(lead.phone);
                   const waText = encodeURIComponent(
                     `Hello ${lead.name}, thank you for your interest in ${lead.institute.name}. How can we assist you with admissions?`
@@ -515,7 +509,7 @@ export default function InboundLeadsExplorer({
                             lead.status || "NEW"
                           )}`}
                         >
-                          {CRM_STATUSES.map((st) => (
+                          {CRM_STATUSES.map((st: any) => (
                             <option key={st.id} value={st.id}>
                               {st.label}
                             </option>
@@ -586,7 +580,7 @@ export default function InboundLeadsExplorer({
                             lead.phone !== "Email-Only Lead" &&
                             lead.phone !== "Awaiting Meta Sync" && (
                               <a
-                                href={`https://wa.me/${formattedPhone}?text=${waText}`}
+                                href={`https://api.whatsapp.com/send?phone=${formattedPhone}&text=${waText}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 title={`Open WhatsApp chat with ${lead.name} (${formattedPhone})`}

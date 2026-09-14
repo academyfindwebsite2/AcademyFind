@@ -2172,10 +2172,12 @@ export type UserCreateNestedOneWithoutIsmActivitiesInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutIsmActivitiesNestedInput = {
+export type UserUpdateOneWithoutIsmActivitiesNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutIsmActivitiesInput, Prisma.UserUncheckedCreateWithoutIsmActivitiesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutIsmActivitiesInput
   upsert?: Prisma.UserUpsertWithoutIsmActivitiesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIsmActivitiesInput, Prisma.UserUpdateWithoutIsmActivitiesInput>, Prisma.UserUncheckedUpdateWithoutIsmActivitiesInput>
 }

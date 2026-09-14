@@ -65,7 +65,7 @@ export default function CallbackControls({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  
+
   // Notes & Comments History State
   const [commentList, setCommentList] = useState<any[]>(comments);
   const [newAdminComment, setNewAdminComment] = useState("");
@@ -234,7 +234,7 @@ Team AcademyFind
     if (formattedPhone.startsWith("0")) formattedPhone = formattedPhone.slice(1);
     if (formattedPhone.length === 10) formattedPhone = `91${formattedPhone}`;
 
-    window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`https://api.whatsapp.com/send?phone=${formattedPhone}&text=${encodeURIComponent(message)}`, "_blank");
   };
 
   const handleWhatsAppStudent = () => {
@@ -242,9 +242,9 @@ Team AcademyFind
 
     const cleanPhone = studentPhone.replace(/\D/g, "");
 
-    const message = `Hi ${studentName || "Student"} \uD83D\uDC4B
+    const message = `Hi ${studentName || "Student"} 👋
 
-Thank you for choosing AcademyFind! \uD83C\uDF93
+Thank you for choosing AcademyFind! 🎓
 
 Your enquiry for ${instituteName || "an institute"} has been shared with the institute. They've been requested to contact you shortly.
 
@@ -252,17 +252,17 @@ Your enquiry for ${instituteName || "an institute"} has been shared with the ins
 
 With AcademyFind, you can discover, compare and connect with coaching institutes, tutors and learning centres across India — and make more informed decisions before joining.
 
-Wishing you the best in your learning journey! \uD83C\uDF1F
+Wishing you the best in your learning journey! 🌟
 
 Team AcademyFind
-\uD83C\uDF10 www.academyfind.com
-\uD83D\uDCDE 9045699938`;
+🌐 www.academyfind.com
+📞 9045699938`;
 
     let formattedPhone = cleanPhone;
     if (formattedPhone.startsWith("0")) formattedPhone = formattedPhone.slice(1);
     if (formattedPhone.length === 10) formattedPhone = `91${formattedPhone}`;
 
-    window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`https://api.whatsapp.com/send?phone=${formattedPhone}&text=${encodeURIComponent(message)}`, "_blank");
   };
 
   return (
@@ -288,7 +288,7 @@ Team AcademyFind
               className="w-full sm:w-auto bg-white border border-indigo-200 text-indigo-900 text-xs font-bold rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer shadow-xs"
             >
               <option value="">Unassigned</option>
-              {salesManagers.map((sm) => (
+              {salesManagers.map((sm: any) => (
                 <option key={sm.id} value={sm.id}>
                   {sm.name || sm.email}
                 </option>
@@ -309,7 +309,7 @@ Team AcademyFind
       {/* Main Actions Container */}
       <div className="flex flex-wrap items-start justify-between gap-4 w-full">
         <div className="flex flex-wrap gap-4">
-          
+
           {/* Student Outreach Section */}
           <div className="flex flex-col gap-2 p-3 bg-stone-50/80 rounded-2xl border border-stone-200">
             <button
@@ -327,7 +327,7 @@ Team AcademyFind
                 disabled={loading}
                 className="bg-white border border-stone-200 text-stone-700 text-xs font-bold rounded-xl px-2.5 py-1.5 outline-none focus:ring-2 focus:ring-stone-500 cursor-pointer"
               >
-                {userStatuses.map((s) => (
+                {userStatuses.map((s: any) => (
                   <option key={s} value={s}>{formatStatusLabel(s)}</option>
                 ))}
               </select>
@@ -351,7 +351,7 @@ Team AcademyFind
                 disabled={loading}
                 className="bg-white border border-stone-200 text-stone-700 text-xs font-bold rounded-xl px-2.5 py-1.5 outline-none focus:ring-2 focus:ring-stone-500 cursor-pointer"
               >
-                {statuses.map((s) => (
+                {statuses.map((s: any) => (
                   <option key={s} value={s}>{formatStatusLabel(s)}</option>
                 ))}
               </select>

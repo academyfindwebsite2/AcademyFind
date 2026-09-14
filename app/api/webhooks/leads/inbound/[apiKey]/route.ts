@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { createStandardizedLead } from "@/lib/crm/crmLeadService";
 
 export async function GET(
   request: NextRequest,
@@ -364,8 +365,22 @@ export async function POST(
       }
     }
 
-    // 6. Create InboundLead in dedicated database table (separate from website callbacks)
-    const lead = await prisma.inboundLead.create({
+    // 6. Create standardized lead in CRM enquiry database with auto-welcome email & activity tracking
+    const lead = await createStandardizedLead({
+      instituteId: integration.instituteId,
+      name,
+      phone,
+      email: email || null,
+      message: message || `Captured via ${integration.provider} integration (${integration.name || "Inbound Webhook"})`,
+      source: sourceString,
+      sourceDetails,
+      status: "NEW",
+      creatorRole: "INBOUND_WEBHOOK",
+      creatorName: integration.name || integration.provider,
+    });
+
+    // Also persist in inboundLead for integration historical logs
+    await prisma.inboundLead.create({
       data: {
         integrationId: integration.id,
         instituteId: integration.instituteId,
@@ -377,7 +392,7 @@ export async function POST(
         sourceDetails,
         status: "NEW",
       },
-    });
+    }).catch(() => null);
 
     // 7. Update integration stats
     await prisma.inboundLeadIntegration.update({

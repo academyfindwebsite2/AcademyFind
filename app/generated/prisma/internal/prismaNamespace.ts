@@ -486,7 +486,8 @@ export const ModelName = {
   IsmLeadActivity: 'IsmLeadActivity',
   AdmissionRecord: 'AdmissionRecord',
   FeeInstallment: 'FeeInstallment',
-  IsmInviteRequest: 'IsmInviteRequest'
+  IsmInviteRequest: 'IsmInviteRequest',
+  InstituteCommunicationTemplate: 'InstituteCommunicationTemplate'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -502,7 +503,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userWallet" | "walletTransaction" | "userReputation" | "userPreference" | "userPreferredCategory" | "userPreferenceCity" | "reputationLog" | "session" | "account" | "verification" | "institute" | "city" | "category" | "categoryCityContent" | "instituteCategory" | "instituteManager" | "review" | "reviewReply" | "instituteClaim" | "userShortlist" | "userHistory" | "instituteEnquiry" | "teacherProfile" | "studentProfile" | "instituteMembership" | "studentInstituteRecord" | "teacherInstituteRecord" | "conversation" | "conversationParticipant" | "message" | "messageAttachment" | "messageReaction" | "messageRead" | "messageReport" | "chatSettings" | "userNotification" | "userBlock" | "contactMessage" | "contactReply" | "instituteRequest" | "subscriptionPayment" | "salesAssignment" | "salesCategoryAssignment" | "salesAreaAssignment" | "salesAssignmentRequest" | "lifeCoachRequest" | "adminNotification" | "jobPosting" | "jobApplication" | "generalResume" | "instituteDailyView" | "instituteVisit" | "instituteFacility" | "instituteBatch" | "batchStudent" | "batchTeacher" | "instituteHighlightStat" | "instituteAchievement" | "instituteFAQ" | "instituteOperatingHour" | "userCompareList" | "compareListInstitute" | "communityQuestion" | "communityAnswer" | "notablePersons" | "instituteComparisonCache" | "leadDistributionLog" | "blogAuthorProfile" | "blogCategory" | "blogTag" | "blogPost" | "blogSlugHistory" | "blogRevision" | "blogView" | "blogBookmark" | "blogAuthorFollower" | "blogSubscriber" | "blogReport" | "blogPostTag" | "blogComment" | "blogReaction" | "blogFAQ" | "blogBrand" | "cRMIntegration" | "inboundLeadIntegration" | "inboundLead" | "userEducation" | "userExperience" | "userAchievement" | "userSkill" | "visitorSession" | "visitorEvent" | "advertisement" | "advertisementAnalytic" | "systemSetting" | "enquiryStatusHistory" | "enquiryComment" | "instituteSalesManagerAssignment" | "ismLeadActivity" | "admissionRecord" | "feeInstallment" | "ismInviteRequest"
+    modelProps: "user" | "userWallet" | "walletTransaction" | "userReputation" | "userPreference" | "userPreferredCategory" | "userPreferenceCity" | "reputationLog" | "session" | "account" | "verification" | "institute" | "city" | "category" | "categoryCityContent" | "instituteCategory" | "instituteManager" | "review" | "reviewReply" | "instituteClaim" | "userShortlist" | "userHistory" | "instituteEnquiry" | "teacherProfile" | "studentProfile" | "instituteMembership" | "studentInstituteRecord" | "teacherInstituteRecord" | "conversation" | "conversationParticipant" | "message" | "messageAttachment" | "messageReaction" | "messageRead" | "messageReport" | "chatSettings" | "userNotification" | "userBlock" | "contactMessage" | "contactReply" | "instituteRequest" | "subscriptionPayment" | "salesAssignment" | "salesCategoryAssignment" | "salesAreaAssignment" | "salesAssignmentRequest" | "lifeCoachRequest" | "adminNotification" | "jobPosting" | "jobApplication" | "generalResume" | "instituteDailyView" | "instituteVisit" | "instituteFacility" | "instituteBatch" | "batchStudent" | "batchTeacher" | "instituteHighlightStat" | "instituteAchievement" | "instituteFAQ" | "instituteOperatingHour" | "userCompareList" | "compareListInstitute" | "communityQuestion" | "communityAnswer" | "notablePersons" | "instituteComparisonCache" | "leadDistributionLog" | "blogAuthorProfile" | "blogCategory" | "blogTag" | "blogPost" | "blogSlugHistory" | "blogRevision" | "blogView" | "blogBookmark" | "blogAuthorFollower" | "blogSubscriber" | "blogReport" | "blogPostTag" | "blogComment" | "blogReaction" | "blogFAQ" | "blogBrand" | "cRMIntegration" | "inboundLeadIntegration" | "inboundLead" | "userEducation" | "userExperience" | "userAchievement" | "userSkill" | "visitorSession" | "visitorEvent" | "advertisement" | "advertisementAnalytic" | "systemSetting" | "enquiryStatusHistory" | "enquiryComment" | "instituteSalesManagerAssignment" | "ismLeadActivity" | "admissionRecord" | "feeInstallment" | "ismInviteRequest" | "instituteCommunicationTemplate"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -8128,6 +8129,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    InstituteCommunicationTemplate: {
+      payload: Prisma.$InstituteCommunicationTemplatePayload<ExtArgs>
+      fields: Prisma.InstituteCommunicationTemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InstituteCommunicationTemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InstituteCommunicationTemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.InstituteCommunicationTemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InstituteCommunicationTemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload>
+        }
+        findMany: {
+          args: Prisma.InstituteCommunicationTemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload>[]
+        }
+        create: {
+          args: Prisma.InstituteCommunicationTemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload>
+        }
+        createMany: {
+          args: Prisma.InstituteCommunicationTemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InstituteCommunicationTemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.InstituteCommunicationTemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload>
+        }
+        update: {
+          args: Prisma.InstituteCommunicationTemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.InstituteCommunicationTemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InstituteCommunicationTemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InstituteCommunicationTemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.InstituteCommunicationTemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteCommunicationTemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.InstituteCommunicationTemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInstituteCommunicationTemplate>
+        }
+        groupBy: {
+          args: Prisma.InstituteCommunicationTemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InstituteCommunicationTemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InstituteCommunicationTemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InstituteCommunicationTemplateCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -8562,6 +8637,9 @@ export const InstituteEnquiryScalarFieldEnum = {
   lastUpdatedByRole: 'lastUpdatedByRole',
   lastUpdatedByName: 'lastUpdatedByName',
   parentId: 'parentId',
+  course: 'course',
+  batch: 'batch',
+  tags: 'tags',
   source: 'source',
   sourceDetails: 'sourceDetails',
   createdAt: 'createdAt',
@@ -9838,6 +9916,21 @@ export const IsmInviteRequestScalarFieldEnum = {
 export type IsmInviteRequestScalarFieldEnum = (typeof IsmInviteRequestScalarFieldEnum)[keyof typeof IsmInviteRequestScalarFieldEnum]
 
 
+export const InstituteCommunicationTemplateScalarFieldEnum = {
+  id: 'id',
+  instituteId: 'instituteId',
+  type: 'type',
+  title: 'title',
+  subject: 'subject',
+  content: 'content',
+  variables: 'variables',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InstituteCommunicationTemplateScalarFieldEnum = (typeof InstituteCommunicationTemplateScalarFieldEnum)[keyof typeof InstituteCommunicationTemplateScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -10706,6 +10799,7 @@ export type GlobalOmitConfig = {
   admissionRecord?: Prisma.AdmissionRecordOmit
   feeInstallment?: Prisma.FeeInstallmentOmit
   ismInviteRequest?: Prisma.IsmInviteRequestOmit
+  instituteCommunicationTemplate?: Prisma.InstituteCommunicationTemplateOmit
 }
 
 /* Types for Logging */

@@ -556,3 +556,8 @@ export type FeeInstallment = Prisma.FeeInstallmentModel
  * 
  */
 export type IsmInviteRequest = Prisma.IsmInviteRequestModel
+/**
+ * Model InstituteCommunicationTemplate
+ * 
+ */
+export type InstituteCommunicationTemplate = Prisma.InstituteCommunicationTemplateModel

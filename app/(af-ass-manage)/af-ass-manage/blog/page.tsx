@@ -322,6 +322,7 @@ export default async function AdminBlogPage({
                   <AdminBlogActions
                     postId={post.id}
                     slug={post.slug}
+                    postTitle={post.title}
                     isArchived={post.status === "ARCHIVED"}
                     status={post.status}
                     authorPhone={post.authorProfile?.user?.phone || post.relatedInstitute?.phone}

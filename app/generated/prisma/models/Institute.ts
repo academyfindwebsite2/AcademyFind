@@ -748,6 +748,7 @@ export type InstituteWhereInput = {
   studentRecords?: Prisma.StudentInstituteRecordListRelationFilter
   teacherRecords?: Prisma.TeacherInstituteRecordListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateListRelationFilter
 }
 
 export type InstituteOrderByWithRelationInput = {
@@ -852,6 +853,7 @@ export type InstituteOrderByWithRelationInput = {
   studentRecords?: Prisma.StudentInstituteRecordOrderByRelationAggregateInput
   teacherRecords?: Prisma.TeacherInstituteRecordOrderByRelationAggregateInput
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateOrderByRelationAggregateInput
 }
 
 export type InstituteWhereUniqueInput = Prisma.AtLeast<{
@@ -959,6 +961,7 @@ export type InstituteWhereUniqueInput = Prisma.AtLeast<{
   studentRecords?: Prisma.StudentInstituteRecordListRelationFilter
   teacherRecords?: Prisma.TeacherInstituteRecordListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateListRelationFilter
 }, "id" | "googlePlaceId">
 
 export type InstituteOrderByWithAggregationInput = {
@@ -1206,6 +1209,7 @@ export type InstituteCreateInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateInput = {
@@ -1309,6 +1313,7 @@ export type InstituteUncheckedCreateInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUpdateInput = {
@@ -1412,6 +1417,7 @@ export type InstituteUpdateInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateInput = {
@@ -1515,6 +1521,7 @@ export type InstituteUncheckedUpdateInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateManyInput = {
@@ -2615,6 +2622,20 @@ export type InstituteUpdateOneRequiredWithoutIsmInviteRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.InstituteUpdateToOneWithWhereWithoutIsmInviteRequestsInput, Prisma.InstituteUpdateWithoutIsmInviteRequestsInput>, Prisma.InstituteUncheckedUpdateWithoutIsmInviteRequestsInput>
 }
 
+export type InstituteCreateNestedOneWithoutCommunicationTemplatesInput = {
+  create?: Prisma.XOR<Prisma.InstituteCreateWithoutCommunicationTemplatesInput, Prisma.InstituteUncheckedCreateWithoutCommunicationTemplatesInput>
+  connectOrCreate?: Prisma.InstituteCreateOrConnectWithoutCommunicationTemplatesInput
+  connect?: Prisma.InstituteWhereUniqueInput
+}
+
+export type InstituteUpdateOneRequiredWithoutCommunicationTemplatesNestedInput = {
+  create?: Prisma.XOR<Prisma.InstituteCreateWithoutCommunicationTemplatesInput, Prisma.InstituteUncheckedCreateWithoutCommunicationTemplatesInput>
+  connectOrCreate?: Prisma.InstituteCreateOrConnectWithoutCommunicationTemplatesInput
+  upsert?: Prisma.InstituteUpsertWithoutCommunicationTemplatesInput
+  connect?: Prisma.InstituteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.InstituteUpdateToOneWithWhereWithoutCommunicationTemplatesInput, Prisma.InstituteUpdateWithoutCommunicationTemplatesInput>, Prisma.InstituteUncheckedUpdateWithoutCommunicationTemplatesInput>
+}
+
 export type InstituteCreateWithoutCityInput = {
   id?: string
   providerType?: $Enums.ProviderType
@@ -2715,6 +2736,7 @@ export type InstituteCreateWithoutCityInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutCityInput = {
@@ -2817,6 +2839,7 @@ export type InstituteUncheckedCreateWithoutCityInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutCityInput = {
@@ -3016,6 +3039,7 @@ export type InstituteCreateWithoutCategoriesInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutCategoriesInput = {
@@ -3118,6 +3142,7 @@ export type InstituteUncheckedCreateWithoutCategoriesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutCategoriesInput = {
@@ -3236,6 +3261,7 @@ export type InstituteUpdateWithoutCategoriesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutCategoriesInput = {
@@ -3338,6 +3364,7 @@ export type InstituteUncheckedUpdateWithoutCategoriesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutManagersInput = {
@@ -3440,6 +3467,7 @@ export type InstituteCreateWithoutManagersInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutManagersInput = {
@@ -3542,6 +3570,7 @@ export type InstituteUncheckedCreateWithoutManagersInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutManagersInput = {
@@ -3660,6 +3689,7 @@ export type InstituteUpdateWithoutManagersInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutManagersInput = {
@@ -3762,6 +3792,7 @@ export type InstituteUncheckedUpdateWithoutManagersInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutReviewsInput = {
@@ -3864,6 +3895,7 @@ export type InstituteCreateWithoutReviewsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutReviewsInput = {
@@ -3966,6 +3998,7 @@ export type InstituteUncheckedCreateWithoutReviewsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutReviewsInput = {
@@ -4084,6 +4117,7 @@ export type InstituteUpdateWithoutReviewsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutReviewsInput = {
@@ -4186,6 +4220,7 @@ export type InstituteUncheckedUpdateWithoutReviewsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutClaimsInput = {
@@ -4288,6 +4323,7 @@ export type InstituteCreateWithoutClaimsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutClaimsInput = {
@@ -4390,6 +4426,7 @@ export type InstituteUncheckedCreateWithoutClaimsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutClaimsInput = {
@@ -4508,6 +4545,7 @@ export type InstituteUpdateWithoutClaimsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutClaimsInput = {
@@ -4610,6 +4648,7 @@ export type InstituteUncheckedUpdateWithoutClaimsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutShortlistedByInput = {
@@ -4712,6 +4751,7 @@ export type InstituteCreateWithoutShortlistedByInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutShortlistedByInput = {
@@ -4814,6 +4854,7 @@ export type InstituteUncheckedCreateWithoutShortlistedByInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutShortlistedByInput = {
@@ -4932,6 +4973,7 @@ export type InstituteUpdateWithoutShortlistedByInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutShortlistedByInput = {
@@ -5034,6 +5076,7 @@ export type InstituteUncheckedUpdateWithoutShortlistedByInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutViewHistoryInput = {
@@ -5136,6 +5179,7 @@ export type InstituteCreateWithoutViewHistoryInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutViewHistoryInput = {
@@ -5238,6 +5282,7 @@ export type InstituteUncheckedCreateWithoutViewHistoryInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutViewHistoryInput = {
@@ -5356,6 +5401,7 @@ export type InstituteUpdateWithoutViewHistoryInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutViewHistoryInput = {
@@ -5458,6 +5504,7 @@ export type InstituteUncheckedUpdateWithoutViewHistoryInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutEnquiriesInput = {
@@ -5560,6 +5607,7 @@ export type InstituteCreateWithoutEnquiriesInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutEnquiriesInput = {
@@ -5662,6 +5710,7 @@ export type InstituteUncheckedCreateWithoutEnquiriesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutEnquiriesInput = {
@@ -5780,6 +5829,7 @@ export type InstituteUpdateWithoutEnquiriesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutEnquiriesInput = {
@@ -5882,6 +5932,7 @@ export type InstituteUncheckedUpdateWithoutEnquiriesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutMembershipsInput = {
@@ -5984,6 +6035,7 @@ export type InstituteCreateWithoutMembershipsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutMembershipsInput = {
@@ -6086,6 +6138,7 @@ export type InstituteUncheckedCreateWithoutMembershipsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutMembershipsInput = {
@@ -6204,6 +6257,7 @@ export type InstituteUpdateWithoutMembershipsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutMembershipsInput = {
@@ -6306,6 +6360,7 @@ export type InstituteUncheckedUpdateWithoutMembershipsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutStudentRecordsInput = {
@@ -6408,6 +6463,7 @@ export type InstituteCreateWithoutStudentRecordsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutStudentRecordsInput = {
@@ -6510,6 +6566,7 @@ export type InstituteUncheckedCreateWithoutStudentRecordsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutStudentRecordsInput = {
@@ -6628,6 +6685,7 @@ export type InstituteUpdateWithoutStudentRecordsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutStudentRecordsInput = {
@@ -6730,6 +6788,7 @@ export type InstituteUncheckedUpdateWithoutStudentRecordsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutTeacherRecordsInput = {
@@ -6832,6 +6891,7 @@ export type InstituteCreateWithoutTeacherRecordsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestCreateNestedManyWithoutInstituteInput
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutTeacherRecordsInput = {
@@ -6934,6 +6994,7 @@ export type InstituteUncheckedCreateWithoutTeacherRecordsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutInstituteInput
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutTeacherRecordsInput = {
@@ -7052,6 +7113,7 @@ export type InstituteUpdateWithoutTeacherRecordsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestUpdateManyWithoutInstituteNestedInput
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutTeacherRecordsInput = {
@@ -7154,6 +7216,7 @@ export type InstituteUncheckedUpdateWithoutTeacherRecordsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutInstituteNestedInput
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutConversationsInput = {
@@ -7256,6 +7319,7 @@ export type InstituteCreateWithoutConversationsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestCreateNestedManyWithoutInstituteInput
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutConversationsInput = {
@@ -7358,6 +7422,7 @@ export type InstituteUncheckedCreateWithoutConversationsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutInstituteInput
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutConversationsInput = {
@@ -7476,6 +7541,7 @@ export type InstituteUpdateWithoutConversationsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestUpdateManyWithoutInstituteNestedInput
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutConversationsInput = {
@@ -7578,6 +7644,7 @@ export type InstituteUncheckedUpdateWithoutConversationsInput = {
   ismInviteRequests?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutInstituteNestedInput
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutInstituteRequestInput = {
@@ -7680,6 +7747,7 @@ export type InstituteCreateWithoutInstituteRequestInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutInstituteRequestInput = {
@@ -7782,6 +7850,7 @@ export type InstituteUncheckedCreateWithoutInstituteRequestInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutInstituteRequestInput = {
@@ -7900,6 +7969,7 @@ export type InstituteUpdateWithoutInstituteRequestInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutInstituteRequestInput = {
@@ -8002,6 +8072,7 @@ export type InstituteUncheckedUpdateWithoutInstituteRequestInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutPaymentsInput = {
@@ -8104,6 +8175,7 @@ export type InstituteCreateWithoutPaymentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutPaymentsInput = {
@@ -8206,6 +8278,7 @@ export type InstituteUncheckedCreateWithoutPaymentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutPaymentsInput = {
@@ -8324,6 +8397,7 @@ export type InstituteUpdateWithoutPaymentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutPaymentsInput = {
@@ -8426,6 +8500,7 @@ export type InstituteUncheckedUpdateWithoutPaymentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutSalesAssignmentsInput = {
@@ -8528,6 +8603,7 @@ export type InstituteCreateWithoutSalesAssignmentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutSalesAssignmentsInput = {
@@ -8630,6 +8706,7 @@ export type InstituteUncheckedCreateWithoutSalesAssignmentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutSalesAssignmentsInput = {
@@ -8748,6 +8825,7 @@ export type InstituteUpdateWithoutSalesAssignmentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutSalesAssignmentsInput = {
@@ -8850,6 +8928,7 @@ export type InstituteUncheckedUpdateWithoutSalesAssignmentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutSalesRequestsInput = {
@@ -8952,6 +9031,7 @@ export type InstituteCreateWithoutSalesRequestsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutSalesRequestsInput = {
@@ -9054,6 +9134,7 @@ export type InstituteUncheckedCreateWithoutSalesRequestsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutSalesRequestsInput = {
@@ -9172,6 +9253,7 @@ export type InstituteUpdateWithoutSalesRequestsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutSalesRequestsInput = {
@@ -9274,6 +9356,7 @@ export type InstituteUncheckedUpdateWithoutSalesRequestsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutDailyViewsInput = {
@@ -9376,6 +9459,7 @@ export type InstituteCreateWithoutDailyViewsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutDailyViewsInput = {
@@ -9478,6 +9562,7 @@ export type InstituteUncheckedCreateWithoutDailyViewsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutDailyViewsInput = {
@@ -9596,6 +9681,7 @@ export type InstituteUpdateWithoutDailyViewsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutDailyViewsInput = {
@@ -9698,6 +9784,7 @@ export type InstituteUncheckedUpdateWithoutDailyViewsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutVisitsInput = {
@@ -9800,6 +9887,7 @@ export type InstituteCreateWithoutVisitsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutVisitsInput = {
@@ -9902,6 +9990,7 @@ export type InstituteUncheckedCreateWithoutVisitsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutVisitsInput = {
@@ -10020,6 +10109,7 @@ export type InstituteUpdateWithoutVisitsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutVisitsInput = {
@@ -10122,6 +10212,7 @@ export type InstituteUncheckedUpdateWithoutVisitsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutFacilitiesInput = {
@@ -10224,6 +10315,7 @@ export type InstituteCreateWithoutFacilitiesInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutFacilitiesInput = {
@@ -10326,6 +10418,7 @@ export type InstituteUncheckedCreateWithoutFacilitiesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutFacilitiesInput = {
@@ -10444,6 +10537,7 @@ export type InstituteUpdateWithoutFacilitiesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutFacilitiesInput = {
@@ -10546,6 +10640,7 @@ export type InstituteUncheckedUpdateWithoutFacilitiesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutBatchesInput = {
@@ -10648,6 +10743,7 @@ export type InstituteCreateWithoutBatchesInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutBatchesInput = {
@@ -10750,6 +10846,7 @@ export type InstituteUncheckedCreateWithoutBatchesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutBatchesInput = {
@@ -10868,6 +10965,7 @@ export type InstituteUpdateWithoutBatchesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutBatchesInput = {
@@ -10970,6 +11068,7 @@ export type InstituteUncheckedUpdateWithoutBatchesInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutHighlightStatsInput = {
@@ -11072,6 +11171,7 @@ export type InstituteCreateWithoutHighlightStatsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutHighlightStatsInput = {
@@ -11174,6 +11274,7 @@ export type InstituteUncheckedCreateWithoutHighlightStatsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutHighlightStatsInput = {
@@ -11292,6 +11393,7 @@ export type InstituteUpdateWithoutHighlightStatsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutHighlightStatsInput = {
@@ -11394,6 +11496,7 @@ export type InstituteUncheckedUpdateWithoutHighlightStatsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutAchievementsInput = {
@@ -11496,6 +11599,7 @@ export type InstituteCreateWithoutAchievementsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutAchievementsInput = {
@@ -11598,6 +11702,7 @@ export type InstituteUncheckedCreateWithoutAchievementsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutAchievementsInput = {
@@ -11716,6 +11821,7 @@ export type InstituteUpdateWithoutAchievementsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutAchievementsInput = {
@@ -11818,6 +11924,7 @@ export type InstituteUncheckedUpdateWithoutAchievementsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutFaqsInput = {
@@ -11920,6 +12027,7 @@ export type InstituteCreateWithoutFaqsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutFaqsInput = {
@@ -12022,6 +12130,7 @@ export type InstituteUncheckedCreateWithoutFaqsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutFaqsInput = {
@@ -12140,6 +12249,7 @@ export type InstituteUpdateWithoutFaqsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutFaqsInput = {
@@ -12242,6 +12352,7 @@ export type InstituteUncheckedUpdateWithoutFaqsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutOperatingHoursInput = {
@@ -12344,6 +12455,7 @@ export type InstituteCreateWithoutOperatingHoursInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutOperatingHoursInput = {
@@ -12446,6 +12558,7 @@ export type InstituteUncheckedCreateWithoutOperatingHoursInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutOperatingHoursInput = {
@@ -12564,6 +12677,7 @@ export type InstituteUpdateWithoutOperatingHoursInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutOperatingHoursInput = {
@@ -12666,6 +12780,7 @@ export type InstituteUncheckedUpdateWithoutOperatingHoursInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutCompareListItemsInput = {
@@ -12768,6 +12883,7 @@ export type InstituteCreateWithoutCompareListItemsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutCompareListItemsInput = {
@@ -12870,6 +12986,7 @@ export type InstituteUncheckedCreateWithoutCompareListItemsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutCompareListItemsInput = {
@@ -12988,6 +13105,7 @@ export type InstituteUpdateWithoutCompareListItemsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutCompareListItemsInput = {
@@ -13090,6 +13208,7 @@ export type InstituteUncheckedUpdateWithoutCompareListItemsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutCommunityQuestionsInput = {
@@ -13192,6 +13311,7 @@ export type InstituteCreateWithoutCommunityQuestionsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutCommunityQuestionsInput = {
@@ -13294,6 +13414,7 @@ export type InstituteUncheckedCreateWithoutCommunityQuestionsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutCommunityQuestionsInput = {
@@ -13412,6 +13533,7 @@ export type InstituteUpdateWithoutCommunityQuestionsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutCommunityQuestionsInput = {
@@ -13514,6 +13636,7 @@ export type InstituteUncheckedUpdateWithoutCommunityQuestionsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutNotablepersonsInput = {
@@ -13616,6 +13739,7 @@ export type InstituteCreateWithoutNotablepersonsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutNotablepersonsInput = {
@@ -13718,6 +13842,7 @@ export type InstituteUncheckedCreateWithoutNotablepersonsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutNotablepersonsInput = {
@@ -13836,6 +13961,7 @@ export type InstituteUpdateWithoutNotablepersonsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutNotablepersonsInput = {
@@ -13938,6 +14064,7 @@ export type InstituteUncheckedUpdateWithoutNotablepersonsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutComparisonsAsFirstInput = {
@@ -14040,6 +14167,7 @@ export type InstituteCreateWithoutComparisonsAsFirstInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutComparisonsAsFirstInput = {
@@ -14142,6 +14270,7 @@ export type InstituteUncheckedCreateWithoutComparisonsAsFirstInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutComparisonsAsFirstInput = {
@@ -14249,6 +14378,7 @@ export type InstituteCreateWithoutComparisonsAsSecondInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutComparisonsAsSecondInput = {
@@ -14351,6 +14481,7 @@ export type InstituteUncheckedCreateWithoutComparisonsAsSecondInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutComparisonsAsSecondInput = {
@@ -14469,6 +14600,7 @@ export type InstituteUpdateWithoutComparisonsAsFirstInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutComparisonsAsFirstInput = {
@@ -14571,6 +14703,7 @@ export type InstituteUncheckedUpdateWithoutComparisonsAsFirstInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUpsertWithoutComparisonsAsSecondInput = {
@@ -14684,6 +14817,7 @@ export type InstituteUpdateWithoutComparisonsAsSecondInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutComparisonsAsSecondInput = {
@@ -14786,6 +14920,7 @@ export type InstituteUncheckedUpdateWithoutComparisonsAsSecondInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutBlogPostsInput = {
@@ -14888,6 +15023,7 @@ export type InstituteCreateWithoutBlogPostsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutBlogPostsInput = {
@@ -14990,6 +15126,7 @@ export type InstituteUncheckedCreateWithoutBlogPostsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutBlogPostsInput = {
@@ -15108,6 +15245,7 @@ export type InstituteUpdateWithoutBlogPostsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutBlogPostsInput = {
@@ -15210,6 +15348,7 @@ export type InstituteUncheckedUpdateWithoutBlogPostsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutCrmIntegrationsInput = {
@@ -15312,6 +15451,7 @@ export type InstituteCreateWithoutCrmIntegrationsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutCrmIntegrationsInput = {
@@ -15414,6 +15554,7 @@ export type InstituteUncheckedCreateWithoutCrmIntegrationsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutCrmIntegrationsInput = {
@@ -15532,6 +15673,7 @@ export type InstituteUpdateWithoutCrmIntegrationsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutCrmIntegrationsInput = {
@@ -15634,6 +15776,7 @@ export type InstituteUncheckedUpdateWithoutCrmIntegrationsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutInboundLeadIntegrationsInput = {
@@ -15736,6 +15879,7 @@ export type InstituteCreateWithoutInboundLeadIntegrationsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutInboundLeadIntegrationsInput = {
@@ -15838,6 +15982,7 @@ export type InstituteUncheckedCreateWithoutInboundLeadIntegrationsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutInboundLeadIntegrationsInput = {
@@ -15956,6 +16101,7 @@ export type InstituteUpdateWithoutInboundLeadIntegrationsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutInboundLeadIntegrationsInput = {
@@ -16058,6 +16204,7 @@ export type InstituteUncheckedUpdateWithoutInboundLeadIntegrationsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutInboundLeadsInput = {
@@ -16160,6 +16307,7 @@ export type InstituteCreateWithoutInboundLeadsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutInboundLeadsInput = {
@@ -16262,6 +16410,7 @@ export type InstituteUncheckedCreateWithoutInboundLeadsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutInboundLeadsInput = {
@@ -16380,6 +16529,7 @@ export type InstituteUpdateWithoutInboundLeadsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutInboundLeadsInput = {
@@ -16482,6 +16632,7 @@ export type InstituteUncheckedUpdateWithoutInboundLeadsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutIsmAssignmentsInput = {
@@ -16584,6 +16735,7 @@ export type InstituteCreateWithoutIsmAssignmentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutIsmAssignmentsInput = {
@@ -16686,6 +16838,7 @@ export type InstituteUncheckedCreateWithoutIsmAssignmentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutIsmAssignmentsInput = {
@@ -16804,6 +16957,7 @@ export type InstituteUpdateWithoutIsmAssignmentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutIsmAssignmentsInput = {
@@ -16906,6 +17060,7 @@ export type InstituteUncheckedUpdateWithoutIsmAssignmentsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutAdmissionRecordsInput = {
@@ -17008,6 +17163,7 @@ export type InstituteCreateWithoutAdmissionRecordsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutAdmissionRecordsInput = {
@@ -17110,6 +17266,7 @@ export type InstituteUncheckedCreateWithoutAdmissionRecordsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutAdmissionRecordsInput = {
@@ -17228,6 +17385,7 @@ export type InstituteUpdateWithoutAdmissionRecordsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutAdmissionRecordsInput = {
@@ -17330,6 +17488,7 @@ export type InstituteUncheckedUpdateWithoutAdmissionRecordsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteCreateWithoutIsmInviteRequestsInput = {
@@ -17432,6 +17591,7 @@ export type InstituteCreateWithoutIsmInviteRequestsInput = {
   studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteUncheckedCreateWithoutIsmInviteRequestsInput = {
@@ -17534,6 +17694,7 @@ export type InstituteUncheckedCreateWithoutIsmInviteRequestsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedCreateNestedManyWithoutInstituteInput
 }
 
 export type InstituteCreateOrConnectWithoutIsmInviteRequestsInput = {
@@ -17652,6 +17813,7 @@ export type InstituteUpdateWithoutIsmInviteRequestsInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutIsmInviteRequestsInput = {
@@ -17751,6 +17913,435 @@ export type InstituteUncheckedUpdateWithoutIsmInviteRequestsInput = {
   memberships?: Prisma.InstituteMembershipUncheckedUpdateManyWithoutInstituteNestedInput
   ismAssignments?: Prisma.InstituteSalesManagerAssignmentUncheckedUpdateManyWithoutInstituteNestedInput
   admissionRecords?: Prisma.AdmissionRecordUncheckedUpdateManyWithoutInstituteNestedInput
+  studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
+  teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
+}
+
+export type InstituteCreateWithoutCommunicationTemplatesInput = {
+  id?: string
+  providerType?: $Enums.ProviderType
+  name: string
+  slug: string
+  description?: string | null
+  phone?: string | null
+  email?: string | null
+  website?: string | null
+  address: string
+  latitude?: number | null
+  longitude?: number | null
+  logo?: string | null
+  coverImage?: string | null
+  googlePlaceId?: string | null
+  googleRating?: number | null
+  googleReviewCount?: number | null
+  isVerified?: boolean
+  isFeatured?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: string | null
+  averageRating?: number | null
+  reviewCount?: number
+  googleMapsUrl?: string | null
+  placeTypes?: Prisma.InstituteCreateplaceTypesInput | string[]
+  gallery?: Prisma.InstituteCreategalleryInput | string[]
+  subscriptionPlan?: $Enums.SubscriptionPlan
+  planWeight?: number
+  youtubeVideos?: Prisma.InstituteCreateyoutubeVideosInput | string[]
+  classroomImages?: Prisma.InstituteCreateclassroomImagesInput | string[]
+  feeInfo?: string | null
+  planExpiresAt?: Date | string | null
+  facebookUrl?: string | null
+  instagramUrl?: string | null
+  telegramUrl?: string | null
+  twitterUrl?: string | null
+  youtubeUrl?: string | null
+  linkedinUrl?: string | null
+  whatsappUrl?: string | null
+  isPublished?: boolean
+  mode?: $Enums.InstituteMode
+  viewCount?: number
+  affiliations?: Prisma.InstituteCreateaffiliationsInput | string[]
+  awards?: Prisma.InstituteCreateawardsInput | string[]
+  brochureUrl?: string | null
+  compareCount?: number
+  cons?: Prisma.InstituteCreateconsInput | string[]
+  establishedYear?: number | null
+  feeMax?: number | null
+  feeMin?: number | null
+  hasCertification?: boolean
+  hasDemoClasses?: boolean
+  hasHostelFacility?: boolean
+  hasOnlineClasses?: boolean
+  hasScholarship?: boolean
+  mediumOfInstruction?: Prisma.InstituteCreatemediumOfInstructionInput | string[]
+  metaDescription?: string | null
+  metaTitle?: string | null
+  metaKeywords?: string | null
+  pros?: Prisma.InstituteCreateprosInput | string[]
+  refundPolicy?: string | null
+  totalBranches?: number | null
+  totalStudents?: number | null
+  crmIntegrations?: Prisma.CRMIntegrationCreateNestedManyWithoutInstituteInput
+  inboundLeadIntegrations?: Prisma.InboundLeadIntegrationCreateNestedManyWithoutInstituteInput
+  inboundLeads?: Prisma.InboundLeadCreateNestedManyWithoutInstituteInput
+  city: Prisma.CityCreateNestedOneWithoutInstitutesInput
+  categories?: Prisma.InstituteCategoryCreateNestedManyWithoutInstituteInput
+  managers?: Prisma.InstituteManagerCreateNestedManyWithoutInstituteInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutInstituteInput
+  communityQuestions?: Prisma.CommunityQuestionCreateNestedManyWithoutInstituteInput
+  compareListItems?: Prisma.CompareListInstituteCreateNestedManyWithoutInstituteInput
+  achievements?: Prisma.InstituteAchievementCreateNestedManyWithoutInstituteInput
+  batches?: Prisma.InstituteBatchCreateNestedManyWithoutInstituteInput
+  claims?: Prisma.InstituteClaimCreateNestedManyWithoutInstituteInput
+  comparisonsAsFirst?: Prisma.InstituteComparisonCacheCreateNestedManyWithoutInstitute1Input
+  comparisonsAsSecond?: Prisma.InstituteComparisonCacheCreateNestedManyWithoutInstitute2Input
+  dailyViews?: Prisma.InstituteDailyViewCreateNestedManyWithoutInstituteInput
+  visits?: Prisma.InstituteVisitCreateNestedManyWithoutInstituteInput
+  enquiries?: Prisma.InstituteEnquiryCreateNestedManyWithoutInstituteInput
+  facilities?: Prisma.InstituteFacilityCreateNestedManyWithoutInstituteInput
+  faqs?: Prisma.InstituteFAQCreateNestedManyWithoutInstituteInput
+  highlightStats?: Prisma.InstituteHighlightStatCreateNestedManyWithoutInstituteInput
+  operatingHours?: Prisma.InstituteOperatingHourCreateNestedManyWithoutInstituteInput
+  instituteRequest?: Prisma.InstituteRequestCreateNestedOneWithoutInstituteInput
+  notablepersons?: Prisma.NotablePersonsCreateNestedManyWithoutInstituteInput
+  salesAssignments?: Prisma.SalesAssignmentCreateNestedOneWithoutInstituteInput
+  salesRequests?: Prisma.SalesAssignmentRequestCreateNestedManyWithoutInstituteInput
+  payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutInstituteInput
+  viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutInstituteInput
+  shortlistedBy?: Prisma.UserShortlistCreateNestedManyWithoutInstituteInput
+  blogPosts?: Prisma.BlogPostCreateNestedManyWithoutRelatedInstituteInput
+  memberships?: Prisma.InstituteMembershipCreateNestedManyWithoutInstituteInput
+  ismAssignments?: Prisma.InstituteSalesManagerAssignmentCreateNestedManyWithoutInstituteInput
+  admissionRecords?: Prisma.AdmissionRecordCreateNestedManyWithoutInstituteInput
+  ismInviteRequests?: Prisma.IsmInviteRequestCreateNestedManyWithoutInstituteInput
+  studentRecords?: Prisma.StudentInstituteRecordCreateNestedManyWithoutInstituteInput
+  teacherRecords?: Prisma.TeacherInstituteRecordCreateNestedManyWithoutInstituteInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutInstituteInput
+}
+
+export type InstituteUncheckedCreateWithoutCommunicationTemplatesInput = {
+  id?: string
+  providerType?: $Enums.ProviderType
+  name: string
+  slug: string
+  description?: string | null
+  phone?: string | null
+  email?: string | null
+  website?: string | null
+  address: string
+  latitude?: number | null
+  longitude?: number | null
+  logo?: string | null
+  coverImage?: string | null
+  googlePlaceId?: string | null
+  googleRating?: number | null
+  googleReviewCount?: number | null
+  cityId: string
+  isVerified?: boolean
+  isFeatured?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: string | null
+  averageRating?: number | null
+  reviewCount?: number
+  googleMapsUrl?: string | null
+  placeTypes?: Prisma.InstituteCreateplaceTypesInput | string[]
+  gallery?: Prisma.InstituteCreategalleryInput | string[]
+  subscriptionPlan?: $Enums.SubscriptionPlan
+  planWeight?: number
+  youtubeVideos?: Prisma.InstituteCreateyoutubeVideosInput | string[]
+  classroomImages?: Prisma.InstituteCreateclassroomImagesInput | string[]
+  feeInfo?: string | null
+  planExpiresAt?: Date | string | null
+  facebookUrl?: string | null
+  instagramUrl?: string | null
+  telegramUrl?: string | null
+  twitterUrl?: string | null
+  youtubeUrl?: string | null
+  linkedinUrl?: string | null
+  whatsappUrl?: string | null
+  isPublished?: boolean
+  mode?: $Enums.InstituteMode
+  viewCount?: number
+  affiliations?: Prisma.InstituteCreateaffiliationsInput | string[]
+  awards?: Prisma.InstituteCreateawardsInput | string[]
+  brochureUrl?: string | null
+  compareCount?: number
+  cons?: Prisma.InstituteCreateconsInput | string[]
+  establishedYear?: number | null
+  feeMax?: number | null
+  feeMin?: number | null
+  hasCertification?: boolean
+  hasDemoClasses?: boolean
+  hasHostelFacility?: boolean
+  hasOnlineClasses?: boolean
+  hasScholarship?: boolean
+  mediumOfInstruction?: Prisma.InstituteCreatemediumOfInstructionInput | string[]
+  metaDescription?: string | null
+  metaTitle?: string | null
+  metaKeywords?: string | null
+  pros?: Prisma.InstituteCreateprosInput | string[]
+  refundPolicy?: string | null
+  totalBranches?: number | null
+  totalStudents?: number | null
+  crmIntegrations?: Prisma.CRMIntegrationUncheckedCreateNestedManyWithoutInstituteInput
+  inboundLeadIntegrations?: Prisma.InboundLeadIntegrationUncheckedCreateNestedManyWithoutInstituteInput
+  inboundLeads?: Prisma.InboundLeadUncheckedCreateNestedManyWithoutInstituteInput
+  categories?: Prisma.InstituteCategoryUncheckedCreateNestedManyWithoutInstituteInput
+  managers?: Prisma.InstituteManagerUncheckedCreateNestedManyWithoutInstituteInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutInstituteInput
+  communityQuestions?: Prisma.CommunityQuestionUncheckedCreateNestedManyWithoutInstituteInput
+  compareListItems?: Prisma.CompareListInstituteUncheckedCreateNestedManyWithoutInstituteInput
+  achievements?: Prisma.InstituteAchievementUncheckedCreateNestedManyWithoutInstituteInput
+  batches?: Prisma.InstituteBatchUncheckedCreateNestedManyWithoutInstituteInput
+  claims?: Prisma.InstituteClaimUncheckedCreateNestedManyWithoutInstituteInput
+  comparisonsAsFirst?: Prisma.InstituteComparisonCacheUncheckedCreateNestedManyWithoutInstitute1Input
+  comparisonsAsSecond?: Prisma.InstituteComparisonCacheUncheckedCreateNestedManyWithoutInstitute2Input
+  dailyViews?: Prisma.InstituteDailyViewUncheckedCreateNestedManyWithoutInstituteInput
+  visits?: Prisma.InstituteVisitUncheckedCreateNestedManyWithoutInstituteInput
+  enquiries?: Prisma.InstituteEnquiryUncheckedCreateNestedManyWithoutInstituteInput
+  facilities?: Prisma.InstituteFacilityUncheckedCreateNestedManyWithoutInstituteInput
+  faqs?: Prisma.InstituteFAQUncheckedCreateNestedManyWithoutInstituteInput
+  highlightStats?: Prisma.InstituteHighlightStatUncheckedCreateNestedManyWithoutInstituteInput
+  operatingHours?: Prisma.InstituteOperatingHourUncheckedCreateNestedManyWithoutInstituteInput
+  instituteRequest?: Prisma.InstituteRequestUncheckedCreateNestedOneWithoutInstituteInput
+  notablepersons?: Prisma.NotablePersonsUncheckedCreateNestedManyWithoutInstituteInput
+  salesAssignments?: Prisma.SalesAssignmentUncheckedCreateNestedOneWithoutInstituteInput
+  salesRequests?: Prisma.SalesAssignmentRequestUncheckedCreateNestedManyWithoutInstituteInput
+  payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutInstituteInput
+  viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutInstituteInput
+  shortlistedBy?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutInstituteInput
+  blogPosts?: Prisma.BlogPostUncheckedCreateNestedManyWithoutRelatedInstituteInput
+  memberships?: Prisma.InstituteMembershipUncheckedCreateNestedManyWithoutInstituteInput
+  ismAssignments?: Prisma.InstituteSalesManagerAssignmentUncheckedCreateNestedManyWithoutInstituteInput
+  admissionRecords?: Prisma.AdmissionRecordUncheckedCreateNestedManyWithoutInstituteInput
+  ismInviteRequests?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutInstituteInput
+  studentRecords?: Prisma.StudentInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
+  teacherRecords?: Prisma.TeacherInstituteRecordUncheckedCreateNestedManyWithoutInstituteInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutInstituteInput
+}
+
+export type InstituteCreateOrConnectWithoutCommunicationTemplatesInput = {
+  where: Prisma.InstituteWhereUniqueInput
+  create: Prisma.XOR<Prisma.InstituteCreateWithoutCommunicationTemplatesInput, Prisma.InstituteUncheckedCreateWithoutCommunicationTemplatesInput>
+}
+
+export type InstituteUpsertWithoutCommunicationTemplatesInput = {
+  update: Prisma.XOR<Prisma.InstituteUpdateWithoutCommunicationTemplatesInput, Prisma.InstituteUncheckedUpdateWithoutCommunicationTemplatesInput>
+  create: Prisma.XOR<Prisma.InstituteCreateWithoutCommunicationTemplatesInput, Prisma.InstituteUncheckedCreateWithoutCommunicationTemplatesInput>
+  where?: Prisma.InstituteWhereInput
+}
+
+export type InstituteUpdateToOneWithWhereWithoutCommunicationTemplatesInput = {
+  where?: Prisma.InstituteWhereInput
+  data: Prisma.XOR<Prisma.InstituteUpdateWithoutCommunicationTemplatesInput, Prisma.InstituteUncheckedUpdateWithoutCommunicationTemplatesInput>
+}
+
+export type InstituteUpdateWithoutCommunicationTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  providerType?: Prisma.EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googlePlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleRating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  googleReviewCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  averageRating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reviewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  placeTypes?: Prisma.InstituteUpdateplaceTypesInput | string[]
+  gallery?: Prisma.InstituteUpdategalleryInput | string[]
+  subscriptionPlan?: Prisma.EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+  planWeight?: Prisma.IntFieldUpdateOperationsInput | number
+  youtubeVideos?: Prisma.InstituteUpdateyoutubeVideosInput | string[]
+  classroomImages?: Prisma.InstituteUpdateclassroomImagesInput | string[]
+  feeInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkedinUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mode?: Prisma.EnumInstituteModeFieldUpdateOperationsInput | $Enums.InstituteMode
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  affiliations?: Prisma.InstituteUpdateaffiliationsInput | string[]
+  awards?: Prisma.InstituteUpdateawardsInput | string[]
+  brochureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  compareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  cons?: Prisma.InstituteUpdateconsInput | string[]
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feeMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feeMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hasCertification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasDemoClasses?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasHostelFacility?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasOnlineClasses?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasScholarship?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mediumOfInstruction?: Prisma.InstituteUpdatemediumOfInstructionInput | string[]
+  metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metaKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pros?: Prisma.InstituteUpdateprosInput | string[]
+  refundPolicy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalBranches?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalStudents?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  crmIntegrations?: Prisma.CRMIntegrationUpdateManyWithoutInstituteNestedInput
+  inboundLeadIntegrations?: Prisma.InboundLeadIntegrationUpdateManyWithoutInstituteNestedInput
+  inboundLeads?: Prisma.InboundLeadUpdateManyWithoutInstituteNestedInput
+  city?: Prisma.CityUpdateOneRequiredWithoutInstitutesNestedInput
+  categories?: Prisma.InstituteCategoryUpdateManyWithoutInstituteNestedInput
+  managers?: Prisma.InstituteManagerUpdateManyWithoutInstituteNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutInstituteNestedInput
+  communityQuestions?: Prisma.CommunityQuestionUpdateManyWithoutInstituteNestedInput
+  compareListItems?: Prisma.CompareListInstituteUpdateManyWithoutInstituteNestedInput
+  achievements?: Prisma.InstituteAchievementUpdateManyWithoutInstituteNestedInput
+  batches?: Prisma.InstituteBatchUpdateManyWithoutInstituteNestedInput
+  claims?: Prisma.InstituteClaimUpdateManyWithoutInstituteNestedInput
+  comparisonsAsFirst?: Prisma.InstituteComparisonCacheUpdateManyWithoutInstitute1NestedInput
+  comparisonsAsSecond?: Prisma.InstituteComparisonCacheUpdateManyWithoutInstitute2NestedInput
+  dailyViews?: Prisma.InstituteDailyViewUpdateManyWithoutInstituteNestedInput
+  visits?: Prisma.InstituteVisitUpdateManyWithoutInstituteNestedInput
+  enquiries?: Prisma.InstituteEnquiryUpdateManyWithoutInstituteNestedInput
+  facilities?: Prisma.InstituteFacilityUpdateManyWithoutInstituteNestedInput
+  faqs?: Prisma.InstituteFAQUpdateManyWithoutInstituteNestedInput
+  highlightStats?: Prisma.InstituteHighlightStatUpdateManyWithoutInstituteNestedInput
+  operatingHours?: Prisma.InstituteOperatingHourUpdateManyWithoutInstituteNestedInput
+  instituteRequest?: Prisma.InstituteRequestUpdateOneWithoutInstituteNestedInput
+  notablepersons?: Prisma.NotablePersonsUpdateManyWithoutInstituteNestedInput
+  salesAssignments?: Prisma.SalesAssignmentUpdateOneWithoutInstituteNestedInput
+  salesRequests?: Prisma.SalesAssignmentRequestUpdateManyWithoutInstituteNestedInput
+  payments?: Prisma.SubscriptionPaymentUpdateManyWithoutInstituteNestedInput
+  viewHistory?: Prisma.UserHistoryUpdateManyWithoutInstituteNestedInput
+  shortlistedBy?: Prisma.UserShortlistUpdateManyWithoutInstituteNestedInput
+  blogPosts?: Prisma.BlogPostUpdateManyWithoutRelatedInstituteNestedInput
+  memberships?: Prisma.InstituteMembershipUpdateManyWithoutInstituteNestedInput
+  ismAssignments?: Prisma.InstituteSalesManagerAssignmentUpdateManyWithoutInstituteNestedInput
+  admissionRecords?: Prisma.AdmissionRecordUpdateManyWithoutInstituteNestedInput
+  ismInviteRequests?: Prisma.IsmInviteRequestUpdateManyWithoutInstituteNestedInput
+  studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
+  teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+}
+
+export type InstituteUncheckedUpdateWithoutCommunicationTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  providerType?: Prisma.EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googlePlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleRating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  googleReviewCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  averageRating?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  reviewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  googleMapsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  placeTypes?: Prisma.InstituteUpdateplaceTypesInput | string[]
+  gallery?: Prisma.InstituteUpdategalleryInput | string[]
+  subscriptionPlan?: Prisma.EnumSubscriptionPlanFieldUpdateOperationsInput | $Enums.SubscriptionPlan
+  planWeight?: Prisma.IntFieldUpdateOperationsInput | number
+  youtubeVideos?: Prisma.InstituteUpdateyoutubeVideosInput | string[]
+  classroomImages?: Prisma.InstituteUpdateclassroomImagesInput | string[]
+  feeInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkedinUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mode?: Prisma.EnumInstituteModeFieldUpdateOperationsInput | $Enums.InstituteMode
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  affiliations?: Prisma.InstituteUpdateaffiliationsInput | string[]
+  awards?: Prisma.InstituteUpdateawardsInput | string[]
+  brochureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  compareCount?: Prisma.IntFieldUpdateOperationsInput | number
+  cons?: Prisma.InstituteUpdateconsInput | string[]
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feeMax?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  feeMin?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hasCertification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasDemoClasses?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasHostelFacility?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasOnlineClasses?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasScholarship?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  mediumOfInstruction?: Prisma.InstituteUpdatemediumOfInstructionInput | string[]
+  metaDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metaTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metaKeywords?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pros?: Prisma.InstituteUpdateprosInput | string[]
+  refundPolicy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalBranches?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalStudents?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  crmIntegrations?: Prisma.CRMIntegrationUncheckedUpdateManyWithoutInstituteNestedInput
+  inboundLeadIntegrations?: Prisma.InboundLeadIntegrationUncheckedUpdateManyWithoutInstituteNestedInput
+  inboundLeads?: Prisma.InboundLeadUncheckedUpdateManyWithoutInstituteNestedInput
+  categories?: Prisma.InstituteCategoryUncheckedUpdateManyWithoutInstituteNestedInput
+  managers?: Prisma.InstituteManagerUncheckedUpdateManyWithoutInstituteNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutInstituteNestedInput
+  communityQuestions?: Prisma.CommunityQuestionUncheckedUpdateManyWithoutInstituteNestedInput
+  compareListItems?: Prisma.CompareListInstituteUncheckedUpdateManyWithoutInstituteNestedInput
+  achievements?: Prisma.InstituteAchievementUncheckedUpdateManyWithoutInstituteNestedInput
+  batches?: Prisma.InstituteBatchUncheckedUpdateManyWithoutInstituteNestedInput
+  claims?: Prisma.InstituteClaimUncheckedUpdateManyWithoutInstituteNestedInput
+  comparisonsAsFirst?: Prisma.InstituteComparisonCacheUncheckedUpdateManyWithoutInstitute1NestedInput
+  comparisonsAsSecond?: Prisma.InstituteComparisonCacheUncheckedUpdateManyWithoutInstitute2NestedInput
+  dailyViews?: Prisma.InstituteDailyViewUncheckedUpdateManyWithoutInstituteNestedInput
+  visits?: Prisma.InstituteVisitUncheckedUpdateManyWithoutInstituteNestedInput
+  enquiries?: Prisma.InstituteEnquiryUncheckedUpdateManyWithoutInstituteNestedInput
+  facilities?: Prisma.InstituteFacilityUncheckedUpdateManyWithoutInstituteNestedInput
+  faqs?: Prisma.InstituteFAQUncheckedUpdateManyWithoutInstituteNestedInput
+  highlightStats?: Prisma.InstituteHighlightStatUncheckedUpdateManyWithoutInstituteNestedInput
+  operatingHours?: Prisma.InstituteOperatingHourUncheckedUpdateManyWithoutInstituteNestedInput
+  instituteRequest?: Prisma.InstituteRequestUncheckedUpdateOneWithoutInstituteNestedInput
+  notablepersons?: Prisma.NotablePersonsUncheckedUpdateManyWithoutInstituteNestedInput
+  salesAssignments?: Prisma.SalesAssignmentUncheckedUpdateOneWithoutInstituteNestedInput
+  salesRequests?: Prisma.SalesAssignmentRequestUncheckedUpdateManyWithoutInstituteNestedInput
+  payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutInstituteNestedInput
+  viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutInstituteNestedInput
+  shortlistedBy?: Prisma.UserShortlistUncheckedUpdateManyWithoutInstituteNestedInput
+  blogPosts?: Prisma.BlogPostUncheckedUpdateManyWithoutRelatedInstituteNestedInput
+  memberships?: Prisma.InstituteMembershipUncheckedUpdateManyWithoutInstituteNestedInput
+  ismAssignments?: Prisma.InstituteSalesManagerAssignmentUncheckedUpdateManyWithoutInstituteNestedInput
+  admissionRecords?: Prisma.AdmissionRecordUncheckedUpdateManyWithoutInstituteNestedInput
+  ismInviteRequests?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutInstituteNestedInput
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
@@ -17923,6 +18514,7 @@ export type InstituteUpdateWithoutCityInput = {
   studentRecords?: Prisma.StudentInstituteRecordUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateWithoutCityInput = {
@@ -18025,6 +18617,7 @@ export type InstituteUncheckedUpdateWithoutCityInput = {
   studentRecords?: Prisma.StudentInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   teacherRecords?: Prisma.TeacherInstituteRecordUncheckedUpdateManyWithoutInstituteNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutInstituteNestedInput
+  communicationTemplates?: Prisma.InstituteCommunicationTemplateUncheckedUpdateManyWithoutInstituteNestedInput
 }
 
 export type InstituteUncheckedUpdateManyWithoutCityInput = {
@@ -18133,6 +18726,7 @@ export type InstituteCountOutputType = {
   studentRecords: number
   teacherRecords: number
   conversations: number
+  communicationTemplates: number
 }
 
 export type InstituteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -18169,6 +18763,7 @@ export type InstituteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensi
   studentRecords?: boolean | InstituteCountOutputTypeCountStudentRecordsArgs
   teacherRecords?: boolean | InstituteCountOutputTypeCountTeacherRecordsArgs
   conversations?: boolean | InstituteCountOutputTypeCountConversationsArgs
+  communicationTemplates?: boolean | InstituteCountOutputTypeCountCommunicationTemplatesArgs
 }
 
 /**
@@ -18412,6 +19007,13 @@ export type InstituteCountOutputTypeCountConversationsArgs<ExtArgs extends runti
   where?: Prisma.ConversationWhereInput
 }
 
+/**
+ * InstituteCountOutputType without action
+ */
+export type InstituteCountOutputTypeCountCommunicationTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstituteCommunicationTemplateWhereInput
+}
+
 
 export type InstituteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -18515,6 +19117,7 @@ export type InstituteSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   studentRecords?: boolean | Prisma.Institute$studentRecordsArgs<ExtArgs>
   teacherRecords?: boolean | Prisma.Institute$teacherRecordsArgs<ExtArgs>
   conversations?: boolean | Prisma.Institute$conversationsArgs<ExtArgs>
+  communicationTemplates?: boolean | Prisma.Institute$communicationTemplatesArgs<ExtArgs>
   _count?: boolean | Prisma.InstituteCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["institute"]>
 
@@ -18762,6 +19365,7 @@ export type InstituteInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   studentRecords?: boolean | Prisma.Institute$studentRecordsArgs<ExtArgs>
   teacherRecords?: boolean | Prisma.Institute$teacherRecordsArgs<ExtArgs>
   conversations?: boolean | Prisma.Institute$conversationsArgs<ExtArgs>
+  communicationTemplates?: boolean | Prisma.Institute$communicationTemplatesArgs<ExtArgs>
   _count?: boolean | Prisma.InstituteCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type InstituteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -18810,6 +19414,7 @@ export type $InstitutePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     studentRecords: Prisma.$StudentInstituteRecordPayload<ExtArgs>[]
     teacherRecords: Prisma.$TeacherInstituteRecordPayload<ExtArgs>[]
     conversations: Prisma.$ConversationPayload<ExtArgs>[]
+    communicationTemplates: Prisma.$InstituteCommunicationTemplatePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -19307,6 +19912,7 @@ export interface Prisma__InstituteClient<T, Null = never, ExtArgs extends runtim
   studentRecords<T extends Prisma.Institute$studentRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Institute$studentRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentInstituteRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   teacherRecords<T extends Prisma.Institute$teacherRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Institute$teacherRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeacherInstituteRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversations<T extends Prisma.Institute$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Institute$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  communicationTemplates<T extends Prisma.Institute$communicationTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Institute$communicationTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstituteCommunicationTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20629,6 +21235,30 @@ export type Institute$conversationsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
+}
+
+/**
+ * Institute.communicationTemplates
+ */
+export type Institute$communicationTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InstituteCommunicationTemplate
+   */
+  select?: Prisma.InstituteCommunicationTemplateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InstituteCommunicationTemplate
+   */
+  omit?: Prisma.InstituteCommunicationTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InstituteCommunicationTemplateInclude<ExtArgs> | null
+  where?: Prisma.InstituteCommunicationTemplateWhereInput
+  orderBy?: Prisma.InstituteCommunicationTemplateOrderByWithRelationInput | Prisma.InstituteCommunicationTemplateOrderByWithRelationInput[]
+  cursor?: Prisma.InstituteCommunicationTemplateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InstituteCommunicationTemplateScalarFieldEnum | Prisma.InstituteCommunicationTemplateScalarFieldEnum[]
 }
 
 /**

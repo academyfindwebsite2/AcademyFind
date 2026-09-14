@@ -9,6 +9,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { formatWhatsAppNumber } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
+import { buildBlogSubmissionWhatsAppMessage } from "@/lib/notifications/blogNotifications";
 import {
   archiveAdminBlogPost,
   unarchiveAdminBlogPost,
@@ -19,6 +20,7 @@ import {
 export default function AdminBlogActions({
   postId,
   slug,
+  postTitle,
   isArchived,
   status,
   authorPhone,
@@ -26,6 +28,7 @@ export default function AdminBlogActions({
 }: {
   postId: string;
   slug: string;
+  postTitle?: string | null;
   isArchived: boolean;
   status: string;
   authorPhone?: string | null;
@@ -145,11 +148,14 @@ export default function AdminBlogActions({
           {formattedWaPhone && (
             <a
               href={`https://api.whatsapp.com/send?phone=${formattedWaPhone}&text=${encodeURIComponent(
-                `Hi ${authorName || "Contributor"}, this is from AcademyFind editorial team regarding your blog submission "${slug}".`
+                buildBlogSubmissionWhatsAppMessage({
+                  writerName: authorName || "Writer",
+                  articleTitle: postTitle || slug,
+                })
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              title="Chat with author on WhatsApp"
+              title="Send blog submission message to author on WhatsApp"
               className="inline-flex items-center justify-center size-8 rounded-lg text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 transition-colors"
             >
               <FaWhatsapp className="size-4 text-[#25D366]" />

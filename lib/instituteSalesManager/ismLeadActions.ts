@@ -123,7 +123,7 @@ export async function scheduleIsmFollowUp(enquiryId: string, nextFollowUp: strin
     data: {
       nextFollowUp: new Date(nextFollowUp),
       followUpNote: followUpNote || null,
-      status: "FOLLOW_UP",
+      status: "CONTACT_LATER",
       lastUpdatedByRole: session.user.role,
       lastUpdatedByName: session.user.name || "ISM",
     },
@@ -381,3 +381,204 @@ export async function markInstallmentPaid(installmentId: string) {
   revalidatePath(`/manager/${admission.instituteId}/sales-team`);
   return { success: true };
 }
+
+// ─── 7. Update Lead Attributes (Course, Batch, Tags) ───────────────────────────
+export async function updateLeadAttributes(
+  enquiryId: string,
+  data: { course?: string | null; batch?: string | null; tags?: string[] }
+) {
+  const { error, session, enquiry } = await verifyIsmAccess(enquiryId);
+  if (error || !session || !enquiry) return { success: false, error };
+
+  // Only Institute Manager or Admin can edit lead attributes
+  const isManager =
+    session.user.role === "ADMIN" ||
+    !!(await prisma.instituteManager.findUnique({
+      where: {
+        userId_instituteId: {
+          userId: session.user.id,
+          instituteId: enquiry.instituteId,
+        },
+      },
+    }));
+
+  if (!isManager) {
+    return {
+      success: false,
+      error: "Permission denied: Only Institute Managers can edit lead attributes. Sales Managers are not authorized.",
+    };
+  }
+
+  await prisma.instituteEnquiry.update({
+    where: { id: enquiryId },
+    data: {
+      ...(data.course !== undefined ? { course: data.course?.trim() || null } : {}),
+      ...(data.batch !== undefined ? { batch: data.batch?.trim() || null } : {}),
+      ...(data.tags !== undefined ? { tags: data.tags } : {}),
+      lastUpdatedByRole: session.user.role,
+      lastUpdatedByName: session.user.name || "ISM",
+    },
+  });
+
+  const actorId = enquiry.assignedIsmId || session.user.id;
+  await prisma.ismLeadActivity.create({
+    data: {
+      enquiryId,
+      ismId: actorId,
+      type: "NOTE",
+      content: `Lead attributes updated: Course="${data.course || "N/A"}", Batch="${data.batch || "N/A"}", Tags=[${(data.tags || []).join(", ")}]`,
+    },
+  });
+
+  revalidateIsmPaths(enquiry, enquiry.assignedIsmId);
+  return { success: true };
+}
+
+// ─── 8. Bulk Update Lead Status ───────────────────────────────────────────────
+export async function bulkUpdateLeadStatus(
+  instituteId: string,
+  leadIds: string[],
+  newStatus: string
+) {
+  const session = await getSession();
+  if (!session?.user) return { success: false, error: "Unauthorized" };
+
+  const isManager = await prisma.instituteManager.findUnique({
+    where: { userId_instituteId: { userId: session.user.id, instituteId } },
+  });
+  if (session.user.role !== "ADMIN" && !isManager) {
+    return { success: false, error: "Not authorized" };
+  }
+
+  await prisma.instituteEnquiry.updateMany({
+    where: { id: { in: leadIds }, instituteId },
+    data: {
+      status: newStatus,
+      lastUpdatedByRole: session.user.role,
+      lastUpdatedByName: session.user.name || "Manager",
+    },
+  });
+
+  // Log activity for each
+  for (const leadId of leadIds) {
+    await prisma.ismLeadActivity.create({
+      data: {
+        enquiryId: leadId,
+        ismId: session.user.id,
+        type: "STATUS_CHANGED",
+        content: `Bulk status update to: ${newStatus}`,
+      },
+    }).catch(() => null);
+  }
+
+  revalidatePath(`/manager/${instituteId}/leads`);
+  return { success: true, count: leadIds.length };
+}
+
+// ─── 9. Full Lead Edit (Name, Phone, Email, Course, Batch, Source, Status, Assignment, Tags) ───
+export interface UpdateLeadFullDetailsInput {
+  name: string;
+  phone: string;
+  email?: string | null;
+  course?: string | null;
+  batch?: string | null;
+  source?: string;
+  status?: string;
+  assignedIsmId?: string | null;
+  tags?: string[];
+}
+
+export async function updateLeadFullDetails(
+  enquiryId: string,
+  data: UpdateLeadFullDetailsInput
+) {
+  const { error, session, enquiry } = await verifyIsmAccess(enquiryId);
+  if (error || !session || !enquiry) return { success: false, error };
+
+  // Strict Role Check: Only Institute Manager or Admin can edit lead profile details
+  // Institute Sales Managers (ISM) are NOT authorized to edit leads
+  const isManager =
+    session.user.role === "ADMIN" ||
+    !!(await prisma.instituteManager.findUnique({
+      where: {
+        userId_instituteId: {
+          userId: session.user.id,
+          instituteId: enquiry.instituteId,
+        },
+      },
+    }));
+
+  if (!isManager) {
+    return {
+      success: false,
+      error: "Permission denied: Only Institute Managers can edit lead details. Sales Managers are not authorized to edit leads.",
+    };
+  }
+
+  const cleanName = data.name.trim();
+  if (!cleanName) return { success: false, error: "Student name is required" };
+
+  const cleanPhone = data.phone.trim().replace(/\D/g, "");
+  if (cleanPhone.length < 10) return { success: false, error: "Please provide a valid 10-digit phone number" };
+
+  const oldValues = {
+    name: enquiry.name,
+    phone: enquiry.phone,
+    email: enquiry.email,
+    course: enquiry.course,
+    batch: enquiry.batch,
+    source: enquiry.source,
+    status: enquiry.status,
+    assignedIsmId: enquiry.assignedIsmId,
+  };
+
+  const updated = await prisma.instituteEnquiry.update({
+    where: { id: enquiryId },
+    data: {
+      name: cleanName,
+      phone: cleanPhone,
+      email: data.email?.trim() || null,
+      course: data.course?.trim() || null,
+      batch: data.batch?.trim() || null,
+      ...(data.source ? { source: data.source } : {}),
+      ...(data.status ? { status: data.status } : {}),
+      assignedIsmId: data.assignedIsmId !== undefined ? (data.assignedIsmId || null) : enquiry.assignedIsmId,
+      ...(data.tags !== undefined ? { tags: data.tags } : {}),
+      lastUpdatedByRole: session.user.role,
+      lastUpdatedByName: session.user.name || "Manager",
+    },
+  });
+
+  // Describe changes for immutable activity history
+  const changes: string[] = [];
+  if (oldValues.name !== cleanName) changes.push(`Name: "${oldValues.name}" → "${cleanName}"`);
+  if (oldValues.phone !== cleanPhone) changes.push(`Phone: "${oldValues.phone}" → "${cleanPhone}"`);
+  if (oldValues.email !== (data.email?.trim() || null)) changes.push(`Email updated`);
+  if (oldValues.course !== (data.course?.trim() || null)) changes.push(`Course: "${oldValues.course || "N/A"}" → "${data.course || "N/A"}"`);
+  if (oldValues.batch !== (data.batch?.trim() || null)) changes.push(`Batch: "${oldValues.batch || "N/A"}" → "${data.batch || "N/A"}"`);
+  if (data.status && oldValues.status !== data.status) changes.push(`Status: ${oldValues.status} → ${data.status}`);
+  if (data.assignedIsmId !== undefined && oldValues.assignedIsmId !== (data.assignedIsmId || null)) {
+    changes.push(`Assignment updated`);
+  }
+
+  const actorId = enquiry.assignedIsmId || session.user.id;
+  await prisma.ismLeadActivity.create({
+    data: {
+      enquiryId,
+      ismId: actorId,
+      type: "NOTE",
+      content: `Lead details updated: ${changes.length > 0 ? changes.join(", ") : "Profile details saved"}`,
+      meta: {
+        actorId: session.user.id,
+        actorName: session.user.name || "Manager",
+        changes,
+      },
+    },
+  });
+
+  revalidateIsmPaths(enquiry, updated.assignedIsmId);
+  revalidatePath(`/manager/${enquiry.instituteId}/leads`);
+  revalidatePath(`/manager/${enquiry.instituteId}/leads/${enquiryId}`);
+  return { success: true, lead: updated };
+}
+
