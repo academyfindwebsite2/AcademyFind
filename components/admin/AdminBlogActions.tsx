@@ -9,7 +9,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { formatWhatsAppNumber } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
-import { buildBlogSubmissionWhatsAppMessage } from "@/lib/notifications/blogNotifications";
+import { buildBlogSubmissionWhatsAppMessage } from "@/lib/notifications/blogTemplates";
 import {
   archiveAdminBlogPost,
   unarchiveAdminBlogPost,
