@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@/app/generated/prisma/client";
 import Link from "next/link";
 import { formatIST } from "@/lib/utils";
 import {
@@ -69,7 +70,7 @@ export default async function AdminUnlocksPage({
   const searchQuery = params.q?.trim() || "";
 
   // Build filter conditions
-  const whereCondition: any = {};
+  const whereCondition: Prisma.InstituteUnlockWhereInput = {};
 
   if (currentType !== "ALL") {
     whereCondition.unlockType = currentType;
@@ -243,18 +244,17 @@ export default async function AdminUnlocksPage({
             { key: "EMAIL", label: "Email" },
             { key: "SOCIAL", label: "Social" },
             { key: "COMMUNITY", label: "Community" },
-          ].map((tab) => {
+          ].map((tab: any) => {
             const isActive = currentType === tab.key;
             const targetUrl = `?type=${tab.key}${searchQuery ? `&q=${encodeURIComponent(searchQuery)}` : ""}`;
             return (
               <Link
                 key={tab.key}
                 href={targetUrl}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                  isActive
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${isActive
                     ? "bg-slate-900 text-white shadow-xs"
                     : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                }`}
+                  }`}
               >
                 {tab.label}
               </Link>
@@ -299,7 +299,7 @@ export default async function AdminUnlocksPage({
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-sm">
-                {unlocks.map((u) => {
+                {unlocks.map((u: any) => {
                   const badge = getUnlockTypeBadge(u.unlockType);
                   return (
                     <tr key={u.id} className="hover:bg-amber-50/20 transition-colors">
