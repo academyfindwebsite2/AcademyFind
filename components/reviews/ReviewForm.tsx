@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { CheckCircle2, AlertTriangle } from "lucide-react";
+import { buildAuthHref } from "@/lib/auth/redirect-utils";
 
 import Link from "next/link";
 
@@ -13,6 +14,7 @@ interface Props {
 
 export default function ReviewForm({ instituteId, isLoggedIn = true }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
   
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
@@ -83,7 +85,7 @@ export default function ReviewForm({ instituteId, isLoggedIn = true }: Props) {
             You need to be logged in to share your experience and write a review for this institute.
           </p>
           <Link 
-            href="/login" 
+            href={buildAuthHref("/login", pathname)} 
             className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-xl transition-colors shadow-sm"
           >
             Login to Review

@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import RegisterComponent from "./Register";
 import type { Metadata } from "next";
+import { Loader2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Create an Account | Join AcademyFind Today",
@@ -14,15 +16,22 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sign Up for AcademyFind",
     description: "Create your free account to find the best educational institutes in India.",
-    url: "https://academyfind.com/register",
+    url: "https://cademyfind.com/register",
     siteName: "AcademyFind",
     type: "website",
   },
 };
 
-
-export default function RegisterPage() { // Component ka naam RegisterPage hona better hai
+export default function RegisterPage() {
   return (
-    <RegisterComponent />
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-[#f8f8f8]">
+          <Loader2 className="h-8 w-8 animate-spin text-amber-500" />
+        </div>
+      }
+    >
+      <RegisterComponent />
+    </Suspense>
   );
-}
+}

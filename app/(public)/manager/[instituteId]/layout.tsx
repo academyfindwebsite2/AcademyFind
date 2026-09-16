@@ -2,7 +2,7 @@ import { PremiumLock } from "@/components/manager/PremiumLock";
 import { ManagerSidebarWrapper } from "@/components/manager/ManagerSidebarWrapper";
 import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/prisma";
-import { ArrowLeft, ArrowRight, BarChart2, BarChart3, CreditCard, LayoutDashboardIcon, MessageSquare, User, UserRound, Users, PackageOpen, MessageCircle, FileText, Zap, Building2, Sparkles, UserCheck, GraduationCap } from "lucide-react";
+import { ArrowLeft, ArrowRight, BarChart2, BarChart3, CreditCard, LayoutDashboardIcon, MessageSquare, User, UserRound, Users, PackageOpen, MessageCircle, FileText, Zap, Building2, Sparkles, UserCheck, GraduationCap, KeyRound } from "lucide-react";
 import { Metadata } from "next";
 import { headers } from "next/headers";
 import Link from "next/link";
@@ -103,22 +103,28 @@ export default async function ManagerDashBoardLayout({
 
     const institute = await prisma.institute.findUnique({
         where: { id: instituteId },
-        select: { name: true, subscriptionPlan: true, planExpiresAt: true }
+        select: { name: true, subscriptionPlan: true, planExpiresAt: true, isVerified: true }
     });
 
     if (!institute) return <div>Institute not found.</div>;
 
-    // Count pending membership requests & admissions
-    const [pendingCount, admissionCount] = await Promise.all([
+    const plan = institute.subscriptionPlan; // BASIC, PREMIUM, ULTRA, VERIFIED
+    const isVerifiedType = plan === "VERIFIED" || (Boolean(institute.isVerified) && plan !== "PREMIUM" && plan !== "ULTRA");
+
+    // Count pending membership requests, admissions, & unlocks
+    const [pendingCount, admissionCount, unlockCount] = await Promise.all([
         prisma.instituteMembership.count({
             where: { instituteId, status: "PENDING" },
         }),
         prisma.admissionRecord.count({
             where: { instituteId },
         }),
+        isVerifiedType
+            ? prisma.instituteUnlock.count({
+                where: { instituteId },
+            })
+            : Promise.resolve(0),
     ]);
-
-    const plan = institute.subscriptionPlan; // BASIC, PREMIUM, ULTRA
 
     // Automatic Expiry Notification Check
     if (plan !== "BASIC" && institute.planExpiresAt) {
@@ -256,6 +262,14 @@ export default async function ManagerDashBoardLayout({
                             locked={plan == "BASIC" || plan == "VERIFIED"}
                         />
                         <ManagerSidebarLink href={`/manager/${instituteId}/leads`} icon={<MessageSquare />} label="Student Leads" locked={plan === "BASIC" || plan == "VERIFIED"} />
+                        {isVerifiedType && (
+                            <ManagerSidebarLink
+                                href={`/manager/${instituteId}/unlocks`}
+                                icon={<KeyRound />}
+                                label="Contact Unlocks"
+                                badge={unlockCount > 0 ? unlockCount : undefined}
+                            />
+                        )}
 
                         <ManagerSidebarLink
                             href={`/manager/${instituteId}/sales-team`}

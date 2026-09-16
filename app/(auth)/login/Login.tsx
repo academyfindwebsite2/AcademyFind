@@ -14,11 +14,12 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import { authClient } from "@/lib/auth/auth-client";
-import { redirect, useRouter } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { auth } from "@/lib/auth/auth";
 import { useMobileApp } from "@/hooks/useMobileApp";
 import { PlatformStats } from "@/lib/stats";
+import { getAuthRedirectTarget } from "@/lib/auth/redirect-utils";
 
 export default function LoginComponent({ stats }: { stats?: PlatformStats }) {
   const [method, setMethod] = useState<"email" | "phone">("email");
@@ -35,19 +36,21 @@ export default function LoginComponent({ stats }: { stats?: PlatformStats }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTarget = getAuthRedirectTarget(searchParams);
 
   useEffect(() => {
     authClient.getSession().then((res) => {
       if (res.data?.user) {
-        router.replace('/')
+        router.replace(redirectTarget);
       }
     });
-  }, [router])
+  }, [router, redirectTarget]);
 
   const handleGoogleLogin = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: redirectTarget,
     });
   };
 
@@ -75,7 +78,7 @@ export default function LoginComponent({ stats }: { stats?: PlatformStats }) {
       const { error } = await authClient.signIn.email({
         email,
         password,
-        callbackURL: "/", // Sahi password hone par yahan jayega
+        callbackURL: redirectTarget, // Sahi password hone par yahan jayega
       });
 
       if (error) {
@@ -107,7 +110,7 @@ export default function LoginComponent({ stats }: { stats?: PlatformStats }) {
 
       // Login Successful!
       toast.success("Welcome back!");
-      router.push("/");
+      router.push(redirectTarget);
     } catch (error) {
       console.error("Login Error:", error);
       toast.error("Something went wrong during login.");
@@ -148,7 +151,7 @@ export default function LoginComponent({ stats }: { stats?: PlatformStats }) {
         setShowOtpScreen(false);
       } else {
         toast.success("Verified and logged in successfully!");
-        router.push("/");
+        router.push(redirectTarget);
       }
     } catch (error) {
       console.error(error);
@@ -435,7 +438,11 @@ export default function LoginComponent({ stats }: { stats?: PlatformStats }) {
                 <p className="mt-8 text-center text-sm text-slate-500">
                   Don't have an account?{" "}
                   <Link
-                    href="/register"
+                    href={
+                      redirectTarget && redirectTarget !== "/"
+                        ? `/register?callbackUrl=${encodeURIComponent(redirectTarget)}`
+                        : "/register"
+                    }
                     className="font-semibold text-amber-400 hover:text-amber-500"
                   >
                     Sign Up for free

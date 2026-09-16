@@ -14,9 +14,10 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import { authClient } from "@/lib/auth/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from 'react-hot-toast'
 import { useMobileApp } from "@/hooks/useMobileApp";
+import { getAuthRedirectTarget } from "@/lib/auth/redirect-utils";
 
 export default function RegisterComponent() { // Component ka naam RegisterPage hona better hai
   const [method, setMethod] = useState<"email" | "phone">("email");
@@ -37,21 +38,21 @@ export default function RegisterComponent() { // Component ka naam RegisterPage 
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTarget = getAuthRedirectTarget(searchParams);
 
   useEffect(() => {
     authClient.getSession().then((res) => {
       if (res.data?.user) {
-        router.replace('/')
+        router.replace(redirectTarget);
       }
     });
-  }, [router])
-
-
+  }, [router, redirectTarget]);
 
   const handleGoogleLogin = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: redirectTarget,
     });
   };
   // 1. Account Create & Send OTP
@@ -146,14 +147,18 @@ export default function RegisterComponent() { // Component ka naam RegisterPage 
 
       if (loginError) {
         toast.error("Email verified, but auto-login failed. Please login manually.");
-        router.push("/login");
+        const loginUrl =
+          redirectTarget && redirectTarget !== "/"
+            ? `/login?callbackUrl=${encodeURIComponent(redirectTarget)}`
+            : "/login";
+        router.push(loginUrl);
       } else {
-        // Step C: Makkhan redirect to dashboard
+        // Step C: Makkhan redirect to previous page
         if (typeof window !== "undefined") {
           localStorage.removeItem("temp_reg_email");
           localStorage.removeItem("temp_reg_password");
         }
-        router.push("/");
+        router.push(redirectTarget);
       }
     } catch (error) {
       console.error(error);
@@ -449,7 +454,14 @@ export default function RegisterComponent() { // Component ka naam RegisterPage 
 
                 <p className="mt-8 text-center text-sm text-slate-500">
                   Already have an account?{" "}
-                  <Link href="/login" className="font-semibold text-amber-400 hover:text-amber-500">
+                  <Link
+                    href={
+                      redirectTarget && redirectTarget !== "/"
+                        ? `/login?callbackUrl=${encodeURIComponent(redirectTarget)}`
+                        : "/login"
+                    }
+                    className="font-semibold text-amber-400 hover:text-amber-500"
+                  >
                     Sign In
                   </Link>
                 </p>

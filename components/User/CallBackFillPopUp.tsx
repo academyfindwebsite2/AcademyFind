@@ -11,7 +11,9 @@ import {
     Heart,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { buildAuthHref } from "@/lib/auth/redirect-utils";
 
 interface CallBackSuccessPopUpProps {
     isOpen: boolean;
@@ -26,6 +28,7 @@ export default function CallBackSuccessPopUp({
     isLoggedIn,
     instituteName,
 }: CallBackSuccessPopUpProps) {
+    const pathname = usePathname();
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="max-w-sm rounded-3xl border-0 p-0 overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto">
@@ -106,12 +109,12 @@ export default function CallBackSuccessPopUp({
                                         Create an account or login to track your enquiry, chat with counselors &amp; earn free AFC coins!
                                     </p>
                                     <div className="flex gap-2 pt-1">
-                                        <Link href="/login" onClick={onClose} className="flex-1">
+                                        <Link href={buildAuthHref("/login", pathname)} onClick={onClose} className="flex-1">
                                             <Button variant="outline" className="w-full rounded-xl border-slate-700 bg-slate-800 text-white hover:bg-slate-700 font-bold text-xs h-9">
                                                 Log In
                                             </Button>
                                         </Link>
-                                        <Link href="/register" onClick={onClose} className="flex-1">
+                                        <Link href={buildAuthHref("/register", pathname)} onClick={onClose} className="flex-1">
                                             <Button className="w-full bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-xs h-9 shadow-xs">
                                                 Sign Up
                                             </Button>

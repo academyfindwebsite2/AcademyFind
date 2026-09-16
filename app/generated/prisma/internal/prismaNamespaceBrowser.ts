@@ -73,6 +73,7 @@ export const ModelName = {
   InstituteClaim: 'InstituteClaim',
   UserShortlist: 'UserShortlist',
   UserHistory: 'UserHistory',
+  InstituteUnlock: 'InstituteUnlock',
   InstituteEnquiry: 'InstituteEnquiry',
   TeacherProfile: 'TeacherProfile',
   StudentProfile: 'StudentProfile',
@@ -545,6 +546,19 @@ export const UserHistoryScalarFieldEnum = {
 } as const
 
 export type UserHistoryScalarFieldEnum = (typeof UserHistoryScalarFieldEnum)[keyof typeof UserHistoryScalarFieldEnum]
+
+
+export const InstituteUnlockScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  instituteId: 'instituteId',
+  unlockType: 'unlockType',
+  coinsSpent: 'coinsSpent',
+  description: 'description',
+  createdAt: 'createdAt'
+} as const
+
+export type InstituteUnlockScalarFieldEnum = (typeof InstituteUnlockScalarFieldEnum)[keyof typeof InstituteUnlockScalarFieldEnum]
 
 
 export const InstituteEnquiryScalarFieldEnum = {

@@ -9,7 +9,9 @@ import { useChat } from "@ai-sdk/react";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { requestGlobalCallback } from "@/lib/User/user/global-callback";
+import { buildAuthHref } from "@/lib/auth/redirect-utils";
 
 function cleanAssistantText(rawText: string): string {
     if (!rawText) return "";
@@ -41,6 +43,7 @@ interface AiChatBotProps {
 }
 
 export default function AiChatBot({ isAuthenticated = false, defaultName, defaultPhone }: AiChatBotProps) {
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<'chat' | 'callback'>('chat');
     const [input, setInput] = useState("");
@@ -431,7 +434,7 @@ export default function AiChatBot({ isAuthenticated = false, defaultName, defaul
 
                                 {/* Login CTA Button */}
                                 <Link
-                                    href="/login"
+                                    href={buildAuthHref("/login", pathname)}
                                     className="w-full py-3 px-5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-white font-bold text-sm shadow-md shadow-amber-300/40 flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98]"
                                 >
                                     <LogIn className="w-4 h-4" />
@@ -439,7 +442,7 @@ export default function AiChatBot({ isAuthenticated = false, defaultName, defaul
                                 </Link>
 
                                 <p className="mt-3 text-[11px] text-slate-400">
-                                    New to AcademyFind? <Link href="/login" className="text-amber-600 font-semibold hover:underline">Create an account</Link>
+                                    New to AcademyFind? <Link href={buildAuthHref("/register", pathname)} className="text-amber-600 font-semibold hover:underline">Create an account</Link>
                                 </p>
                             </div>
                         ) : (
@@ -631,7 +634,7 @@ export default function AiChatBot({ isAuthenticated = false, defaultName, defaul
 
                                         <div className="mt-6 pt-6 border-t border-slate-100">
                                             <p className="text-sm font-medium text-slate-600 mb-3">Want to explore on your own?</p>
-                                            <Link href="/login" onClick={() => setIsOpen(false)}>
+                                            <Link href={buildAuthHref("/login", pathname)} onClick={() => setIsOpen(false)}>
                                                 <Button className="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-xl">
                                                     Login / Sign Up
                                                 </Button>

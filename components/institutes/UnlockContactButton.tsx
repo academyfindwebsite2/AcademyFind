@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { Lock, Phone, Globe, Mail, Share2, Sparkles } from "lucide-react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTelegram, FaTwitter, FaWhatsapp, FaYoutube } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { ConfirmModal } from "@/components/ui/confirm-modal";
+import { buildAuthHref } from "@/lib/auth/redirect-utils";
 
 interface UnlockContactButtonProps {
   type: "phone" | "website" | "email" | "social";
@@ -38,11 +39,12 @@ export function UnlockContactButton({
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleUnlockClick = () => {
     if (!isLoggedIn) {
       toast.error("Please login to unlock contact details.");
-      router.push("/login");
+      router.push(buildAuthHref("/login", pathname));
       return;
     }
 
@@ -62,6 +64,8 @@ export function UnlockContactButton({
           source: "SEE_CONTACT_BASIC_INSTITUTE",
           description: `Viewed ${type} for institute ${instituteId}`,
           referenceId: instituteId,
+          unlockType: type,
+          instituteId: instituteId,
         }),
       });
 

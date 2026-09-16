@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
 
 import { authClient } from "@/lib/auth/auth-client";
+import { buildAuthHref } from "@/lib/auth/redirect-utils";
 
 export function AuthPromptModal({
   isAuthenticated = false,
@@ -84,14 +85,14 @@ export function AuthPromptModal({
 
           <div className="mt-6 flex flex-col gap-3">
             {/* Added onClick to close modal instantly when navigating */}
-            <Link href="/register" onClick={() => setOpen(false)}>
+            <Link href={buildAuthHref("/register", pathname)} onClick={() => setOpen(false)}>
               <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold">
                 Create Free Account
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
 
-            <Link href="/login" onClick={() => setOpen(false)}>
+            <Link href={buildAuthHref("/login", pathname)} onClick={() => setOpen(false)}>
               <Button
                 variant="outline"
                 className="w-full font-semibold"

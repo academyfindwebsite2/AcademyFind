@@ -81,9 +81,9 @@ export async function GET(
     }
 
     const plan = institute.subscriptionPlan || 'BASIC';
-    const isBasicPlan = plan === 'BASIC';
-    const isContactLocked = isBasicPlan && !hasUnlockedBasicFeatures;
-    const isCommunityLocked = isBasicPlan && !hasUnlockedCommunity;
+    const isLockedPlan = plan === 'BASIC' || plan === 'VERIFIED';
+    const isContactLocked = isLockedPlan && !hasUnlockedBasicFeatures;
+    const isCommunityLocked = isLockedPlan && !hasUnlockedCommunity;
 
     return NextResponse.json({
       success: true,

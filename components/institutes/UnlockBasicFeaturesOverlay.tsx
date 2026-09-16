@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { Lock } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { ConfirmModal } from "@/components/ui/confirm-modal";
+import { buildAuthHref } from "@/lib/auth/redirect-utils";
 
 interface UnlockBasicFeaturesOverlayProps {
   instituteId: string;
@@ -17,11 +18,12 @@ export function UnlockBasicFeaturesOverlay({ instituteId, isLoggedIn, title = "F
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleUnlockClick = () => {
     if (!isLoggedIn) {
       toast.error("Please login to unlock features.");
-      router.push("/login");
+      router.push(buildAuthHref("/login", pathname));
       return;
     }
     setIsModalOpen(true);
@@ -39,6 +41,8 @@ export function UnlockBasicFeaturesOverlay({ instituteId, isLoggedIn, title = "F
           source: "SEE_COMMUNITY_BASIC_INSTITUTE",
           description: `Unlocked ${title} for institute ${instituteId}`,
           referenceId: instituteId,
+          unlockType: "COMMUNITY",
+          instituteId: instituteId,
         }),
       });
 

@@ -406,6 +406,7 @@ export const ModelName = {
   InstituteClaim: 'InstituteClaim',
   UserShortlist: 'UserShortlist',
   UserHistory: 'UserHistory',
+  InstituteUnlock: 'InstituteUnlock',
   InstituteEnquiry: 'InstituteEnquiry',
   TeacherProfile: 'TeacherProfile',
   StudentProfile: 'StudentProfile',
@@ -503,7 +504,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userWallet" | "walletTransaction" | "userReputation" | "userPreference" | "userPreferredCategory" | "userPreferenceCity" | "reputationLog" | "session" | "account" | "verification" | "institute" | "city" | "category" | "categoryCityContent" | "instituteCategory" | "instituteManager" | "review" | "reviewReply" | "instituteClaim" | "userShortlist" | "userHistory" | "instituteEnquiry" | "teacherProfile" | "studentProfile" | "instituteMembership" | "studentInstituteRecord" | "teacherInstituteRecord" | "conversation" | "conversationParticipant" | "message" | "messageAttachment" | "messageReaction" | "messageRead" | "messageReport" | "chatSettings" | "userNotification" | "userBlock" | "contactMessage" | "contactReply" | "instituteRequest" | "subscriptionPayment" | "salesAssignment" | "salesCategoryAssignment" | "salesAreaAssignment" | "salesAssignmentRequest" | "lifeCoachRequest" | "adminNotification" | "jobPosting" | "jobApplication" | "generalResume" | "instituteDailyView" | "instituteVisit" | "instituteFacility" | "instituteBatch" | "batchStudent" | "batchTeacher" | "instituteHighlightStat" | "instituteAchievement" | "instituteFAQ" | "instituteOperatingHour" | "userCompareList" | "compareListInstitute" | "communityQuestion" | "communityAnswer" | "notablePersons" | "instituteComparisonCache" | "leadDistributionLog" | "blogAuthorProfile" | "blogCategory" | "blogTag" | "blogPost" | "blogSlugHistory" | "blogRevision" | "blogView" | "blogBookmark" | "blogAuthorFollower" | "blogSubscriber" | "blogReport" | "blogPostTag" | "blogComment" | "blogReaction" | "blogFAQ" | "blogBrand" | "cRMIntegration" | "inboundLeadIntegration" | "inboundLead" | "userEducation" | "userExperience" | "userAchievement" | "userSkill" | "visitorSession" | "visitorEvent" | "advertisement" | "advertisementAnalytic" | "systemSetting" | "enquiryStatusHistory" | "enquiryComment" | "instituteSalesManagerAssignment" | "ismLeadActivity" | "admissionRecord" | "feeInstallment" | "ismInviteRequest" | "instituteCommunicationTemplate"
+    modelProps: "user" | "userWallet" | "walletTransaction" | "userReputation" | "userPreference" | "userPreferredCategory" | "userPreferenceCity" | "reputationLog" | "session" | "account" | "verification" | "institute" | "city" | "category" | "categoryCityContent" | "instituteCategory" | "instituteManager" | "review" | "reviewReply" | "instituteClaim" | "userShortlist" | "userHistory" | "instituteUnlock" | "instituteEnquiry" | "teacherProfile" | "studentProfile" | "instituteMembership" | "studentInstituteRecord" | "teacherInstituteRecord" | "conversation" | "conversationParticipant" | "message" | "messageAttachment" | "messageReaction" | "messageRead" | "messageReport" | "chatSettings" | "userNotification" | "userBlock" | "contactMessage" | "contactReply" | "instituteRequest" | "subscriptionPayment" | "salesAssignment" | "salesCategoryAssignment" | "salesAreaAssignment" | "salesAssignmentRequest" | "lifeCoachRequest" | "adminNotification" | "jobPosting" | "jobApplication" | "generalResume" | "instituteDailyView" | "instituteVisit" | "instituteFacility" | "instituteBatch" | "batchStudent" | "batchTeacher" | "instituteHighlightStat" | "instituteAchievement" | "instituteFAQ" | "instituteOperatingHour" | "userCompareList" | "compareListInstitute" | "communityQuestion" | "communityAnswer" | "notablePersons" | "instituteComparisonCache" | "leadDistributionLog" | "blogAuthorProfile" | "blogCategory" | "blogTag" | "blogPost" | "blogSlugHistory" | "blogRevision" | "blogView" | "blogBookmark" | "blogAuthorFollower" | "blogSubscriber" | "blogReport" | "blogPostTag" | "blogComment" | "blogReaction" | "blogFAQ" | "blogBrand" | "cRMIntegration" | "inboundLeadIntegration" | "inboundLead" | "userEducation" | "userExperience" | "userAchievement" | "userSkill" | "visitorSession" | "visitorEvent" | "advertisement" | "advertisementAnalytic" | "systemSetting" | "enquiryStatusHistory" | "enquiryComment" | "instituteSalesManagerAssignment" | "ismLeadActivity" | "admissionRecord" | "feeInstallment" | "ismInviteRequest" | "instituteCommunicationTemplate"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2132,6 +2133,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserHistoryCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    InstituteUnlock: {
+      payload: Prisma.$InstituteUnlockPayload<ExtArgs>
+      fields: Prisma.InstituteUnlockFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InstituteUnlockFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InstituteUnlockFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload>
+        }
+        findFirst: {
+          args: Prisma.InstituteUnlockFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InstituteUnlockFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload>
+        }
+        findMany: {
+          args: Prisma.InstituteUnlockFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload>[]
+        }
+        create: {
+          args: Prisma.InstituteUnlockCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload>
+        }
+        createMany: {
+          args: Prisma.InstituteUnlockCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InstituteUnlockCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload>[]
+        }
+        delete: {
+          args: Prisma.InstituteUnlockDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload>
+        }
+        update: {
+          args: Prisma.InstituteUnlockUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload>
+        }
+        deleteMany: {
+          args: Prisma.InstituteUnlockDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InstituteUnlockUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InstituteUnlockUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload>[]
+        }
+        upsert: {
+          args: Prisma.InstituteUnlockUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InstituteUnlockPayload>
+        }
+        aggregate: {
+          args: Prisma.InstituteUnlockAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInstituteUnlock>
+        }
+        groupBy: {
+          args: Prisma.InstituteUnlockGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InstituteUnlockGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InstituteUnlockCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InstituteUnlockCountAggregateOutputType> | number
         }
       }
     }
@@ -8616,6 +8691,19 @@ export const UserHistoryScalarFieldEnum = {
 export type UserHistoryScalarFieldEnum = (typeof UserHistoryScalarFieldEnum)[keyof typeof UserHistoryScalarFieldEnum]
 
 
+export const InstituteUnlockScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  instituteId: 'instituteId',
+  unlockType: 'unlockType',
+  coinsSpent: 'coinsSpent',
+  description: 'description',
+  createdAt: 'createdAt'
+} as const
+
+export type InstituteUnlockScalarFieldEnum = (typeof InstituteUnlockScalarFieldEnum)[keyof typeof InstituteUnlockScalarFieldEnum]
+
+
 export const InstituteEnquiryScalarFieldEnum = {
   id: 'id',
   instituteId: 'instituteId',
@@ -10718,6 +10806,7 @@ export type GlobalOmitConfig = {
   instituteClaim?: Prisma.InstituteClaimOmit
   userShortlist?: Prisma.UserShortlistOmit
   userHistory?: Prisma.UserHistoryOmit
+  instituteUnlock?: Prisma.InstituteUnlockOmit
   instituteEnquiry?: Prisma.InstituteEnquiryOmit
   teacherProfile?: Prisma.TeacherProfileOmit
   studentProfile?: Prisma.StudentProfileOmit

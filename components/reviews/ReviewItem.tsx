@@ -5,12 +5,14 @@ import { toast } from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import Link from "next/link";
 import { Sparkles, ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { buildAuthHref } from "@/lib/auth/redirect-utils";
 
 export function ReviewItem({ review, isLoggedIn }: { review: any, isLoggedIn: boolean }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [replyContent, setReplyContent] = useState("");
   const [loading, setLoading] = useState(false);
@@ -118,13 +120,13 @@ export function ReviewItem({ review, isLoggedIn }: { review: any, isLoggedIn: bo
               Create a free account or login to view profiles and send messages directly.
             </p>
             <div className="mt-6 flex flex-col gap-3">
-              <Link href="/register" onClick={() => setShowAuthModal(false)}>
+              <Link href={buildAuthHref("/register", pathname)} onClick={() => setShowAuthModal(false)}>
                 <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold">
                   Create Free Account
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/login" onClick={() => setShowAuthModal(false)}>
+              <Link href={buildAuthHref("/login", pathname)} onClick={() => setShowAuthModal(false)}>
                 <Button variant="outline" className="w-full font-semibold">Login</Button>
               </Link>
             </div>

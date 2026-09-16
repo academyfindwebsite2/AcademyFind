@@ -25,7 +25,8 @@ import {
     Wallet,
     Activity,
     Megaphone,
-    Share2
+    Share2,
+    KeyRound
 } from "lucide-react";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
@@ -88,6 +89,7 @@ export default async function AdminLayout({
         blogCount,
         adCount,
         inboundLeadCount,
+        unlockCount,
     ] = await Promise.all([
         prisma.instituteClaim.count({ where: { status: "PENDING" } }),
         prisma.review.count({ where: { status: "PENDING" } }),
@@ -116,6 +118,7 @@ export default async function AdminLayout({
         prisma.blogPost.count({ where: { status: { in: ["PENDING_REVIEW", "CONTACTED"] } } }),
         prisma.advertisement.count({ where: { status: "PENDING" } }),
         prisma.inboundLead.count({ where: { status: "NEW" } }),
+        prisma.instituteUnlock.count(),
     ]);
 
     // New route counts
@@ -158,6 +161,7 @@ export default async function AdminLayout({
                         <SidebarLink href="/af-ass-manage/reviews" icon={<Star />} label="Review Requests" count={reviewCount} />
                         <SidebarLink href="/af-ass-manage/instituteRequests" icon={<FileType2 />} label="Institute Requests" count={instituteReqCount} />
                         <SidebarLink href="/af-ass-manage/instituteCallbacks" icon={<PhoneCall />} label="Institute Callbacks" count={enquiryCount} />
+                        <SidebarLink href="/af-ass-manage/unlocks" icon={<KeyRound />} label="Contact Unlocks" count={unlockCount} />
                         <SidebarLink href="/af-ass-manage/lead-integrations" icon={<Share2 />} label="Ad & Webhook Leads" count={inboundLeadCount} />
                         <SidebarLink href="/af-ass-manage/contactmessages" icon={<Contact />} label="Contact Messages" count={contactCount} />
                         <SidebarLink href="/af-ass-manage/payments" icon={<Pyramid />} label="Payment Approvals" count={paymentCount} />

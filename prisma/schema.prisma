@@ -56,6 +56,7 @@ model User {
   ismInvitesSent           IsmInviteRequest[]        @relation("IsmInvitesSent")
   sessions                 Session[]
   payments                 SubscriptionPayment[]
+  instituteUnlocks         InstituteUnlock[]
   compareLists             UserCompareList[]
   viewHistory              UserHistory[]
   shortlisted              UserShortlist[]
@@ -430,6 +431,7 @@ model Institute {
   salesAssignments    SalesAssignment?
   salesRequests       SalesAssignmentRequest[]
   payments            SubscriptionPayment[]
+  unlocks             InstituteUnlock[]
   viewHistory         UserHistory[]
   shortlistedBy       UserShortlist[]
   blogPosts           BlogPost[]                 @relation("InstituteBlogPosts")
@@ -615,6 +617,24 @@ model UserHistory {
   @@unique([userId, instituteId])
   @@index([userId])
   @@map("user_history")
+}
+
+model InstituteUnlock {
+  id          String    @id @default(cuid())
+  userId      String
+  instituteId String
+  unlockType  String    // "PHONE", "WEBSITE", "EMAIL", "SOCIAL", "COMMUNITY"
+  coinsSpent  Int       @default(1)
+  description String?
+  createdAt   DateTime  @default(now())
+
+  institute   Institute @relation(fields: [instituteId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([instituteId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("institute_unlock")
 }
 
 model InstituteEnquiry {

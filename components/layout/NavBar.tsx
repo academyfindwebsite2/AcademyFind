@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import UserDropdown from "@/components/navigation/UserDropdown";
 import { NotificationBell } from "@/components/layout/NotificationBell";
+import { buildAuthHref } from "@/lib/auth/redirect-utils";
 
 export default function Navbar({ session }: { session: any }) {
   const pathname = usePathname();
@@ -48,6 +49,9 @@ export default function Navbar({ session }: { session: any }) {
     if (href === "/") return pathname === "/";
     return pathname === href || pathname.startsWith(href + "/");
   };
+
+  const loginHref = buildAuthHref("/login", pathname);
+  const registerHref = buildAuthHref("/register", pathname);
 
   return (
     <header className="sticky top-0 z-[110] border-b border-slate-100 bg-white/80 backdrop-blur-md shadow-xs">
@@ -157,14 +161,14 @@ export default function Navbar({ session }: { session: any }) {
             ) : (
               <>
                 <Button asChild variant="ghost" className="gap-2 cursor-pointer text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all duration-250">
-                  <Link href="/login">
+                  <Link href={loginHref}>
                     <LogIn className="size-4" />
                     Login
                   </Link>
                 </Button>
 
                 <Button asChild className="gap-2 bg-amber-500 text-white shadow-xs hover:bg-amber-600 hover:shadow-md cursor-pointer rounded-xl border-0 transition-all duration-250 font-semibold px-4">
-                  <Link href="/register">
+                  <Link href={registerHref}>
                     <UserPlus className="size-4" />
                     Sign Up
                   </Link>
@@ -268,14 +272,14 @@ export default function Navbar({ session }: { session: any }) {
                 ) : (
                   <div className="flex flex-col gap-2.5">
                     <Button asChild variant="outline" className="justify-start gap-3 h-11 px-4 rounded-2xl border-slate-200 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-                      <Link href="/login">
+                      <Link href={loginHref}>
                         <LogIn className="size-4 text-slate-400" />
                         Login
                       </Link>
                     </Button>
 
                     <Button asChild className="gap-3 h-11 px-4 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-semibold transition-all duration-200 border-0">
-                      <Link href="/register">
+                      <Link href={registerHref}>
                         <UserPlus className="size-4" />
                         Sign Up
                       </Link>

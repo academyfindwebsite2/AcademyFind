@@ -152,6 +152,11 @@ export type UserShortlist = Prisma.UserShortlistModel
  */
 export type UserHistory = Prisma.UserHistoryModel
 /**
+ * Model InstituteUnlock
+ * 
+ */
+export type InstituteUnlock = Prisma.InstituteUnlockModel
+/**
  * Model InstituteEnquiry
  * 
  */

@@ -381,6 +381,7 @@ export type UserWhereInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   payments?: Prisma.SubscriptionPaymentListRelationFilter
+  instituteUnlocks?: Prisma.InstituteUnlockListRelationFilter
   compareLists?: Prisma.UserCompareListListRelationFilter
   viewHistory?: Prisma.UserHistoryListRelationFilter
   shortlisted?: Prisma.UserShortlistListRelationFilter
@@ -476,6 +477,7 @@ export type UserOrderByWithRelationInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   payments?: Prisma.SubscriptionPaymentOrderByRelationAggregateInput
+  instituteUnlocks?: Prisma.InstituteUnlockOrderByRelationAggregateInput
   compareLists?: Prisma.UserCompareListOrderByRelationAggregateInput
   viewHistory?: Prisma.UserHistoryOrderByRelationAggregateInput
   shortlisted?: Prisma.UserShortlistOrderByRelationAggregateInput
@@ -574,6 +576,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   ismInvitesSent?: Prisma.IsmInviteRequestListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   payments?: Prisma.SubscriptionPaymentListRelationFilter
+  instituteUnlocks?: Prisma.InstituteUnlockListRelationFilter
   compareLists?: Prisma.UserCompareListListRelationFilter
   viewHistory?: Prisma.UserHistoryListRelationFilter
   shortlisted?: Prisma.UserShortlistListRelationFilter
@@ -735,6 +738,7 @@ export type UserCreateInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -830,6 +834,7 @@ export type UserUncheckedCreateInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -925,6 +930,7 @@ export type UserUpdateInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -1020,6 +1026,7 @@ export type UserUncheckedUpdateInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -1430,6 +1437,20 @@ export type UserUpdateOneRequiredWithoutViewHistoryNestedInput = {
   upsert?: Prisma.UserUpsertWithoutViewHistoryInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutViewHistoryInput, Prisma.UserUpdateWithoutViewHistoryInput>, Prisma.UserUncheckedUpdateWithoutViewHistoryInput>
+}
+
+export type UserCreateNestedOneWithoutInstituteUnlocksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInstituteUnlocksInput, Prisma.UserUncheckedCreateWithoutInstituteUnlocksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInstituteUnlocksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutInstituteUnlocksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInstituteUnlocksInput, Prisma.UserUncheckedCreateWithoutInstituteUnlocksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInstituteUnlocksInput
+  upsert?: Prisma.UserUpsertWithoutInstituteUnlocksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInstituteUnlocksInput, Prisma.UserUpdateWithoutInstituteUnlocksInput>, Prisma.UserUncheckedUpdateWithoutInstituteUnlocksInput>
 }
 
 export type UserCreateNestedOneWithoutSalesEnquiryAssignmentsInput = {
@@ -2275,6 +2296,7 @@ export type UserCreateWithoutWalletInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -2369,6 +2391,7 @@ export type UserUncheckedCreateWithoutWalletInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -2479,6 +2502,7 @@ export type UserUpdateWithoutWalletInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -2573,6 +2597,7 @@ export type UserUncheckedUpdateWithoutWalletInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -2667,6 +2692,7 @@ export type UserCreateWithoutReputationInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -2761,6 +2787,7 @@ export type UserUncheckedCreateWithoutReputationInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -2871,6 +2898,7 @@ export type UserUpdateWithoutReputationInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -2965,6 +2993,7 @@ export type UserUncheckedUpdateWithoutReputationInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -3059,6 +3088,7 @@ export type UserCreateWithoutPreferencesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -3153,6 +3183,7 @@ export type UserUncheckedCreateWithoutPreferencesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -3263,6 +3294,7 @@ export type UserUpdateWithoutPreferencesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -3357,6 +3389,7 @@ export type UserUncheckedUpdateWithoutPreferencesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -3450,6 +3483,7 @@ export type UserCreateWithoutSessionsInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestCreateNestedManyWithoutUserInput
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -3544,6 +3578,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutUserInput
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -3654,6 +3689,7 @@ export type UserUpdateWithoutSessionsInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestUpdateManyWithoutUserNestedInput
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -3748,6 +3784,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutUserNestedInput
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -3842,6 +3879,7 @@ export type UserCreateWithoutAccountsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -3936,6 +3974,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -4046,6 +4085,7 @@ export type UserUpdateWithoutAccountsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -4140,6 +4180,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -4234,6 +4275,7 @@ export type UserCreateWithoutManagedInstitutesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -4328,6 +4370,7 @@ export type UserUncheckedCreateWithoutManagedInstitutesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -4438,6 +4481,7 @@ export type UserUpdateWithoutManagedInstitutesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -4532,6 +4576,7 @@ export type UserUncheckedUpdateWithoutManagedInstitutesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -4626,6 +4671,7 @@ export type UserCreateWithoutReviewsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -4720,6 +4766,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -4830,6 +4877,7 @@ export type UserUpdateWithoutReviewsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -4924,6 +4972,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -5019,6 +5068,7 @@ export type UserCreateWithoutReviewRepliesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -5113,6 +5163,7 @@ export type UserUncheckedCreateWithoutReviewRepliesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -5223,6 +5274,7 @@ export type UserUpdateWithoutReviewRepliesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -5317,6 +5369,7 @@ export type UserUncheckedUpdateWithoutReviewRepliesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -5410,6 +5463,7 @@ export type UserCreateWithoutClaimsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -5504,6 +5558,7 @@ export type UserUncheckedCreateWithoutClaimsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -5614,6 +5669,7 @@ export type UserUpdateWithoutClaimsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -5708,6 +5764,7 @@ export type UserUncheckedUpdateWithoutClaimsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -5803,6 +5860,7 @@ export type UserCreateWithoutShortlistedInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   distributionLogs?: Prisma.LeadDistributionLogCreateNestedManyWithoutAdminInput
@@ -5897,6 +5955,7 @@ export type UserUncheckedCreateWithoutShortlistedInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   distributionLogs?: Prisma.LeadDistributionLogUncheckedCreateNestedManyWithoutAdminInput
@@ -6007,6 +6066,7 @@ export type UserUpdateWithoutShortlistedInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   distributionLogs?: Prisma.LeadDistributionLogUpdateManyWithoutAdminNestedInput
@@ -6101,6 +6161,7 @@ export type UserUncheckedUpdateWithoutShortlistedInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   distributionLogs?: Prisma.LeadDistributionLogUncheckedUpdateManyWithoutAdminNestedInput
@@ -6195,6 +6256,7 @@ export type UserCreateWithoutViewHistoryInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
   distributionLogs?: Prisma.LeadDistributionLogCreateNestedManyWithoutAdminInput
@@ -6289,6 +6351,7 @@ export type UserUncheckedCreateWithoutViewHistoryInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
   distributionLogs?: Prisma.LeadDistributionLogUncheckedCreateNestedManyWithoutAdminInput
@@ -6399,6 +6462,7 @@ export type UserUpdateWithoutViewHistoryInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
   distributionLogs?: Prisma.LeadDistributionLogUpdateManyWithoutAdminNestedInput
@@ -6493,7 +6557,404 @@ export type UserUncheckedUpdateWithoutViewHistoryInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
+  shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
+  distributionLogs?: Prisma.LeadDistributionLogUncheckedUpdateManyWithoutAdminNestedInput
+  blogAuthorProfile?: Prisma.BlogAuthorProfileUncheckedUpdateOneWithoutUserNestedInput
+  blogComments?: Prisma.BlogCommentUncheckedUpdateManyWithoutUserNestedInput
+  blogReactions?: Prisma.BlogReactionUncheckedUpdateManyWithoutUserNestedInput
+  blogViews?: Prisma.BlogViewUncheckedUpdateManyWithoutUserNestedInput
+  blogBookmarks?: Prisma.BlogBookmarkUncheckedUpdateManyWithoutUserNestedInput
+  followedAuthors?: Prisma.BlogAuthorFollowerUncheckedUpdateManyWithoutUserNestedInput
+  reviewedPosts?: Prisma.BlogPostUncheckedUpdateManyWithoutReviewedByNestedInput
+  publishedPosts?: Prisma.BlogPostUncheckedUpdateManyWithoutPublishedByNestedInput
+  editedPosts?: Prisma.BlogPostUncheckedUpdateManyWithoutLastEditedByNestedInput
+  blogRevisions?: Prisma.BlogRevisionUncheckedUpdateManyWithoutCreatedByNestedInput
+  reviewReplies?: Prisma.ReviewReplyUncheckedUpdateManyWithoutUserNestedInput
+  visitorSessions?: Prisma.VisitorSessionUncheckedUpdateManyWithoutUserNestedInput
+  blogReports?: Prisma.BlogReportUncheckedUpdateManyWithoutUserNestedInput
+  resolvedBlogReports?: Prisma.BlogReportUncheckedUpdateManyWithoutResolvedByNestedInput
+  studentProfile?: Prisma.StudentProfileUncheckedUpdateOneWithoutUserNestedInput
+  teacherProfile?: Prisma.TeacherProfileUncheckedUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.InstituteMembershipUncheckedUpdateManyWithoutUserNestedInput
+  chatSettings?: Prisma.ChatSettingsUncheckedUpdateOneWithoutUserNestedInput
+  conversationParticipants?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  contactMessages?: Prisma.ContactMessageUncheckedUpdateManyWithoutUserNestedInput
+  messageReads?: Prisma.MessageReadUncheckedUpdateManyWithoutUserNestedInput
+  messageReactions?: Prisma.MessageReactionUncheckedUpdateManyWithoutUserNestedInput
+  messageReports?: Prisma.MessageReportUncheckedUpdateManyWithoutReporterNestedInput
+  resolvedMessageReports?: Prisma.MessageReportUncheckedUpdateManyWithoutResolverNestedInput
+  blockedUsers?: Prisma.UserBlockUncheckedUpdateManyWithoutBlockerNestedInput
+  blockedByUsers?: Prisma.UserBlockUncheckedUpdateManyWithoutBlockedNestedInput
+  createdConversations?: Prisma.ConversationUncheckedUpdateManyWithoutCreatedByNestedInput
+  notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+  wallet?: Prisma.UserWalletUncheckedUpdateOneWithoutUserNestedInput
+  reputation?: Prisma.UserReputationUncheckedUpdateOneWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  educations?: Prisma.UserEducationUncheckedUpdateManyWithoutUserNestedInput
+  experiences?: Prisma.UserExperienceUncheckedUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUncheckedUpdateManyWithoutUserNestedInput
+  skills?: Prisma.UserSkillUncheckedUpdateManyWithoutUserNestedInput
+  instituteVisits?: Prisma.InstituteVisitUncheckedUpdateManyWithoutUserNestedInput
+  advertisements?: Prisma.AdvertisementUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutInstituteUnlocksInput = {
+  id?: string
+  name?: string | null
+  username: string
+  email: string
+  phone?: string | null
+  passwordHash?: string | null
+  image?: string | null
+  coverImage?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  emailVerified?: boolean
+  onboardingCompleted?: boolean
+  lastLoginAt?: Date | string | null
+  pushToken?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  canAddInstitute?: boolean
+  canWriteBlogs?: boolean
+  facebookUrl?: string | null
+  instagramUrl?: string | null
+  telegramUrl?: string | null
+  twitterUrl?: string | null
+  youtubeUrl?: string | null
+  linkedinUrl?: string | null
+  whatsappUrl?: string | null
+  allowDms?: boolean
+  isVisible?: boolean
+  managedInstitutes?: Prisma.InstituteManagerCreateNestedManyWithoutUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  adminNotifications?: Prisma.AdminNotificationCreateNestedManyWithoutUserInput
+  communityAnswers?: Prisma.CommunityAnswerCreateNestedManyWithoutUserInput
+  communityQuestions?: Prisma.CommunityQuestionCreateNestedManyWithoutUserInput
+  claims?: Prisma.InstituteClaimCreateNestedManyWithoutUserInput
+  instituteRequests?: Prisma.InstituteRequestCreateNestedManyWithoutUserInput
+  salesAssignments?: Prisma.SalesAssignmentCreateNestedManyWithoutSalesManagerInput
+  salesCategoryAssignments?: Prisma.SalesCategoryAssignmentCreateNestedManyWithoutSalesManagerInput
+  salesAreaAssignments?: Prisma.SalesAreaAssignmentCreateNestedManyWithoutSalesManagerInput
+  salesEnquiryAssignments?: Prisma.InstituteEnquiryCreateNestedManyWithoutAssignedSalesManagerInput
+  salesRequests?: Prisma.SalesAssignmentRequestCreateNestedManyWithoutSalesManagerInput
+  reviewedSalesRequests?: Prisma.SalesAssignmentRequestCreateNestedManyWithoutReviewedByInput
+  ismAssignments?: Prisma.InstituteSalesManagerAssignmentCreateNestedManyWithoutUserInput
+  ismAssignedBy?: Prisma.InstituteSalesManagerAssignmentCreateNestedManyWithoutAssignedByInput
+  ismLeadAssignments?: Prisma.InstituteEnquiryCreateNestedManyWithoutAssignedIsmInput
+  ismActivities?: Prisma.IsmLeadActivityCreateNestedManyWithoutIsmInput
+  ismAdmissions?: Prisma.AdmissionRecordCreateNestedManyWithoutIsmInput
+  ismInvitesReceived?: Prisma.IsmInviteRequestCreateNestedManyWithoutUserInput
+  ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
+  viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
+  distributionLogs?: Prisma.LeadDistributionLogCreateNestedManyWithoutAdminInput
+  blogAuthorProfile?: Prisma.BlogAuthorProfileCreateNestedOneWithoutUserInput
+  blogComments?: Prisma.BlogCommentCreateNestedManyWithoutUserInput
+  blogReactions?: Prisma.BlogReactionCreateNestedManyWithoutUserInput
+  blogViews?: Prisma.BlogViewCreateNestedManyWithoutUserInput
+  blogBookmarks?: Prisma.BlogBookmarkCreateNestedManyWithoutUserInput
+  followedAuthors?: Prisma.BlogAuthorFollowerCreateNestedManyWithoutUserInput
+  reviewedPosts?: Prisma.BlogPostCreateNestedManyWithoutReviewedByInput
+  publishedPosts?: Prisma.BlogPostCreateNestedManyWithoutPublishedByInput
+  editedPosts?: Prisma.BlogPostCreateNestedManyWithoutLastEditedByInput
+  blogRevisions?: Prisma.BlogRevisionCreateNestedManyWithoutCreatedByInput
+  reviewReplies?: Prisma.ReviewReplyCreateNestedManyWithoutUserInput
+  visitorSessions?: Prisma.VisitorSessionCreateNestedManyWithoutUserInput
+  blogReports?: Prisma.BlogReportCreateNestedManyWithoutUserInput
+  resolvedBlogReports?: Prisma.BlogReportCreateNestedManyWithoutResolvedByInput
+  studentProfile?: Prisma.StudentProfileCreateNestedOneWithoutUserInput
+  teacherProfile?: Prisma.TeacherProfileCreateNestedOneWithoutUserInput
+  memberships?: Prisma.InstituteMembershipCreateNestedManyWithoutUserInput
+  chatSettings?: Prisma.ChatSettingsCreateNestedOneWithoutUserInput
+  conversationParticipants?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  contactMessages?: Prisma.ContactMessageCreateNestedManyWithoutUserInput
+  messageReads?: Prisma.MessageReadCreateNestedManyWithoutUserInput
+  messageReactions?: Prisma.MessageReactionCreateNestedManyWithoutUserInput
+  messageReports?: Prisma.MessageReportCreateNestedManyWithoutReporterInput
+  resolvedMessageReports?: Prisma.MessageReportCreateNestedManyWithoutResolverInput
+  blockedUsers?: Prisma.UserBlockCreateNestedManyWithoutBlockerInput
+  blockedByUsers?: Prisma.UserBlockCreateNestedManyWithoutBlockedInput
+  createdConversations?: Prisma.ConversationCreateNestedManyWithoutCreatedByInput
+  notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
+  wallet?: Prisma.UserWalletCreateNestedOneWithoutUserInput
+  reputation?: Prisma.UserReputationCreateNestedOneWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  educations?: Prisma.UserEducationCreateNestedManyWithoutUserInput
+  experiences?: Prisma.UserExperienceCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementCreateNestedManyWithoutUserInput
+  skills?: Prisma.UserSkillCreateNestedManyWithoutUserInput
+  instituteVisits?: Prisma.InstituteVisitCreateNestedManyWithoutUserInput
+  advertisements?: Prisma.AdvertisementCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutInstituteUnlocksInput = {
+  id?: string
+  name?: string | null
+  username: string
+  email: string
+  phone?: string | null
+  passwordHash?: string | null
+  image?: string | null
+  coverImage?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  emailVerified?: boolean
+  onboardingCompleted?: boolean
+  lastLoginAt?: Date | string | null
+  pushToken?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  canAddInstitute?: boolean
+  canWriteBlogs?: boolean
+  facebookUrl?: string | null
+  instagramUrl?: string | null
+  telegramUrl?: string | null
+  twitterUrl?: string | null
+  youtubeUrl?: string | null
+  linkedinUrl?: string | null
+  whatsappUrl?: string | null
+  allowDms?: boolean
+  isVisible?: boolean
+  managedInstitutes?: Prisma.InstituteManagerUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  adminNotifications?: Prisma.AdminNotificationUncheckedCreateNestedManyWithoutUserInput
+  communityAnswers?: Prisma.CommunityAnswerUncheckedCreateNestedManyWithoutUserInput
+  communityQuestions?: Prisma.CommunityQuestionUncheckedCreateNestedManyWithoutUserInput
+  claims?: Prisma.InstituteClaimUncheckedCreateNestedManyWithoutUserInput
+  instituteRequests?: Prisma.InstituteRequestUncheckedCreateNestedManyWithoutUserInput
+  salesAssignments?: Prisma.SalesAssignmentUncheckedCreateNestedManyWithoutSalesManagerInput
+  salesCategoryAssignments?: Prisma.SalesCategoryAssignmentUncheckedCreateNestedManyWithoutSalesManagerInput
+  salesAreaAssignments?: Prisma.SalesAreaAssignmentUncheckedCreateNestedManyWithoutSalesManagerInput
+  salesEnquiryAssignments?: Prisma.InstituteEnquiryUncheckedCreateNestedManyWithoutAssignedSalesManagerInput
+  salesRequests?: Prisma.SalesAssignmentRequestUncheckedCreateNestedManyWithoutSalesManagerInput
+  reviewedSalesRequests?: Prisma.SalesAssignmentRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  ismAssignments?: Prisma.InstituteSalesManagerAssignmentUncheckedCreateNestedManyWithoutUserInput
+  ismAssignedBy?: Prisma.InstituteSalesManagerAssignmentUncheckedCreateNestedManyWithoutAssignedByInput
+  ismLeadAssignments?: Prisma.InstituteEnquiryUncheckedCreateNestedManyWithoutAssignedIsmInput
+  ismActivities?: Prisma.IsmLeadActivityUncheckedCreateNestedManyWithoutIsmInput
+  ismAdmissions?: Prisma.AdmissionRecordUncheckedCreateNestedManyWithoutIsmInput
+  ismInvitesReceived?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutUserInput
+  ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
+  viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
+  distributionLogs?: Prisma.LeadDistributionLogUncheckedCreateNestedManyWithoutAdminInput
+  blogAuthorProfile?: Prisma.BlogAuthorProfileUncheckedCreateNestedOneWithoutUserInput
+  blogComments?: Prisma.BlogCommentUncheckedCreateNestedManyWithoutUserInput
+  blogReactions?: Prisma.BlogReactionUncheckedCreateNestedManyWithoutUserInput
+  blogViews?: Prisma.BlogViewUncheckedCreateNestedManyWithoutUserInput
+  blogBookmarks?: Prisma.BlogBookmarkUncheckedCreateNestedManyWithoutUserInput
+  followedAuthors?: Prisma.BlogAuthorFollowerUncheckedCreateNestedManyWithoutUserInput
+  reviewedPosts?: Prisma.BlogPostUncheckedCreateNestedManyWithoutReviewedByInput
+  publishedPosts?: Prisma.BlogPostUncheckedCreateNestedManyWithoutPublishedByInput
+  editedPosts?: Prisma.BlogPostUncheckedCreateNestedManyWithoutLastEditedByInput
+  blogRevisions?: Prisma.BlogRevisionUncheckedCreateNestedManyWithoutCreatedByInput
+  reviewReplies?: Prisma.ReviewReplyUncheckedCreateNestedManyWithoutUserInput
+  visitorSessions?: Prisma.VisitorSessionUncheckedCreateNestedManyWithoutUserInput
+  blogReports?: Prisma.BlogReportUncheckedCreateNestedManyWithoutUserInput
+  resolvedBlogReports?: Prisma.BlogReportUncheckedCreateNestedManyWithoutResolvedByInput
+  studentProfile?: Prisma.StudentProfileUncheckedCreateNestedOneWithoutUserInput
+  teacherProfile?: Prisma.TeacherProfileUncheckedCreateNestedOneWithoutUserInput
+  memberships?: Prisma.InstituteMembershipUncheckedCreateNestedManyWithoutUserInput
+  chatSettings?: Prisma.ChatSettingsUncheckedCreateNestedOneWithoutUserInput
+  conversationParticipants?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  contactMessages?: Prisma.ContactMessageUncheckedCreateNestedManyWithoutUserInput
+  messageReads?: Prisma.MessageReadUncheckedCreateNestedManyWithoutUserInput
+  messageReactions?: Prisma.MessageReactionUncheckedCreateNestedManyWithoutUserInput
+  messageReports?: Prisma.MessageReportUncheckedCreateNestedManyWithoutReporterInput
+  resolvedMessageReports?: Prisma.MessageReportUncheckedCreateNestedManyWithoutResolverInput
+  blockedUsers?: Prisma.UserBlockUncheckedCreateNestedManyWithoutBlockerInput
+  blockedByUsers?: Prisma.UserBlockUncheckedCreateNestedManyWithoutBlockedInput
+  createdConversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutCreatedByInput
+  notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
+  wallet?: Prisma.UserWalletUncheckedCreateNestedOneWithoutUserInput
+  reputation?: Prisma.UserReputationUncheckedCreateNestedOneWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  educations?: Prisma.UserEducationUncheckedCreateNestedManyWithoutUserInput
+  experiences?: Prisma.UserExperienceUncheckedCreateNestedManyWithoutUserInput
+  achievements?: Prisma.UserAchievementUncheckedCreateNestedManyWithoutUserInput
+  skills?: Prisma.UserSkillUncheckedCreateNestedManyWithoutUserInput
+  instituteVisits?: Prisma.InstituteVisitUncheckedCreateNestedManyWithoutUserInput
+  advertisements?: Prisma.AdvertisementUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutInstituteUnlocksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInstituteUnlocksInput, Prisma.UserUncheckedCreateWithoutInstituteUnlocksInput>
+}
+
+export type UserUpsertWithoutInstituteUnlocksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInstituteUnlocksInput, Prisma.UserUncheckedUpdateWithoutInstituteUnlocksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInstituteUnlocksInput, Prisma.UserUncheckedCreateWithoutInstituteUnlocksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInstituteUnlocksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInstituteUnlocksInput, Prisma.UserUncheckedUpdateWithoutInstituteUnlocksInput>
+}
+
+export type UserUpdateWithoutInstituteUnlocksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  canAddInstitute?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canWriteBlogs?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkedinUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowDms?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  managedInstitutes?: Prisma.InstituteManagerUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  adminNotifications?: Prisma.AdminNotificationUpdateManyWithoutUserNestedInput
+  communityAnswers?: Prisma.CommunityAnswerUpdateManyWithoutUserNestedInput
+  communityQuestions?: Prisma.CommunityQuestionUpdateManyWithoutUserNestedInput
+  claims?: Prisma.InstituteClaimUpdateManyWithoutUserNestedInput
+  instituteRequests?: Prisma.InstituteRequestUpdateManyWithoutUserNestedInput
+  salesAssignments?: Prisma.SalesAssignmentUpdateManyWithoutSalesManagerNestedInput
+  salesCategoryAssignments?: Prisma.SalesCategoryAssignmentUpdateManyWithoutSalesManagerNestedInput
+  salesAreaAssignments?: Prisma.SalesAreaAssignmentUpdateManyWithoutSalesManagerNestedInput
+  salesEnquiryAssignments?: Prisma.InstituteEnquiryUpdateManyWithoutAssignedSalesManagerNestedInput
+  salesRequests?: Prisma.SalesAssignmentRequestUpdateManyWithoutSalesManagerNestedInput
+  reviewedSalesRequests?: Prisma.SalesAssignmentRequestUpdateManyWithoutReviewedByNestedInput
+  ismAssignments?: Prisma.InstituteSalesManagerAssignmentUpdateManyWithoutUserNestedInput
+  ismAssignedBy?: Prisma.InstituteSalesManagerAssignmentUpdateManyWithoutAssignedByNestedInput
+  ismLeadAssignments?: Prisma.InstituteEnquiryUpdateManyWithoutAssignedIsmNestedInput
+  ismActivities?: Prisma.IsmLeadActivityUpdateManyWithoutIsmNestedInput
+  ismAdmissions?: Prisma.AdmissionRecordUpdateManyWithoutIsmNestedInput
+  ismInvitesReceived?: Prisma.IsmInviteRequestUpdateManyWithoutUserNestedInput
+  ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
+  viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
+  distributionLogs?: Prisma.LeadDistributionLogUpdateManyWithoutAdminNestedInput
+  blogAuthorProfile?: Prisma.BlogAuthorProfileUpdateOneWithoutUserNestedInput
+  blogComments?: Prisma.BlogCommentUpdateManyWithoutUserNestedInput
+  blogReactions?: Prisma.BlogReactionUpdateManyWithoutUserNestedInput
+  blogViews?: Prisma.BlogViewUpdateManyWithoutUserNestedInput
+  blogBookmarks?: Prisma.BlogBookmarkUpdateManyWithoutUserNestedInput
+  followedAuthors?: Prisma.BlogAuthorFollowerUpdateManyWithoutUserNestedInput
+  reviewedPosts?: Prisma.BlogPostUpdateManyWithoutReviewedByNestedInput
+  publishedPosts?: Prisma.BlogPostUpdateManyWithoutPublishedByNestedInput
+  editedPosts?: Prisma.BlogPostUpdateManyWithoutLastEditedByNestedInput
+  blogRevisions?: Prisma.BlogRevisionUpdateManyWithoutCreatedByNestedInput
+  reviewReplies?: Prisma.ReviewReplyUpdateManyWithoutUserNestedInput
+  visitorSessions?: Prisma.VisitorSessionUpdateManyWithoutUserNestedInput
+  blogReports?: Prisma.BlogReportUpdateManyWithoutUserNestedInput
+  resolvedBlogReports?: Prisma.BlogReportUpdateManyWithoutResolvedByNestedInput
+  studentProfile?: Prisma.StudentProfileUpdateOneWithoutUserNestedInput
+  teacherProfile?: Prisma.TeacherProfileUpdateOneWithoutUserNestedInput
+  memberships?: Prisma.InstituteMembershipUpdateManyWithoutUserNestedInput
+  chatSettings?: Prisma.ChatSettingsUpdateOneWithoutUserNestedInput
+  conversationParticipants?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  contactMessages?: Prisma.ContactMessageUpdateManyWithoutUserNestedInput
+  messageReads?: Prisma.MessageReadUpdateManyWithoutUserNestedInput
+  messageReactions?: Prisma.MessageReactionUpdateManyWithoutUserNestedInput
+  messageReports?: Prisma.MessageReportUpdateManyWithoutReporterNestedInput
+  resolvedMessageReports?: Prisma.MessageReportUpdateManyWithoutResolverNestedInput
+  blockedUsers?: Prisma.UserBlockUpdateManyWithoutBlockerNestedInput
+  blockedByUsers?: Prisma.UserBlockUpdateManyWithoutBlockedNestedInput
+  createdConversations?: Prisma.ConversationUpdateManyWithoutCreatedByNestedInput
+  notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
+  wallet?: Prisma.UserWalletUpdateOneWithoutUserNestedInput
+  reputation?: Prisma.UserReputationUpdateOneWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  educations?: Prisma.UserEducationUpdateManyWithoutUserNestedInput
+  experiences?: Prisma.UserExperienceUpdateManyWithoutUserNestedInput
+  achievements?: Prisma.UserAchievementUpdateManyWithoutUserNestedInput
+  skills?: Prisma.UserSkillUpdateManyWithoutUserNestedInput
+  instituteVisits?: Prisma.InstituteVisitUpdateManyWithoutUserNestedInput
+  advertisements?: Prisma.AdvertisementUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInstituteUnlocksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  canAddInstitute?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  canWriteBlogs?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  facebookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegramUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  twitterUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkedinUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsappUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowDms?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  managedInstitutes?: Prisma.InstituteManagerUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  adminNotifications?: Prisma.AdminNotificationUncheckedUpdateManyWithoutUserNestedInput
+  communityAnswers?: Prisma.CommunityAnswerUncheckedUpdateManyWithoutUserNestedInput
+  communityQuestions?: Prisma.CommunityQuestionUncheckedUpdateManyWithoutUserNestedInput
+  claims?: Prisma.InstituteClaimUncheckedUpdateManyWithoutUserNestedInput
+  instituteRequests?: Prisma.InstituteRequestUncheckedUpdateManyWithoutUserNestedInput
+  salesAssignments?: Prisma.SalesAssignmentUncheckedUpdateManyWithoutSalesManagerNestedInput
+  salesCategoryAssignments?: Prisma.SalesCategoryAssignmentUncheckedUpdateManyWithoutSalesManagerNestedInput
+  salesAreaAssignments?: Prisma.SalesAreaAssignmentUncheckedUpdateManyWithoutSalesManagerNestedInput
+  salesEnquiryAssignments?: Prisma.InstituteEnquiryUncheckedUpdateManyWithoutAssignedSalesManagerNestedInput
+  salesRequests?: Prisma.SalesAssignmentRequestUncheckedUpdateManyWithoutSalesManagerNestedInput
+  reviewedSalesRequests?: Prisma.SalesAssignmentRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  ismAssignments?: Prisma.InstituteSalesManagerAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  ismAssignedBy?: Prisma.InstituteSalesManagerAssignmentUncheckedUpdateManyWithoutAssignedByNestedInput
+  ismLeadAssignments?: Prisma.InstituteEnquiryUncheckedUpdateManyWithoutAssignedIsmNestedInput
+  ismActivities?: Prisma.IsmLeadActivityUncheckedUpdateManyWithoutIsmNestedInput
+  ismAdmissions?: Prisma.AdmissionRecordUncheckedUpdateManyWithoutIsmNestedInput
+  ismInvitesReceived?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutUserNestedInput
+  ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
+  viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
   distributionLogs?: Prisma.LeadDistributionLogUncheckedUpdateManyWithoutAdminNestedInput
   blogAuthorProfile?: Prisma.BlogAuthorProfileUncheckedUpdateOneWithoutUserNestedInput
@@ -6586,6 +7047,7 @@ export type UserCreateWithoutSalesEnquiryAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -6680,6 +7142,7 @@ export type UserUncheckedCreateWithoutSalesEnquiryAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -6779,6 +7242,7 @@ export type UserCreateWithoutIsmLeadAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -6873,6 +7337,7 @@ export type UserUncheckedCreateWithoutIsmLeadAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -6983,6 +7448,7 @@ export type UserUpdateWithoutSalesEnquiryAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -7077,6 +7543,7 @@ export type UserUncheckedUpdateWithoutSalesEnquiryAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -7182,6 +7649,7 @@ export type UserUpdateWithoutIsmLeadAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -7276,6 +7744,7 @@ export type UserUncheckedUpdateWithoutIsmLeadAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -7371,6 +7840,7 @@ export type UserCreateWithoutTeacherProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -7465,6 +7935,7 @@ export type UserUncheckedCreateWithoutTeacherProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -7575,6 +8046,7 @@ export type UserUpdateWithoutTeacherProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -7669,6 +8141,7 @@ export type UserUncheckedUpdateWithoutTeacherProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -7763,6 +8236,7 @@ export type UserCreateWithoutStudentProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -7857,6 +8331,7 @@ export type UserUncheckedCreateWithoutStudentProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -7967,6 +8442,7 @@ export type UserUpdateWithoutStudentProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -8061,6 +8537,7 @@ export type UserUncheckedUpdateWithoutStudentProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -8155,6 +8632,7 @@ export type UserCreateWithoutMembershipsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -8249,6 +8727,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -8359,6 +8838,7 @@ export type UserUpdateWithoutMembershipsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -8453,6 +8933,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -8547,6 +9028,7 @@ export type UserCreateWithoutCreatedConversationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -8641,6 +9123,7 @@ export type UserUncheckedCreateWithoutCreatedConversationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -8751,6 +9234,7 @@ export type UserUpdateWithoutCreatedConversationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -8845,6 +9329,7 @@ export type UserUncheckedUpdateWithoutCreatedConversationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -8939,6 +9424,7 @@ export type UserCreateWithoutConversationParticipantsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -9033,6 +9519,7 @@ export type UserUncheckedCreateWithoutConversationParticipantsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -9143,6 +9630,7 @@ export type UserUpdateWithoutConversationParticipantsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -9237,6 +9725,7 @@ export type UserUncheckedUpdateWithoutConversationParticipantsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -9331,6 +9820,7 @@ export type UserCreateWithoutMessagesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -9425,6 +9915,7 @@ export type UserUncheckedCreateWithoutMessagesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -9535,6 +10026,7 @@ export type UserUpdateWithoutMessagesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -9629,6 +10121,7 @@ export type UserUncheckedUpdateWithoutMessagesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -9723,6 +10216,7 @@ export type UserCreateWithoutMessageReactionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -9817,6 +10311,7 @@ export type UserUncheckedCreateWithoutMessageReactionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -9927,6 +10422,7 @@ export type UserUpdateWithoutMessageReactionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -10021,6 +10517,7 @@ export type UserUncheckedUpdateWithoutMessageReactionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -10115,6 +10612,7 @@ export type UserCreateWithoutMessageReadsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -10209,6 +10707,7 @@ export type UserUncheckedCreateWithoutMessageReadsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -10319,6 +10818,7 @@ export type UserUpdateWithoutMessageReadsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -10413,6 +10913,7 @@ export type UserUncheckedUpdateWithoutMessageReadsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -10507,6 +11008,7 @@ export type UserCreateWithoutMessageReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -10601,6 +11103,7 @@ export type UserUncheckedCreateWithoutMessageReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -10700,6 +11203,7 @@ export type UserCreateWithoutResolvedMessageReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -10794,6 +11298,7 @@ export type UserUncheckedCreateWithoutResolvedMessageReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -10904,6 +11409,7 @@ export type UserUpdateWithoutMessageReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -10998,6 +11504,7 @@ export type UserUncheckedUpdateWithoutMessageReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -11103,6 +11610,7 @@ export type UserUpdateWithoutResolvedMessageReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -11197,6 +11705,7 @@ export type UserUncheckedUpdateWithoutResolvedMessageReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -11291,6 +11800,7 @@ export type UserCreateWithoutChatSettingsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -11385,6 +11895,7 @@ export type UserUncheckedCreateWithoutChatSettingsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -11495,6 +12006,7 @@ export type UserUpdateWithoutChatSettingsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -11589,6 +12101,7 @@ export type UserUncheckedUpdateWithoutChatSettingsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -11683,6 +12196,7 @@ export type UserCreateWithoutNotificationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -11777,6 +12291,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -11887,6 +12402,7 @@ export type UserUpdateWithoutNotificationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -11981,6 +12497,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -12075,6 +12592,7 @@ export type UserCreateWithoutBlockedUsersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -12169,6 +12687,7 @@ export type UserUncheckedCreateWithoutBlockedUsersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -12268,6 +12787,7 @@ export type UserCreateWithoutBlockedByUsersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -12362,6 +12882,7 @@ export type UserUncheckedCreateWithoutBlockedByUsersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -12472,6 +12993,7 @@ export type UserUpdateWithoutBlockedUsersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -12566,6 +13088,7 @@ export type UserUncheckedUpdateWithoutBlockedUsersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -12671,6 +13194,7 @@ export type UserUpdateWithoutBlockedByUsersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -12765,6 +13289,7 @@ export type UserUncheckedUpdateWithoutBlockedByUsersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -12859,6 +13384,7 @@ export type UserCreateWithoutContactMessagesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -12953,6 +13479,7 @@ export type UserUncheckedCreateWithoutContactMessagesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -13063,6 +13590,7 @@ export type UserUpdateWithoutContactMessagesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -13157,6 +13685,7 @@ export type UserUncheckedUpdateWithoutContactMessagesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -13250,6 +13779,7 @@ export type UserCreateWithoutInstituteRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -13344,6 +13874,7 @@ export type UserUncheckedCreateWithoutInstituteRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -13454,6 +13985,7 @@ export type UserUpdateWithoutInstituteRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -13548,6 +14080,7 @@ export type UserUncheckedUpdateWithoutInstituteRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -13642,6 +14175,7 @@ export type UserCreateWithoutPaymentsInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestCreateNestedManyWithoutUserInput
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -13736,6 +14270,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutUserInput
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -13846,6 +14381,7 @@ export type UserUpdateWithoutPaymentsInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestUpdateManyWithoutUserNestedInput
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -13940,6 +14476,7 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutUserNestedInput
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -14034,6 +14571,7 @@ export type UserCreateWithoutSalesAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -14128,6 +14666,7 @@ export type UserUncheckedCreateWithoutSalesAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -14238,6 +14777,7 @@ export type UserUpdateWithoutSalesAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -14332,6 +14872,7 @@ export type UserUncheckedUpdateWithoutSalesAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -14426,6 +14967,7 @@ export type UserCreateWithoutSalesCategoryAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -14520,6 +15062,7 @@ export type UserUncheckedCreateWithoutSalesCategoryAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -14630,6 +15173,7 @@ export type UserUpdateWithoutSalesCategoryAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -14724,6 +15268,7 @@ export type UserUncheckedUpdateWithoutSalesCategoryAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -14818,6 +15363,7 @@ export type UserCreateWithoutSalesAreaAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -14912,6 +15458,7 @@ export type UserUncheckedCreateWithoutSalesAreaAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -15022,6 +15569,7 @@ export type UserUpdateWithoutSalesAreaAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -15116,6 +15664,7 @@ export type UserUncheckedUpdateWithoutSalesAreaAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -15210,6 +15759,7 @@ export type UserCreateWithoutSalesRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -15304,6 +15854,7 @@ export type UserUncheckedCreateWithoutSalesRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -15403,6 +15954,7 @@ export type UserCreateWithoutReviewedSalesRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -15497,6 +16049,7 @@ export type UserUncheckedCreateWithoutReviewedSalesRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -15607,6 +16160,7 @@ export type UserUpdateWithoutSalesRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -15701,6 +16255,7 @@ export type UserUncheckedUpdateWithoutSalesRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -15806,6 +16361,7 @@ export type UserUpdateWithoutReviewedSalesRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -15900,6 +16456,7 @@ export type UserUncheckedUpdateWithoutReviewedSalesRequestsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -15994,6 +16551,7 @@ export type UserCreateWithoutAdminNotificationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -16088,6 +16646,7 @@ export type UserUncheckedCreateWithoutAdminNotificationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -16198,6 +16757,7 @@ export type UserUpdateWithoutAdminNotificationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -16292,6 +16852,7 @@ export type UserUncheckedUpdateWithoutAdminNotificationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -16387,6 +16948,7 @@ export type UserCreateWithoutInstituteVisitsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -16481,6 +17043,7 @@ export type UserUncheckedCreateWithoutInstituteVisitsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -16591,6 +17154,7 @@ export type UserUpdateWithoutInstituteVisitsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -16685,6 +17249,7 @@ export type UserUncheckedUpdateWithoutInstituteVisitsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -16779,6 +17344,7 @@ export type UserCreateWithoutCompareListsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
   distributionLogs?: Prisma.LeadDistributionLogCreateNestedManyWithoutAdminInput
@@ -16873,6 +17439,7 @@ export type UserUncheckedCreateWithoutCompareListsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
   distributionLogs?: Prisma.LeadDistributionLogUncheckedCreateNestedManyWithoutAdminInput
@@ -16983,6 +17550,7 @@ export type UserUpdateWithoutCompareListsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
   distributionLogs?: Prisma.LeadDistributionLogUpdateManyWithoutAdminNestedInput
@@ -17077,6 +17645,7 @@ export type UserUncheckedUpdateWithoutCompareListsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
   distributionLogs?: Prisma.LeadDistributionLogUncheckedUpdateManyWithoutAdminNestedInput
@@ -17170,6 +17739,7 @@ export type UserCreateWithoutCommunityQuestionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -17264,6 +17834,7 @@ export type UserUncheckedCreateWithoutCommunityQuestionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -17374,6 +17945,7 @@ export type UserUpdateWithoutCommunityQuestionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -17468,6 +18040,7 @@ export type UserUncheckedUpdateWithoutCommunityQuestionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -17562,6 +18135,7 @@ export type UserCreateWithoutCommunityAnswersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -17656,6 +18230,7 @@ export type UserUncheckedCreateWithoutCommunityAnswersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -17766,6 +18341,7 @@ export type UserUpdateWithoutCommunityAnswersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -17860,6 +18436,7 @@ export type UserUncheckedUpdateWithoutCommunityAnswersInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -17955,6 +18532,7 @@ export type UserCreateWithoutDistributionLogsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -18049,6 +18627,7 @@ export type UserUncheckedCreateWithoutDistributionLogsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -18159,6 +18738,7 @@ export type UserUpdateWithoutDistributionLogsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -18253,6 +18833,7 @@ export type UserUncheckedUpdateWithoutDistributionLogsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -18347,6 +18928,7 @@ export type UserCreateWithoutBlogAuthorProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -18441,6 +19023,7 @@ export type UserUncheckedCreateWithoutBlogAuthorProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -18551,6 +19134,7 @@ export type UserUpdateWithoutBlogAuthorProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -18645,6 +19229,7 @@ export type UserUncheckedUpdateWithoutBlogAuthorProfileInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -18739,6 +19324,7 @@ export type UserCreateWithoutReviewedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -18833,6 +19419,7 @@ export type UserUncheckedCreateWithoutReviewedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -18932,6 +19519,7 @@ export type UserCreateWithoutPublishedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -19026,6 +19614,7 @@ export type UserUncheckedCreateWithoutPublishedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -19125,6 +19714,7 @@ export type UserCreateWithoutEditedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -19219,6 +19809,7 @@ export type UserUncheckedCreateWithoutEditedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -19329,6 +19920,7 @@ export type UserUpdateWithoutReviewedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -19423,6 +20015,7 @@ export type UserUncheckedUpdateWithoutReviewedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -19528,6 +20121,7 @@ export type UserUpdateWithoutPublishedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -19622,6 +20216,7 @@ export type UserUncheckedUpdateWithoutPublishedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -19727,6 +20322,7 @@ export type UserUpdateWithoutEditedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -19821,6 +20417,7 @@ export type UserUncheckedUpdateWithoutEditedPostsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -19915,6 +20512,7 @@ export type UserCreateWithoutBlogRevisionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -20009,6 +20607,7 @@ export type UserUncheckedCreateWithoutBlogRevisionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -20119,6 +20718,7 @@ export type UserUpdateWithoutBlogRevisionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -20213,6 +20813,7 @@ export type UserUncheckedUpdateWithoutBlogRevisionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -20307,6 +20908,7 @@ export type UserCreateWithoutBlogViewsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -20401,6 +21003,7 @@ export type UserUncheckedCreateWithoutBlogViewsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -20511,6 +21114,7 @@ export type UserUpdateWithoutBlogViewsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -20605,6 +21209,7 @@ export type UserUncheckedUpdateWithoutBlogViewsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -20699,6 +21304,7 @@ export type UserCreateWithoutBlogBookmarksInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -20793,6 +21399,7 @@ export type UserUncheckedCreateWithoutBlogBookmarksInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -20903,6 +21510,7 @@ export type UserUpdateWithoutBlogBookmarksInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -20997,6 +21605,7 @@ export type UserUncheckedUpdateWithoutBlogBookmarksInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -21091,6 +21700,7 @@ export type UserCreateWithoutFollowedAuthorsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -21185,6 +21795,7 @@ export type UserUncheckedCreateWithoutFollowedAuthorsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -21295,6 +21906,7 @@ export type UserUpdateWithoutFollowedAuthorsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -21389,6 +22001,7 @@ export type UserUncheckedUpdateWithoutFollowedAuthorsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -21483,6 +22096,7 @@ export type UserCreateWithoutResolvedBlogReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -21577,6 +22191,7 @@ export type UserUncheckedCreateWithoutResolvedBlogReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -21676,6 +22291,7 @@ export type UserCreateWithoutBlogReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -21770,6 +22386,7 @@ export type UserUncheckedCreateWithoutBlogReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -21880,6 +22497,7 @@ export type UserUpdateWithoutResolvedBlogReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -21974,6 +22592,7 @@ export type UserUncheckedUpdateWithoutResolvedBlogReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -22079,6 +22698,7 @@ export type UserUpdateWithoutBlogReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -22173,6 +22793,7 @@ export type UserUncheckedUpdateWithoutBlogReportsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -22267,6 +22888,7 @@ export type UserCreateWithoutBlogCommentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -22361,6 +22983,7 @@ export type UserUncheckedCreateWithoutBlogCommentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -22471,6 +23094,7 @@ export type UserUpdateWithoutBlogCommentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -22565,6 +23189,7 @@ export type UserUncheckedUpdateWithoutBlogCommentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -22659,6 +23284,7 @@ export type UserCreateWithoutBlogReactionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -22753,6 +23379,7 @@ export type UserUncheckedCreateWithoutBlogReactionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -22863,6 +23490,7 @@ export type UserUpdateWithoutBlogReactionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -22957,6 +23585,7 @@ export type UserUncheckedUpdateWithoutBlogReactionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -23051,6 +23680,7 @@ export type UserCreateWithoutEducationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -23145,6 +23775,7 @@ export type UserUncheckedCreateWithoutEducationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -23255,6 +23886,7 @@ export type UserUpdateWithoutEducationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -23349,6 +23981,7 @@ export type UserUncheckedUpdateWithoutEducationsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -23443,6 +24076,7 @@ export type UserCreateWithoutExperiencesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -23537,6 +24171,7 @@ export type UserUncheckedCreateWithoutExperiencesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -23647,6 +24282,7 @@ export type UserUpdateWithoutExperiencesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -23741,6 +24377,7 @@ export type UserUncheckedUpdateWithoutExperiencesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -23835,6 +24472,7 @@ export type UserCreateWithoutAchievementsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -23929,6 +24567,7 @@ export type UserUncheckedCreateWithoutAchievementsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -24039,6 +24678,7 @@ export type UserUpdateWithoutAchievementsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -24133,6 +24773,7 @@ export type UserUncheckedUpdateWithoutAchievementsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -24227,6 +24868,7 @@ export type UserCreateWithoutSkillsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -24321,6 +24963,7 @@ export type UserUncheckedCreateWithoutSkillsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -24431,6 +25074,7 @@ export type UserUpdateWithoutSkillsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -24525,6 +25169,7 @@ export type UserUncheckedUpdateWithoutSkillsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -24619,6 +25264,7 @@ export type UserCreateWithoutVisitorSessionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -24713,6 +25359,7 @@ export type UserUncheckedCreateWithoutVisitorSessionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -24823,6 +25470,7 @@ export type UserUpdateWithoutVisitorSessionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -24917,6 +25565,7 @@ export type UserUncheckedUpdateWithoutVisitorSessionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -25011,6 +25660,7 @@ export type UserCreateWithoutAdvertisementsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -25105,6 +25755,7 @@ export type UserUncheckedCreateWithoutAdvertisementsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -25215,6 +25866,7 @@ export type UserUpdateWithoutAdvertisementsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -25309,6 +25961,7 @@ export type UserUncheckedUpdateWithoutAdvertisementsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -25402,6 +26055,7 @@ export type UserCreateWithoutIsmAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -25496,6 +26150,7 @@ export type UserUncheckedCreateWithoutIsmAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -25595,6 +26250,7 @@ export type UserCreateWithoutIsmAssignedByInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -25689,6 +26345,7 @@ export type UserUncheckedCreateWithoutIsmAssignedByInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -25799,6 +26456,7 @@ export type UserUpdateWithoutIsmAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -25893,6 +26551,7 @@ export type UserUncheckedUpdateWithoutIsmAssignmentsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -25998,6 +26657,7 @@ export type UserUpdateWithoutIsmAssignedByInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -26092,6 +26752,7 @@ export type UserUncheckedUpdateWithoutIsmAssignedByInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -26186,6 +26847,7 @@ export type UserCreateWithoutIsmActivitiesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -26280,6 +26942,7 @@ export type UserUncheckedCreateWithoutIsmActivitiesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -26390,6 +27053,7 @@ export type UserUpdateWithoutIsmActivitiesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -26484,6 +27148,7 @@ export type UserUncheckedUpdateWithoutIsmActivitiesInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -26578,6 +27243,7 @@ export type UserCreateWithoutIsmAdmissionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -26672,6 +27338,7 @@ export type UserUncheckedCreateWithoutIsmAdmissionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -26782,6 +27449,7 @@ export type UserUpdateWithoutIsmAdmissionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -26876,6 +27544,7 @@ export type UserUncheckedUpdateWithoutIsmAdmissionsInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -26970,6 +27639,7 @@ export type UserCreateWithoutIsmInvitesReceivedInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -27064,6 +27734,7 @@ export type UserUncheckedCreateWithoutIsmInvitesReceivedInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutSentByInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -27163,6 +27834,7 @@ export type UserCreateWithoutIsmInvitesSentInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistCreateNestedManyWithoutUserInput
@@ -27257,6 +27929,7 @@ export type UserUncheckedCreateWithoutIsmInvitesSentInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutUserInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedCreateNestedManyWithoutUserInput
   compareLists?: Prisma.UserCompareListUncheckedCreateNestedManyWithoutUserInput
   viewHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   shortlisted?: Prisma.UserShortlistUncheckedCreateNestedManyWithoutUserInput
@@ -27367,6 +28040,7 @@ export type UserUpdateWithoutIsmInvitesReceivedInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -27461,6 +28135,7 @@ export type UserUncheckedUpdateWithoutIsmInvitesReceivedInput = {
   ismInvitesSent?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutSentByNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -27566,6 +28241,7 @@ export type UserUpdateWithoutIsmInvitesSentInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUpdateManyWithoutUserNestedInput
@@ -27660,6 +28336,7 @@ export type UserUncheckedUpdateWithoutIsmInvitesSentInput = {
   ismInvitesReceived?: Prisma.IsmInviteRequestUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUserNestedInput
+  instituteUnlocks?: Prisma.InstituteUnlockUncheckedUpdateManyWithoutUserNestedInput
   compareLists?: Prisma.UserCompareListUncheckedUpdateManyWithoutUserNestedInput
   viewHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   shortlisted?: Prisma.UserShortlistUncheckedUpdateManyWithoutUserNestedInput
@@ -27733,6 +28410,7 @@ export type UserCountOutputType = {
   ismInvitesSent: number
   sessions: number
   payments: number
+  instituteUnlocks: number
   compareLists: number
   viewHistory: number
   shortlisted: number
@@ -27794,6 +28472,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   ismInvitesSent?: boolean | UserCountOutputTypeCountIsmInvitesSentArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   payments?: boolean | UserCountOutputTypeCountPaymentsArgs
+  instituteUnlocks?: boolean | UserCountOutputTypeCountInstituteUnlocksArgs
   compareLists?: boolean | UserCountOutputTypeCountCompareListsArgs
   viewHistory?: boolean | UserCountOutputTypeCountViewHistoryArgs
   shortlisted?: boolean | UserCountOutputTypeCountShortlistedArgs
@@ -28000,6 +28679,13 @@ export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.E
  */
 export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SubscriptionPaymentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInstituteUnlocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstituteUnlockWhereInput
 }
 
 /**
@@ -28299,6 +28985,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   ismInvitesSent?: boolean | Prisma.User$ismInvitesSentArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  instituteUnlocks?: boolean | Prisma.User$instituteUnlocksArgs<ExtArgs>
   compareLists?: boolean | Prisma.User$compareListsArgs<ExtArgs>
   viewHistory?: boolean | Prisma.User$viewHistoryArgs<ExtArgs>
   shortlisted?: boolean | Prisma.User$shortlistedArgs<ExtArgs>
@@ -28459,6 +29146,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   ismInvitesSent?: boolean | Prisma.User$ismInvitesSentArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  instituteUnlocks?: boolean | Prisma.User$instituteUnlocksArgs<ExtArgs>
   compareLists?: boolean | Prisma.User$compareListsArgs<ExtArgs>
   viewHistory?: boolean | Prisma.User$viewHistoryArgs<ExtArgs>
   shortlisted?: boolean | Prisma.User$shortlistedArgs<ExtArgs>
@@ -28532,6 +29220,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     ismInvitesSent: Prisma.$IsmInviteRequestPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     payments: Prisma.$SubscriptionPaymentPayload<ExtArgs>[]
+    instituteUnlocks: Prisma.$InstituteUnlockPayload<ExtArgs>[]
     compareLists: Prisma.$UserCompareListPayload<ExtArgs>[]
     viewHistory: Prisma.$UserHistoryPayload<ExtArgs>[]
     shortlisted: Prisma.$UserShortlistPayload<ExtArgs>[]
@@ -29020,6 +29709,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   ismInvitesSent<T extends Prisma.User$ismInvitesSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ismInvitesSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IsmInviteRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.User$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  instituteUnlocks<T extends Prisma.User$instituteUnlocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$instituteUnlocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstituteUnlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   compareLists<T extends Prisma.User$compareListsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$compareListsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserCompareListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   viewHistory<T extends Prisma.User$viewHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$viewHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shortlisted<T extends Prisma.User$shortlistedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$shortlistedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserShortlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -30060,6 +30750,30 @@ export type User$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.SubscriptionPaymentScalarFieldEnum | Prisma.SubscriptionPaymentScalarFieldEnum[]
+}
+
+/**
+ * User.instituteUnlocks
+ */
+export type User$instituteUnlocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InstituteUnlock
+   */
+  select?: Prisma.InstituteUnlockSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InstituteUnlock
+   */
+  omit?: Prisma.InstituteUnlockOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InstituteUnlockInclude<ExtArgs> | null
+  where?: Prisma.InstituteUnlockWhereInput
+  orderBy?: Prisma.InstituteUnlockOrderByWithRelationInput | Prisma.InstituteUnlockOrderByWithRelationInput[]
+  cursor?: Prisma.InstituteUnlockWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InstituteUnlockScalarFieldEnum | Prisma.InstituteUnlockScalarFieldEnum[]
 }
 
 /**

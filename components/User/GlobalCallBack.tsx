@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle2, HeadphonesIcon, X } from "lucide-react";
 import { requestGlobalCallback } from "@/lib/User/user/global-callback";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { buildAuthHref } from "@/lib/auth/redirect-utils";
 
 export interface GlobalCallbackFABProps {
     defaultName?: string | null;
@@ -13,6 +15,7 @@ export interface GlobalCallbackFABProps {
 }
 
 export default function GlobalCallbackFAB({ defaultName, defaultPhone }: GlobalCallbackFABProps) {
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -104,7 +107,7 @@ export default function GlobalCallbackFAB({ defaultName, defaultPhone }: GlobalC
 
                                 <div className="mt-6 pt-6 border-t border-slate-100">
                                     <p className="text-sm font-medium text-slate-600 mb-3">Want to explore on your own?</p>
-                                    <Link href="/login" onClick={() => setIsOpen(false)}>
+                                    <Link href={buildAuthHref("/login", pathname)} onClick={() => setIsOpen(false)}>
                                         <Button className="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-xl">
                                             Login / Sign Up
                                         </Button>

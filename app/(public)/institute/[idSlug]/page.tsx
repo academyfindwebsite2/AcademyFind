@@ -311,9 +311,9 @@ export default async function InstitutePage({ params }: PageProps) {
     if (communityUnlockTx) hasUnlockedCommunity = true;
   }
 
-  // Lock contact details for basic plan institutes (unless already unlocked by user)
-  const isContactLocked = institute.subscriptionPlan === "BASIC" && !hasUnlockedBasicFeatures;
-  const isCommunityLocked = institute.subscriptionPlan === "BASIC" && !hasUnlockedCommunity;
+  // Lock contact details for basic & verified plan institutes (unless already unlocked by user)
+  const isContactLocked = (institute.subscriptionPlan === "BASIC" || institute.subscriptionPlan === "VERIFIED") && !hasUnlockedBasicFeatures;
+  const isCommunityLocked = (institute.subscriptionPlan === "BASIC" || institute.subscriptionPlan === "VERIFIED") && !hasUnlockedCommunity;
 
   const isManager = instituteManagers.some((m: any) => m.user.id === userId);
   const isMember = userMemberships.some((m: any) => m.status === "ACTIVE") || isManager || session?.user?.role === "ADMIN";
