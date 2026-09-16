@@ -1,10 +1,11 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { Eye, Phone, Mail, Clock, ShieldAlert, Filter } from "lucide-react";
+import { Eye, Phone, Mail, Clock, ShieldAlert, Filter, MessageCircle } from "lucide-react";
 import { LifeCoachRequestStatus } from "@/app/generated/prisma/enums";
 import AdminDeleteButton from "@/components/admin/AdminDeleteButton";
 import { deleteLifeCoachRequestAction } from "./actions";
-import { formatIST } from "@/lib/utils";
+import { formatIST, formatWhatsAppNumber } from "@/lib/utils";
+import { buildLifeCoachWhatsAppMessage } from "@/lib/notifications/lifeCoachTemplates";
 
 export default async function AdminLifeCoachLeadsPage({
   searchParams
@@ -134,8 +135,21 @@ export default async function AdminLifeCoachLeadsPage({
                     </td>
                     <td className="p-4 text-right">
                       <div className="flex items-center justify-end gap-2">
+                        {req.phone && (
+                          <a
+                            href={`https://wa.me/${formatWhatsAppNumber(req.phone)}?text=${encodeURIComponent(
+                              buildLifeCoachWhatsAppMessage({ fullName: req.fullName })
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Chat on WhatsApp"
+                            className="inline-flex items-center justify-center p-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg transition-colors border border-emerald-200"
+                          >
+                            <MessageCircle className="w-4 h-4" />
+                          </a>
+                        )}
                         <Link prefetch={false} href={`/af-ass-manage/life-coach/${req.id}`}>
-                          <button className="inline-flex items-center justify-center p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-purple-100 hover:text-purple-700 transition-colors cursor-pointer">
+                          <button className="inline-flex items-center justify-center p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-purple-100 hover:text-purple-700 transition-colors cursor-pointer" title="View Request Details">
                             <Eye className="w-4 h-4" />
                           </button>
                         </Link>

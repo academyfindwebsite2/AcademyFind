@@ -1,9 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
-import { User, Phone, Mail, Clock, MessageSquare, ArrowLeft } from "lucide-react";
+import { User, Phone, Mail, Clock, MessageSquare, ArrowLeft, MessageCircle, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import StatusUpdater from "@/components/admin/AdminLifeCoachStatusUpdater";
-import { formatIST } from "@/lib/utils";
+import { formatIST, formatWhatsAppNumber } from "@/lib/utils";
+import { buildLifeCoachWhatsAppMessage } from "@/lib/notifications/lifeCoachTemplates";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
@@ -65,6 +66,21 @@ export default async function LifeCoachDetailPage({ params }: { params: Promise<
                     <a href={`mailto:${request.email}`} className="font-semibold text-blue-700 hover:underline">{request.email}</a>
                   </div>
                 </div>
+
+                {request.phone && (
+                  <div className="pt-2 border-t border-stone-200/60">
+                    <a
+                      href={`https://wa.me/${formatWhatsAppNumber(request.phone)}?text=${encodeURIComponent(
+                        buildLifeCoachWhatsAppMessage({ fullName: request.fullName })
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition shadow-xs"
+                    >
+                      <MessageCircle className="w-4 h-4" /> Open WhatsApp Chat with Template
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
 

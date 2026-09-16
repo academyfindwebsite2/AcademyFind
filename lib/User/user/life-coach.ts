@@ -1,6 +1,7 @@
 "use server"
 
 import { prisma } from "@/lib/prisma";
+import { sendLifeCoachSubmissionNotifications } from "@/lib/notifications/lifeCoachNotifications";
 
 export async function submitLifeCoachRequest(formData: FormData) {
     const fullName = formData.get("fullName") as string;
@@ -27,6 +28,16 @@ export async function submitLifeCoachRequest(formData: FormData) {
                 title: "New Life Coach Request",
                 message: `${fullName} (${phone}) requested a life coach.`,
             }
+        });
+
+        // 🚀 Automatically send personalized WhatsApp and Email confirmation to the applicant
+        sendLifeCoachSubmissionNotifications({
+            fullName,
+            phone,
+            email,
+            message: message || null,
+        }).catch((err) => {
+            console.error("Failed to send life coach submission notifications:", err);
         });
 
         return { success: true, message: "Request logged inside admin queue!" };
