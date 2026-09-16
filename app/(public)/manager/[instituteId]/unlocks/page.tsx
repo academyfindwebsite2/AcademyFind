@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@/app/generated/prisma/client";
 import Link from "next/link";
 import { formatIST } from "@/lib/utils";
 import {
@@ -107,7 +106,7 @@ export default async function ManagerUnlocksPage({
   }
 
   // Where condition for this specific institute
-  const whereCondition: Prisma.InstituteUnlockWhereInput = {
+  const whereCondition: any = {
     instituteId,
   };
 
