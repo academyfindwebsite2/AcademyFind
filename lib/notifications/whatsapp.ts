@@ -15,7 +15,7 @@ export async function sendWhatsAppMessage(to: string, message: string) {
         const response = await fetch(`${serviceUrl}/send-message`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
           },
           body: JSON.stringify({ phone: formattedTo, message }),
         });
@@ -49,7 +49,7 @@ export async function sendWhatsAppMessage(to: string, message: string) {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
         },
         body: JSON.stringify(payload),
       });

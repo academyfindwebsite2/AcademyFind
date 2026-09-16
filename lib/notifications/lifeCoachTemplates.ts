@@ -1,6 +1,8 @@
 /**
  * Pure template functions for Life Coach submission notifications (WhatsApp & Email).
  * Safe to import in both client and server contexts.
+ * Uses ASCII-safe Unicode escape sequences for emojis and special punctuation
+ * to prevent Windows ANSI / Latin-1 encoding corruption (question marks).
  */
 
 export interface LifeCoachTemplateInput {
@@ -12,6 +14,12 @@ export interface LifeCoachTemplateInput {
 
 /**
  * Builds the exact WhatsApp message formatted for Life Coach submissions.
+ * Unicode escapes:
+ * \uD83D\uDE0A = 😊 (Smiling Face)
+ * \uD83D\uDCAC = 💬 (Speech Bubble)
+ * \uD83C\uDF31 = 🌱 (Seedling)
+ * \uD83C\uDF10 = 🌐 (Globe)
+ * \uD83D\uDCDE = 📞 (Telephone)
  */
 export function buildLifeCoachWhatsAppMessage({
   fullName,
@@ -22,21 +30,21 @@ export function buildLifeCoachWhatsAppMessage({
 
   return `Hello ${name},
 
-You’ve come to the right place! 😊
+You've come to the right place! \uD83D\uDE0A
 
 Thank you for reaching out to AcademyFind regarding Life Coaching.
 
-*AcademyFind* helps you discover the right coaches, institutes and learning opportunities based on your needs — so you can make a more informed choice.
+*AcademyFind* helps you discover the right coaches, institutes and learning opportunities based on your needs \u2014 so you can make a more informed choice.
 
-💬 You can simply share your question or requirement here, and we’ll help you with it.
+\uD83D\uDCAC You can simply share your question or requirement here, and we'll help you with it.
 
 Alternatively, let us know a suitable time to connect, and our counselor will be happy to speak with you.
 
-Looking forward to helping you find the right guidance. 🌱
+Looking forward to helping you find the right guidance. \uD83C\uDF31
 
 Team AcademyFind
-🌐 www.AcademyFind.com
-📞 9045699938`;
+\uD83C\uDF10 www.AcademyFind.com
+\uD83D\uDCDE 9045699938`;
 }
 
 /**
@@ -82,7 +90,7 @@ export function buildLifeCoachEmailHtml({
               
               <div style="background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px 18px; border-radius: 8px; margin: 0 0 20px;">
                 <p style="margin: 0; font-size: 16px; font-weight: 600; color: #b45309;">
-                  You’ve come to the right place! 😊
+                  You've come to the right place! \uD83D\uDE0A
                 </p>
               </div>
 
@@ -91,7 +99,7 @@ export function buildLifeCoachEmailHtml({
               </p>
 
               <p style="margin: 0 0 22px; font-size: 15px; color: #334155; line-height: 1.6;">
-                <strong>AcademyFind</strong> helps you discover the right coaches, institutes and learning opportunities based on your needs — so you can make a more informed choice.
+                <strong>AcademyFind</strong> helps you discover the right coaches, institutes and learning opportunities based on your needs &mdash; so you can make a more informed choice.
               </p>
 
               <!-- Action Prompt Card -->
@@ -99,7 +107,7 @@ export function buildLifeCoachEmailHtml({
                 <tr>
                   <td style="padding: 20px;">
                     <p style="margin: 0 0 12px; font-size: 15px; color: #0f172a; line-height: 1.6;">
-                      💬 <strong>Share your questions:</strong> You can simply reply to this email or send your question or requirement directly on WhatsApp, and we’ll help you with it.
+                      \uD83D\uDCAC <strong>Share your questions:</strong> You can simply reply to this email or send your question or requirement directly on WhatsApp, and we'll help you with it.
                     </p>
                     <p style="margin: 0; font-size: 15px; color: #475569; line-height: 1.6;">
                       Alternatively, let us know a suitable time to connect, and our counselor will be happy to speak with you.
@@ -111,15 +119,15 @@ export function buildLifeCoachEmailHtml({
               <!-- CTA Buttons -->
               <div style="text-align: center; margin: 30px 0 24px;">
                 <a href="${whatsappUrl}" target="_blank" style="background-color: #25d366; color: #ffffff; padding: 13px 26px; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 14px; display: inline-block; margin-right: 8px; box-shadow: 0 2px 8px rgba(37, 211, 102, 0.25);">
-                  💬 Chat on WhatsApp
+                  \uD83D\uDCAC Chat on WhatsApp
                 </a>
                 <a href="https://www.academyfind.com" target="_blank" style="background-color: #0f172a; color: #ffffff; padding: 13px 26px; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 14px; display: inline-block; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);">
-                  🌐 Visit Website
+                  \uD83C\uDF10 Visit Website
                 </a>
               </div>
 
               <p style="margin: 28px 0 20px; font-size: 15px; color: #334155; line-height: 1.6;">
-                Looking forward to helping you find the right guidance. 🌱
+                Looking forward to helping you find the right guidance. \uD83C\uDF31
               </p>
 
               <!-- Sign-off -->
@@ -128,10 +136,10 @@ export function buildLifeCoachEmailHtml({
                   Team AcademyFind
                 </p>
                 <p style="margin: 6px 0 0; font-size: 14px; color: #64748b;">
-                  🌐 <a href="https://www.academyfind.com" target="_blank" style="color: #d97706; text-decoration: none; font-weight: 600;">www.AcademyFind.com</a>
+                  \uD83C\uDF10 <a href="https://www.academyfind.com" target="_blank" style="color: #d97706; text-decoration: none; font-weight: 600;">www.AcademyFind.com</a>
                 </p>
                 <p style="margin: 4px 0 0; font-size: 14px; color: #64748b;">
-                  📞 <a href="tel:9045699938" style="color: #0f172a; text-decoration: none; font-weight: 600;">9045699938</a>
+                  \uD83D\uDCDE <a href="tel:9045699938" style="color: #0f172a; text-decoration: none; font-weight: 600;">9045699938</a>
                 </p>
               </div>
             </td>
