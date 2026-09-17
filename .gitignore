@@ -52,3 +52,12 @@ next-env.d.ts
 /routes.txt
 /scripts/seed_draft_blogs.ts
 /whatsapp-service
+/scripts/inst_seed.ts
+/scripts/inst_seed2.ts
+/scripts/inst_seed3.ts
+/temp.json
+/scripts/create-search-index.ts
+/import_progress4.json
+/import_progress5.json
+/area.txt
+/test_places_new.ts

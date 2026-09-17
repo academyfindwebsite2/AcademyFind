@@ -65,9 +65,13 @@ export async function GET(
       googleCount,
       websiteCount,
       zapierCount,
+      activeIsms,
     ] = await Promise.all([
       prisma.instituteEnquiry.findMany({
         where: { instituteId },
+        include: {
+          assignedIsm: { select: { id: true, name: true, email: true } },
+        },
         orderBy: { createdAt: 'desc' },
       }),
       prisma.inboundLead.findMany({
@@ -79,6 +83,10 @@ export async function GET(
       prisma.inboundLead.count({ where: { instituteId, source: 'GOOGLE_ADS' } }),
       prisma.inboundLead.count({ where: { instituteId, source: 'WEBSITE_WEBHOOK' } }),
       prisma.inboundLead.count({ where: { instituteId, source: 'ZAPIER' } }),
+      prisma.instituteSalesManagerAssignment.findMany({
+        where: { instituteId, isActive: true },
+        include: { user: { select: { id: true, name: true, email: true } } },
+      }),
     ]);
 
     // Format and unify leads list
@@ -88,12 +96,18 @@ export async function GET(
         name: e.name || 'Anonymous Student',
         phone: e.phone || '',
         email: e.email || '',
+        course: e.course || null,
+        batch: e.batch || null,
+        tags: e.tags || [],
         message: e.message || '',
         status: e.status || 'NEW',
         source: e.source || 'ACADEMYFIND',
         isDirectPortal: true,
         isForwarded: !!(e.isForwarded || e.parentId),
         parentId: e.parentId,
+        assignedIsmId: e.assignedIsmId || null,
+        assignedIsm: e.assignedIsm || null,
+        nextFollowUp: e.nextFollowUp || null,
         adminNote: e.adminNote || e.salesManagerNote || null,
         createdAt: e.createdAt,
       })),
@@ -102,12 +116,18 @@ export async function GET(
         name: l.name || 'Ad Lead',
         phone: l.phone || '',
         email: l.email || '',
+        course: null,
+        batch: null,
+        tags: [],
         message: l.message || '',
         status: l.status || 'NEW',
         source: l.source || 'INBOUND',
         isDirectPortal: false,
         isForwarded: false,
         parentId: null,
+        assignedIsmId: null,
+        assignedIsm: null,
+        nextFollowUp: null,
         adminNote: l.notes || null,
         createdAt: l.createdAt,
       })),
@@ -138,8 +158,10 @@ export async function GET(
       success: true,
       data: {
         isLocked: false,
+        canEditLead: true,
         plan: institute.subscriptionPlan,
         instituteName: institute.name,
+        activeIsms: activeIsms.map((a: any) => a.user),
         counts: {
           total: totalCount,
           direct: directCount,
@@ -169,16 +191,32 @@ export async function PUT(
 
     const { instituteId } = await params;
 
-    // Verify manager authorization
+    // Verify manager authorization (strict: ISM cannot edit full details)
     const isManager = await prisma.instituteManager.findFirst({
       where: { userId: session.user.id, instituteId },
     });
     if (!isManager && session.user.role !== 'ADMIN') {
-      return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
+      return NextResponse.json({
+        success: false,
+        error: 'Permission denied: Only Institute Managers can edit leads.',
+      }, { status: 403 });
     }
 
     const body = await request.json();
-    const { leadId, status, adminNote, isDirectPortal } = body;
+    const {
+      leadId,
+      name,
+      phone,
+      email,
+      course,
+      batch,
+      tags,
+      status,
+      assignedIsmId,
+      adminNote,
+      nextFollowUp,
+      isDirectPortal,
+    } = body;
 
     if (!leadId) {
       return NextResponse.json({ success: false, error: 'Lead ID is required' }, { status: 400 });
@@ -191,6 +229,9 @@ export async function PUT(
         const updated = await prisma.inboundLead.update({
           where: { id: leadId },
           data: {
+            name: name?.trim() || undefined,
+            phone: phone?.trim() || undefined,
+            email: email?.trim() || undefined,
             status: status || undefined,
             ...(adminNote !== undefined ? { notes: adminNote } : {}),
           },
@@ -205,29 +246,38 @@ export async function PUT(
       const updated = await prisma.instituteEnquiry.update({
         where: { id: leadId },
         data: {
-          status: status || undefined,
+          ...(name ? { name: name.trim() } : {}),
+          ...(phone ? { phone: phone.trim() } : {}),
+          ...(email !== undefined ? { email: email?.trim() || null } : {}),
+          ...(course !== undefined ? { course: course?.trim() || null } : {}),
+          ...(batch !== undefined ? { batch: batch?.trim() || null } : {}),
+          ...(Array.isArray(tags) ? { tags } : {}),
+          ...(status ? { status } : {}),
+          ...(assignedIsmId !== undefined ? { assignedIsmId: assignedIsmId || null } : {}),
           ...(adminNote !== undefined ? { adminNote } : {}),
+          ...(nextFollowUp !== undefined ? { nextFollowUp: nextFollowUp ? new Date(nextFollowUp) : null } : {}),
+          lastUpdatedByRole: session.user.role,
+          lastUpdatedByName: session.user.name || 'Manager',
         },
       });
-      return NextResponse.json({ success: true, data: updated });
-    }
 
-    // Fallback: check both if isDirectPortal was unspecified
-    const inbound = await prisma.inboundLead.findUnique({ where: { id: leadId } });
-    if (inbound && inbound.instituteId === instituteId) {
-      const updated = await prisma.inboundLead.update({
-        where: { id: leadId },
+      // Log activity
+      await prisma.ismLeadActivity.create({
         data: {
-          status: status || undefined,
-          ...(adminNote !== undefined ? { notes: adminNote } : {}),
+          enquiryId: leadId,
+          ismId: session.user.id,
+          type: "NOTE",
+          content: `Lead updated by Manager: ${name ? `Name: ${name}` : ''} ${status ? `Status: ${status}` : ''}`.trim(),
         },
-      });
+      }).catch(() => null);
+
       return NextResponse.json({ success: true, data: updated });
     }
 
     return NextResponse.json({ success: false, error: 'Lead not found or does not belong to this institute' }, { status: 404 });
   } catch (error: any) {
     console.error('Manager Leads PUT Error:', error);
+
     return NextResponse.json({ success: false, error: error.message || 'Internal Server Error' }, { status: 500 });
   }
 }
